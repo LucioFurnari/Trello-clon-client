@@ -14,7 +14,7 @@ export default function SubMenu({ title, list, isMenuOpen }: SubMenu) {
 
   return (
     <div className={isMenuOpen ? 'block' : 'hidden'}>
-      <div className="bg-gray-600">
+      <div className="bg-gray-600 h-20">
       <h2>{title}</h2>
       <div>
         {
