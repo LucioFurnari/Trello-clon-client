@@ -13,8 +13,8 @@ interface SubMenu {
 export default function SubMenu({ title, list, isMenuOpen }: SubMenu) {
 
   return (
-    <div className={isMenuOpen ? 'block' : 'hidden'}>
-      <div className="bg-gray-600 h-20">
+    <div className="relative">
+      <div className={isMenuOpen ? 'absolute top-2 left-1 bg-slate-600' : 'hidden'}>
       <h2>{title}</h2>
       <div>
         {
