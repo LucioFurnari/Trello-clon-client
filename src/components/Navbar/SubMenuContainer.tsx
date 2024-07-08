@@ -8,6 +8,11 @@ interface SubMenuContainerProp{
   name: string
 }
 
+// Testing placeholder
+const list = [
+  { title: "Your workspace"}
+];
+
 export default function SubMenuContainer({ name }: SubMenuContainerProp) {
   const [ openMenu, setOpenMenu] = useState(false);
 
@@ -18,7 +23,7 @@ export default function SubMenuContainer({ name }: SubMenuContainerProp) {
   return (
     <div>
       <NavbarButton name={name} action={handleMenu} />
-      <SubMenu isMenuOpen={openMenu} />
+      <SubMenu isMenuOpen={openMenu} list={list} />
     </div>
   )
 }
