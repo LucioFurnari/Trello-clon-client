@@ -5,15 +5,18 @@ import NavbarButton from "./NavbarButton";
 import SubMenu from "./SubMenu";
 
 interface SubMenuContainerProp{
+  title?: string,
   name: string
 }
 
 // Testing placeholder
 const list = [
-  { title: "Your workspace"}
+  { title: "Workspace"},
+  { title: "Project"},
+  { title: "Game"}
 ];
 
-export default function SubMenuContainer({ name }: SubMenuContainerProp) {
+export default function SubMenuContainer({ name, title }: SubMenuContainerProp) {
   const [ openMenu, setOpenMenu] = useState(false);
 
   function handleMenu(){
@@ -21,9 +24,9 @@ export default function SubMenuContainer({ name }: SubMenuContainerProp) {
   }
 
   return (
-    <div>
+    <div className="relative">
       <NavbarButton name={name} action={handleMenu} />
-      <SubMenu isMenuOpen={openMenu} list={list} />
+      <SubMenu title={title} isMenuOpen={openMenu} list={list} />
     </div>
   )
 }
