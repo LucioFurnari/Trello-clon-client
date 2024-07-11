@@ -1,0 +1,32 @@
+import { cookies } from "next/headers";
+
+export async function loginUser(formData: FormData) {
+  'use server'
+
+  const rawFormData = {
+    email: formData.get('email'),
+    password: formData.get('password')
+  }
+
+  const res = await fetch("http://localhost:8080/api/login", {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(rawFormData)
+  })
+
+  const data = await res.json()
+
+  if (data.token) {
+    cookies().set({
+      name: 'access_token',
+      value: data.token,
+      httpOnly: true,
+      path: '/',
+    })
+  }
+
+  console.log(data)
+}
