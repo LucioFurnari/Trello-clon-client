@@ -30,3 +30,25 @@ export async function loginUser(formData: FormData) {
 
   console.log(data)
 }
+
+export async function registerUser(formData: FormData) {
+  'use server'
+
+  const rawFormData = {
+    username: formData.get('username'),
+    email: formData.get('email'),
+    password: formData.get('password')
+  }
+
+  const res = await fetch('http://localhost:8080/api/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(rawFormData)
+  });
+
+  const data = await res.json();
+
+  console.log(data)
+}
