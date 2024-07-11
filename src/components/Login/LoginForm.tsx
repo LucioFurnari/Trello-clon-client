@@ -1,11 +1,8 @@
+import { loginUser } from "@/lib/auth"
 
-interface LoginFormProp {
-  formAction: (formData: FormData) => Promise<void>,
-}
-
-export default function LoginForm({ formAction }: LoginFormProp) {
+export default function LoginForm() {
   return (
-    <form action={formAction}>
+    <form action={loginUser}>
       <input type="text" placeholder="email" name="email" id="email" />
       <input type="text" placeholder="password" name="password" id="password" />
       <button type="submit">Submit</button>
