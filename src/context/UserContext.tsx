@@ -6,20 +6,38 @@ interface UserData {
   id: number
 }
 
-const UserContext = createContext(null);
+type UserContextType = {
+  user: UserData,
+  setUser: React.Dispatch<React.SetStateAction<UserData>>
+}
 
-export default function UserContextProvider({ children }) {
-  const [user, setUser] = useState();
+type UserContextProviderProps = {
+  children: React.ReactNode
+}
+
+const UserContext = createContext<UserContextType | null>(null);
+
+export default function UserContextProvider({ children }: UserContextProviderProps) {
+  const [user, setUser] = useState<UserData>({ username: '', email: '', id: 0 });
 
   return (
     <UserContext.Provider
       value={{
-        username,
-        email,
-        id
+        user,
+        setUser
       }}
     >
       {children}
     </UserContext.Provider>
   )
+}
+
+export function useUserContext() {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error(
+      "useUserContext must be used within a UserContextProvider"
+    );
+  }
+  return context;
 }
