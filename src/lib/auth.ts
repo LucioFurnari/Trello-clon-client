@@ -1,3 +1,5 @@
+'use server'
+
 import { cookies } from "next/headers";
 
 export async function loginUser(formData: FormData) {
@@ -31,7 +33,7 @@ export async function loginUser(formData: FormData) {
   console.log(data)
 }
 
-export async function registerUser(formData: FormData) {
+export async function registerUser(prevState: any, formData: FormData) {
   'use server'
 
   const rawFormData = {
@@ -47,6 +49,13 @@ export async function registerUser(formData: FormData) {
     },
     body: JSON.stringify(rawFormData)
   });
+
+  if(res.ok) {
+    return {
+      success: true,
+      message: 'User created'
+    }
+  }
 
   const data = await res.json();
 
