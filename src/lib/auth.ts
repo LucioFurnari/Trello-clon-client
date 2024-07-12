@@ -1,7 +1,6 @@
 'use server'
 
-import { cookies } from "next/headers";
-import { getCookie } from "./cookies";
+import { getCookie, setCookie } from "./cookies";
 
 export async function loginUser(formData: FormData) {
   'use server'
@@ -23,12 +22,7 @@ export async function loginUser(formData: FormData) {
   const data = await res.json()
 
   if (data.token) {
-    cookies().set({
-      name: 'access_token',
-      value: data.token,
-      httpOnly: true,
-      path: '/',
-    })
+    setCookie(data.token);
   }
 
   console.log(data)
