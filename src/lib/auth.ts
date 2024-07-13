@@ -67,10 +67,10 @@ export async function verifyToken() {
         Cookie: `access_token=${token}`
       },
     });
-    if (!res.ok) throw new Error('Token not found');
+    if (!res.ok) return null
 
     const data = await res.json();
-    console.log(data.user)
+    
     return data.user; 
   } catch (error) {
     console.error('Error in the server', error);
