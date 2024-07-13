@@ -64,17 +64,15 @@ export async function verifyToken() {
     const res = await fetch('http://localhost:8080/api/profile', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        Cookie: `access_token=${token}`
       },
-      body: JSON.stringify({ access_token: token })
     });
-
     if (!res.ok) throw new Error('Token not found');
 
     const data = await res.json();
-
-    return data; 
+    console.log(data.user)
+    return data.user; 
   } catch (error) {
-    console.error('Error in the server');
+    console.error('Error in the server', error);
   }
 }
