@@ -14,5 +14,5 @@ export async function getWorkspace(workspaceId: string) {
   if (!res.ok) return null
 
   const data = await res.json();
-  return data;
+  return data.workspace;
 }
