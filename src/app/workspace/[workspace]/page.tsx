@@ -1,10 +1,8 @@
-
+import WorkspacePage from "@/components/Workspace/WorkspacePage"
 
 export default function Workspace({ params }: { params: { workspace: string }}) {
 
   return (
-    <main>
-      <h1>Workspace id: {params.workspace}</h1>
-    </main>
+    <WorkspacePage />
   )
 }
