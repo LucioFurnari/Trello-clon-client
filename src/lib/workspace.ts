@@ -3,7 +3,7 @@ import { getCookie } from "./cookies"
 export async function getWorkspace(workspaceId: string) {
   const token = await getCookie();
 
-  const res = await fetch(`http://localhost:8080/api/workspace/${workspaceId}`,{
+  const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}`,{
     method: 'GET',
     headers: {
     'Content-Type': 'Content-Type',

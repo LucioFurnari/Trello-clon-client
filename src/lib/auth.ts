@@ -10,7 +10,7 @@ export async function loginUser(formData: FormData) {
     password: formData.get('password')
   }
 
-  const res = await fetch( "http://localhost:8080/api/login", {
+  const res = await fetch(`${process.env.API_HOST}/login`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -37,7 +37,7 @@ export async function registerUser(prevState: any, formData: FormData) {
     password: formData.get('password')
   }
 
-  const res = await fetch('http://localhost:8080/api/user', {
+  const res = await fetch(`${process.env.API_HOST}/user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ export async function verifyToken() {
   try {
     const token = await getCookie();
 
-    const res = await fetch('http://localhost:8080/api/profile', {
+    const res = await fetch(`${process.env.API_HOST}/profile`, {
       method: 'GET',
       headers: {
         Cookie: `access_token=${token}`
