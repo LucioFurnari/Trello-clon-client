@@ -3,16 +3,12 @@
 import { getCookie, setCookie } from "./cookies";
 import { redirect } from "next/navigation";
 
-export async function loginUser(formData: FormData) {
+export async function loginUser(prevState: any, formData: FormData) {
   'use server'
 
   try {
     const email = formData.get('email') as string | null;
     const password = formData.get('password') as string | null;
-    
-    if (!email || !password) {
-      throw new Error('Email and password must be provided');
-    }
   
     const rawFormData = { email, password };
 
@@ -29,8 +25,7 @@ export async function loginUser(formData: FormData) {
 
     if (!res.ok) {
       if (data.errorList) {
-        console.error('Validation Errors:', data.errorList);
-        throw new Error(data.errorList);
+        return { errors: data.errorList }
       } else {
         throw new Error(data.message || 'Login failed');
       }
