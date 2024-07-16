@@ -27,7 +27,7 @@ export async function loginUser(prevState: any, formData: FormData) {
       if (data.errorList) {
         return { errors: data.errorList }
       } else {
-        throw new Error(data.message || 'Login failed');
+        return { errors: [], message: data.message }
       }
     }
   
@@ -46,30 +46,38 @@ export async function loginUser(prevState: any, formData: FormData) {
 export async function registerUser(prevState: any, formData: FormData) {
   'use server'
 
-  const rawFormData = {
-    username: formData.get('username'),
-    email: formData.get('email'),
-    password: formData.get('password')
-  }
-
-  const res = await fetch(`${process.env.API_HOST}/user`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(rawFormData)
-  });
-
-  if(res.ok) {
+  try {
+    const rawFormData = {
+      username: formData.get('username'),
+      email: formData.get('email'),
+      password: formData.get('password')
+    }
+  
+    const res = await fetch(`${process.env.API_HOST}/user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rawFormData)
+    });
+  
+    const data = await res.json();
+  
+    if(!res.ok) {
+      if (data.errorList) {
+        return { errors: data.errorList, succes: false }
+      } else {
+        return { errors: [], message: data.message, success: false }
+      }
+    }
+  
     return {
       success: true,
       message: 'User created'
     }
+  } catch (error) {
+    console.error('Error during register');
   }
-
-  const data = await res.json();
-
-  console.log(data)
 }
 
 export async function verifyToken() {
