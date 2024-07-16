@@ -1,12 +1,14 @@
 'use client'
 
 import { registerUser } from "@/lib/auth"
-import { SubmitButton } from "./SubmitButton"
+import { SubmitButton } from "../SubmitButton"
 import { useFormState } from "react-dom"
+import Fieldset from "../Fieldset"
 
 const initialState = {
   success: false,
-  message: ''
+  message: '',
+  errors: []
 }
 
 export default function RegisterForm() {
@@ -14,10 +16,10 @@ export default function RegisterForm() {
 
 
   return (
-    <form action={formAction}>
-      <input type="text"  name="username"  id="username" placeholder="username" required/>
-      <input type="email" name="email"     id="email"    placeholder="email"    required/>
-      <input type="text"  name="password"  id="password" placeholder="password" required/>
+    <form className="flex flex-col mt-8 p-4" action={formAction}>
+      <Fieldset type={"text"} name={"username"} errors={state?.errors} />
+      <Fieldset type={"email"} name={"email"} errors={state?.errors} />
+      <Fieldset type={"text"} name={"password"} errors={state?.errors} />
       <SubmitButton />
       {
         state?.success &&
