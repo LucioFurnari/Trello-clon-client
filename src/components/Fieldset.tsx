@@ -10,11 +10,16 @@ export default function Fieldset({ type, name, errors }: FieldsetProp) {
     <fieldset>
       <input className="p-2 mt-3 border-b-2 w-full" type={type} placeholder={name} name={name} id={name} />
       { 
-        errors
-          .filter((error: any) => error.path === name)
-          .map((error: any, index: number) => (
-            <span key={index}>{error.msg}</span>
-          )) 
+        errors &&
+        <ul className="mt-2">
+          {
+            errors
+            .filter((error: any) => error.path === name)
+            .map((error: any, index: number) => (
+              <li className="text-red-600" key={index}>- {error.msg}</li>
+            )) 
+          }
+        </ul>
       }
     </fieldset>
   )
