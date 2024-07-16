@@ -8,7 +8,7 @@ interface FieldsetProp {
 export default function Fieldset({ type, name, errors }: FieldsetProp) {
   return (
     <fieldset>
-      <input className="p-2 mt-3 border-b-2 w-full" type={type} placeholder="email" name={name} id={name} />
+      <input className="p-2 mt-3 border-b-2 w-full" type={type} placeholder={name} name={name} id={name} />
       { 
         errors
           .filter((error: any) => error.path === name)
