@@ -2,9 +2,11 @@
 
 import { loginUser } from "@/lib/auth"
 import { useFormState } from "react-dom"
+import Fieldset from "../Fieldset"
 
 const initialState = {
   errors: [],
+  message: ''
 }
 
 export default function LoginForm() {
@@ -12,23 +14,10 @@ export default function LoginForm() {
 
   return (
     <form className="flex flex-col mt-8 p-4" action={formAction}>
-      <input className="p-2 mt-3 border-b-2" type="text" placeholder="email" name="email" id="email" />
-      { 
-        state?.errors
-          .filter((error: any) => error.path === 'email')
-          .map((error: any, index: number) => (
-            <span key={index}>{error.msg}</span>
-          )) 
-      }
-      <input className="p-2 mt-3 border-b-2" type="text" placeholder="password" name="password" id="password" />
-      { 
-        state?.errors
-          .filter((error: any) => error.path === 'password')
-          .map((error: any, index: number) => (
-            <span key={index}>{error.msg}</span>
-          )) 
-      }
+      <Fieldset type={"text"} name={"email"} errors={state?.errors} />
+      <Fieldset type={"password"} name={"password"} errors={state?.errors} />
       <button className="py-2 rounded mt-4 bg-blue-700 hover:bg-blue-600 text-white" type="submit">Submit</button>
+      <p className="mx-auto mt-4">{state?.message}</p>
     </form>
   )
 }
