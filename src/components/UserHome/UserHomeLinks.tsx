@@ -7,6 +7,6 @@ interface UserHomeLinkProps {
 
 export default function UserHomeLink({ name, route }: UserHomeLinkProps) {
   return (
-    <Link href={route}>{name}</Link>
+    <Link className="inline-block p-2 text-zinc-300 hover:bg-zinc-600 transition-colors rounded" href={route}>{name}</Link>
   )
 }
