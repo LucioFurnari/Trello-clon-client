@@ -16,3 +16,8 @@ export async function setCookie(token: string) {
     path: '/',
   })
 }
+
+export async function deleteCookie() {
+  const cookieStore = cookies()
+  cookieStore.set('access_token', '', { maxAge: -1 });
+}
