@@ -1,6 +1,6 @@
 'use server'
 
-import { getCookie, setCookie } from "./cookies";
+import { getCookie, setCookie, deleteCookie } from "./cookies";
 import { redirect } from "next/navigation";
 
 export async function loginUser(prevState: any, formData: FormData) {
@@ -77,6 +77,7 @@ export async function registerUser(prevState: any, formData: FormData) {
     }
   } catch (error) {
     console.error('Error during register');
+    return {  errors: [], message: 'Error in the server', success: false }
   }
 }
 
@@ -96,6 +97,12 @@ export async function verifyToken() {
     
     return data.user; 
   } catch (error) {
-    console.error('Error in the server', error);
+    console.error('Error in the server');
+    return null;
   }
+}
+
+export async function logout() {
+  "use server"
+  deleteCookie()
 }
