@@ -5,14 +5,23 @@ import { verifyToken } from "./lib/auth";
 
 export async function middleware(request: NextRequest) {
   const user = await verifyToken();
-
   const { pathname } = request.nextUrl;
 
-  if (pathname.includes('/login') || pathname.includes('/register')) {
-    return NextResponse.next();
+  console.log('Hello')
+
+  if (user && pathname.startsWith('/')) {
+    return NextResponse.redirect(new URL('/user', request.url));
   }
 
-  if (!user) {
-    return NextResponse.redirect('/')
+  if (user && pathname.startsWith('/user')) {
+    return NextResponse.next()
+  } 
+
+  if (!user && pathname.startsWith('/user')) {
+    return NextResponse.redirect(new URL('/', request.url))
   }
+}
+
+export const config = {
+  matcher: ['/','/user'],
 }
