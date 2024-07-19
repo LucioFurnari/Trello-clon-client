@@ -2,6 +2,7 @@
 
 import NavProfileButton from "./NavProfileButton"
 import LoginMenu from "./LoginMenu"
+import LogoutButton from "./LogoutButton"
 import { useState } from "react"
 
 export default function UserMenuContainer() {
@@ -18,6 +19,7 @@ export default function UserMenuContainer() {
         menuOpen &&
         <LoginMenu />
       }
+      <LogoutButton />
     </div>
   )
 }
