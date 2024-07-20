@@ -3,7 +3,7 @@
 export default function BoardPage() {
   return (
     <div>
-      <h1>Thi is the board page</h1>
+      <h1>This is the user home page</h1>
     </div>
   )
 }
