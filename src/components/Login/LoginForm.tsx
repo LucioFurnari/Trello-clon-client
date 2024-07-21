@@ -4,14 +4,24 @@ import { loginUser } from "@/lib/auth"
 import { useFormState } from "react-dom"
 import Fieldset from "../Fieldset"
 import { SubmitButton } from "../SubmitButton"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 const initialState = {
   errors: [],
-  message: ''
+  message: '',
+  success: false
 }
 
 export default function LoginForm() {
   const [state, formAction] = useFormState(loginUser, initialState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      router.replace('/user', { scroll: false })
+    }
+  }, [state.success, router]);
 
   return (
     <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
