@@ -1,7 +1,6 @@
 'use server'
 
 import { getCookie, setCookie, deleteCookie } from "./cookies";
-import { redirect } from "next/navigation";
 
 export async function loginUser(prevState: any, formData: FormData) {
   'use server'
@@ -25,21 +24,23 @@ export async function loginUser(prevState: any, formData: FormData) {
 
     if (!res.ok) {
       if (data.errorList) {
-        return { errors: data.errorList }
+        return { errors: data.errorList, success: false }
       } else {
-        return { errors: [], message: data.message }
+        return { errors: [], message: data.message, success: false }
       }
     }
   
     if (data.token) {
       setCookie(data.token);
-      redirect('/')
+      return {  errors: [], message: '', success: true }
     } else {
-      throw new Error('Token not received');
+      console.error('Token not received');
+      return { errors: [], message: '', success: false }
     }
 
   } catch (error) {
     console.error('Error during login');
+    return { errors: [], message: '', success: false }
   }
 }
 
