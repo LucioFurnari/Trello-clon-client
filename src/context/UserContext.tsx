@@ -7,12 +7,13 @@ interface UserData {
   username: string,
   email: string,
   id: number,
-  loggedIn: boolean
+  // loggedIn: boolean
 }
 
 type UserContextType = {
   user: UserData,
   setUser: React.Dispatch<React.SetStateAction<UserData>>,
+  isLogged: boolean,
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -23,7 +24,7 @@ type UserContextProviderProps = {
 const UserContext = createContext<UserContextType | null>(null);
 
 export default function UserContextProvider({ children }: UserContextProviderProps) {
-  const [user, setUser] = useState<UserData>({ username: '', email: '', id: 0, loggedIn: false });
+  const [user, setUser] = useState<UserData>({ username: '', email: '', id: 0 });
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,8 @@ export default function UserContextProvider({ children }: UserContextProviderPro
 
       // Remove this
       console.log(`User data: ${userData}`)
-      if (userData) setUser({ username: userData.username, email: userData.email, id: userData.id, loggedIn: true })
+      console.log(`Is logged in: ${isLogged}`)
+      if (userData) setUser({ username: userData.username, email: userData.email, id: userData.id })
     }
     getUserData();
   }, [isLogged])
@@ -42,7 +44,8 @@ export default function UserContextProvider({ children }: UserContextProviderPro
       value={{
         user,
         setUser,
-        setIsLogged
+        setIsLogged,
+        isLogged
       }}
     >
       {children}
