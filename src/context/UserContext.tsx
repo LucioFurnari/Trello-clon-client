@@ -12,7 +12,8 @@ interface UserData {
 
 type UserContextType = {
   user: UserData,
-  setUser: React.Dispatch<React.SetStateAction<UserData>>
+  setUser: React.Dispatch<React.SetStateAction<UserData>>,
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type UserContextProviderProps = {
@@ -23,22 +24,25 @@ const UserContext = createContext<UserContextType | null>(null);
 
 export default function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState<UserData>({ username: '', email: '', id: 0, loggedIn: false });
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
       const userData = await verifyToken()
 
-      console.log(userData)
+      // Remove this
+      console.log(`User data: ${userData}`)
       if (userData) setUser({ username: userData.username, email: userData.email, id: userData.id, loggedIn: true })
     }
     getUserData();
-  }, [])
+  }, [isLogged])
 
   return (
     <UserContext.Provider
       value={{
         user,
-        setUser
+        setUser,
+        setIsLogged
       }}
     >
       {children}
