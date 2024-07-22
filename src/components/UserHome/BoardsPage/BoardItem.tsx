@@ -9,7 +9,7 @@ export default function BoardItem({ title }: BoardItemProp) {
     <li className="bg-pink-500 cursor-pointer">
       <Link 
         href={""} 
-        className="inline-block pb-10 pr-10 pt-2 pl-2">
+        className="inline-block pb-14 pt-2 pl-2">
         { title }
       </Link>
     </li>
