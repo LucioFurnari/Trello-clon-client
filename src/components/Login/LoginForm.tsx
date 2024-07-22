@@ -6,6 +6,7 @@ import Fieldset from "../Fieldset"
 import { SubmitButton } from "../SubmitButton"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { useUserContext } from "@/context/UserContext"
 
 const initialState = {
   errors: [],
@@ -16,12 +17,14 @@ const initialState = {
 export default function LoginForm() {
   const [state, formAction] = useFormState(loginUser, initialState);
   const router = useRouter();
+  const { setIsLogged } = useUserContext();
 
   useEffect(() => {
     if (state.success) {
+      setIsLogged(true);
       router.replace('/user', { scroll: false })
     }
-  }, [state.success, router]);
+  }, [state.success, router, setIsLogged]);
 
   return (
     <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
