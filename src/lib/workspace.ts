@@ -12,7 +12,10 @@ export async function getWorkspace(workspaceId: string) {
       }
     });
 
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error('Failed to fetch workspaces', res.status, res.statusText)
+      return null;
+    }
 
     const data = await res.json();
     return data.workspace;
@@ -26,6 +29,11 @@ export async function getAllWorkspacesOfUser() {
   try {
     const token = await getCookie();
 
+    if (!token) {
+      console.error('No token found');
+      return null;
+    }
+
     const res = await fetch(`${process.env.API_HOST}/workspace`, {
       method: 'GET',
       headers: {
@@ -34,12 +42,15 @@ export async function getAllWorkspacesOfUser() {
       }
     });
 
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error('Failed to fetch workspaces', res.status, res.statusText)
+      return null;
+    }
 
     const data = await res.json();
-    return data.workspaces
+    return data.workspaces;
   } catch (error) {
-    console.error('Error in the server, it was not possible to perform the fetch')
+    console.error('Error in the server, it was not possible to perform the fetch', error);
     return null;
   }
 }
