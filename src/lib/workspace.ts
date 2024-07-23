@@ -7,7 +7,7 @@ export async function getWorkspace(workspaceId: string) {
     const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}`,{
       method: 'GET',
       headers: {
-        'Content-Type': 'Content-Type',
+        'Content-Type': 'application/json',
         Cookie: `access_token=${token}`
       }
     });
@@ -37,7 +37,7 @@ export async function getAllWorkspacesOfUser() {
     const res = await fetch(`${process.env.API_HOST}/workspace`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'Content-Type',
+        'Content-Type': 'application/json',
         Cookie: `access_token=${token}`
       }
     });
