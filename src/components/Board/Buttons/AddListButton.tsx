@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from "react"
+import { addList } from "@/lib/list";
+import { useParams } from "next/navigation";
 
 export default function AddListButton() {
   const [showInput, setShowInput] = useState(false);
@@ -15,8 +17,7 @@ export default function AddListButton() {
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setInputText(event.currentTarget.value)
-    console.log(event.currentTarget.value)
+    setInputText(event.currentTarget.value);
   }
 
   return (
@@ -26,7 +27,7 @@ export default function AddListButton() {
         <div>
           <input onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
           <button onClick={handleCloseInput}>X</button>
-          <AddList />
+          <AddList name={inputText} />
         </div>
       }
       <button onClick={handleShowInput}>
@@ -36,10 +37,19 @@ export default function AddListButton() {
   )
 }
 
+interface AddListProps {
+  name: string
+}
 
-function AddList() {
+function AddList({ name }: AddListProps) {
+  const params = useParams<{ board: string}>()
+
+  async function handleAddList() {
+    const result = await addList(params.board, name);
+  }
+
   return (
-    <button>
+    <button type="button" onClick={handleAddList}>
       Add list
     </button>
   )
