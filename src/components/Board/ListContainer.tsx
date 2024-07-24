@@ -18,10 +18,10 @@ export default function ListContainer({ lists }: ListContainerProps) {
   return (
     <section className="flex flex-row">
       {
-        listArray &&
+        listArray.length > 0 &&
         listArray.map((item: any) => <List key={item.listId} name={item.name} cards={item.cards} />)
       }
-      <AddListButton setAction={setListArray} />
+      <AddListButton setAction={setListArray} list={listArray}/>
     </section>
   )
 }
