@@ -1,15 +1,15 @@
 import { getBoard } from "@/lib/board"
+import ListContainer from "./ListContainer";
 
 
 export default async function BoardPage({ params }: { params: { board: string }}) {
   const data = await getBoard(params.board);
 
-  console.log(params.board)
-  console.log(data)
   return (
-    <main className="bg-purple-500 min-h-[calc(100vh-56px)]">
-      <h1> This is the board page</h1>
+    <main className="bg-purple-500 min-h-[calc(100vh-56px)] overflow-auto">
+      <h1>The board name: {data.title}</h1>
       <h2>The id of the board is: {params.board}</h2>
+      <ListContainer lists={data.lists} />
     </main>
   )
 }
