@@ -4,16 +4,25 @@ import { useState } from "react"
 import { addList } from "@/lib/list";
 import { useParams } from "next/navigation";
 
-export default function AddListButton() {
+interface AddListButtonProps {
+  setAction: (value: any) => void,
+  list: any[]
+}
+
+interface AddListProps extends AddListButtonProps {
+  name: string,
+}
+
+export default function AddListButton({ setAction, list }: AddListButtonProps) {
   const [showInput, setShowInput] = useState(false);
   const [inputText, setInputText] = useState('');
 
   function handleShowInput() {
-    setShowInput((value: boolean) => true);
+    setShowInput(true);
   }
 
   function handleCloseInput() {
-    setShowInput((value: boolean) => false);
+    setShowInput(false);
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,7 +36,7 @@ export default function AddListButton() {
         <div>
           <input onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
           <button onClick={handleCloseInput}>X</button>
-          <AddList name={inputText} />
+          <AddList name={inputText} setAction={setAction} list={list}/>
         </div>
       }
       <button onClick={handleShowInput}>
@@ -37,15 +46,12 @@ export default function AddListButton() {
   )
 }
 
-interface AddListProps {
-  name: string
-}
-
-function AddList({ name }: AddListProps) {
+function AddList({ name, setAction, list }: AddListProps) {
   const params = useParams<{ board: string}>()
 
   async function handleAddList() {
     const result = await addList(params.board, name);
+    setAction([...list, result])
   }
 
   return (
