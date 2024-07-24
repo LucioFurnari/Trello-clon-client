@@ -1,10 +1,8 @@
-
-
+'use server'
 
 export async function addList(boardId: string, name: string) {
-  const listName = { name: name }
-
   try {
+    const listName = { name: name }
     const res = await fetch(`${process.env.API_HOST}/board/${boardId}/list`, {
       body: JSON.stringify(listName),
       method: 'POST',
