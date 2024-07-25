@@ -3,17 +3,13 @@
 import { useState } from "react"
 import { addList } from "@/lib/list";
 import { useParams } from "next/navigation";
+import { useListContext } from "@/context/ListContext";
 
-interface AddListButtonProps {
-  setAction: (value: any) => void,
-  list: any[]
-}
-
-interface AddListProps extends AddListButtonProps {
+interface AddListProps {
   name: string,
 }
 
-export default function AddListButton({ setAction, list }: AddListButtonProps) {
+export default function AddListButton() {
   const [showInput, setShowInput] = useState(false);
   const [inputText, setInputText] = useState('');
 
@@ -36,7 +32,7 @@ export default function AddListButton({ setAction, list }: AddListButtonProps) {
         <div>
           <input onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
           <button onClick={handleCloseInput}>X</button>
-          <AddList name={inputText} setAction={setAction} list={list}/>
+          <AddList name={inputText} />
         </div>
       }
       <button onClick={handleShowInput}>
@@ -46,12 +42,13 @@ export default function AddListButton({ setAction, list }: AddListButtonProps) {
   )
 }
 
-function AddList({ name, setAction, list }: AddListProps) {
+function AddList({ name }: AddListProps) {
   const params = useParams<{ board: string}>()
+  const {setList, list} = useListContext();
 
   async function handleAddList() {
     const result = await addList(params.board, name);
-    setAction([...list, result])
+    setList([...list, result])
   }
 
   return (
