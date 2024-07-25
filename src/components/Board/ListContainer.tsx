@@ -2,7 +2,7 @@
 
 import List from "./List"
 import AddListButton from "./Buttons/AddListButton"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useListContext } from "@/context/ListContext"
 
 interface ListContainerProps {
@@ -22,7 +22,7 @@ export default function ListContainer({ lists }: ListContainerProps) {
         list.length > 0 &&
         list.map((item: any) => <List key={item.listId} name={item.name} cards={item.cards} />)
       }
-      {/* <AddListButton /> */}
+      <AddListButton />
     </section>
   )
 }
