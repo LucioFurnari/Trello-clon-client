@@ -3,25 +3,26 @@
 import List from "./List"
 import AddListButton from "./Buttons/AddListButton"
 import { useEffect, useState } from "react"
+import { useListContext } from "@/context/ListContext"
 
 interface ListContainerProps {
   lists: [],
 }
 
 export default function ListContainer({ lists }: ListContainerProps) {
-  const [listArray, setListArray] = useState([])
+  const { setList, list } = useListContext();
 
   useEffect(() => {
-    setListArray(lists)
-  }, [lists]);
+    setList(lists)
+  }, [lists, setList]);
 
   return (
     <section className="flex flex-row">
       {
-        listArray.length > 0 &&
-        listArray.map((item: any) => <List key={item.listId} name={item.name} cards={item.cards} />)
+        list.length > 0 &&
+        list.map((item: any) => <List key={item.listId} name={item.name} cards={item.cards} />)
       }
-      <AddListButton setAction={setListArray} list={listArray}/>
+      {/* <AddListButton /> */}
     </section>
   )
 }
