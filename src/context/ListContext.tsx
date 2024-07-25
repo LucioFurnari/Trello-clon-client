@@ -11,7 +11,7 @@ interface ListData {
 
 type ListContextType = {
   list: ListData[],
-  setList: React.Dispatch<React.SetStateAction<ListData>>
+  setList: React.Dispatch<React.SetStateAction<ListData[]>>
 }
 
 type ListContextProviderProps = {
@@ -33,4 +33,15 @@ export default function ListContextProvider({ children }: ListContextProviderPro
       {children}
     </ListContext.Provider>
   )
+}
+
+
+export function useListContext() {
+  const context = useContext(ListContext);
+  if (!context) {
+    throw new Error(
+      "useUserContext must be used within a UserContextProvider"
+    );
+  }
+  return context;
 }
