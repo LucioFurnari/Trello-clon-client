@@ -23,3 +23,25 @@ export async function addList(boardId: string, name: string) {
     return null;
   }
 }
+
+export async function deleteList(listId: string) {
+  try {
+    const res = await fetch(`${process.env.API_HOST}/list/${listId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to delete list', res.status, res.statusText)
+      return null;
+    }
+
+    const data = await res.json();
+    return data.list;
+  } catch (error) {
+    console.error('Error in the server, it was not possible to perform the fetch');
+    return null;
+  }
+}
