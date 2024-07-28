@@ -1,9 +1,9 @@
 'use client'
 
-import List from "./List"
 import AddListButton from "./Buttons/AddListButton"
 import { useEffect } from "react"
 import { useListContext } from "@/context/ListContext"
+import DragDropList from "./DragAndDrop/DragDropList"
 
 interface ListContainerProps {
   lists: [],
@@ -20,8 +20,12 @@ export default function ListContainer({ lists }: ListContainerProps) {
     <section className="flex flex-row">
       {
         list.length > 0 &&
-        list.map((item: any) => <List key={item.position} name={item.name} cards={item.cards} id={item.listId} />)
+        <DragDropList />
       }
+      {/* {
+        list.length > 0 &&
+        list.map((item: any) => <List key={item.position} name={item.name} cards={item.cards} id={item.listId}/>)
+      } */}
       <AddListButton />
     </section>
   )
