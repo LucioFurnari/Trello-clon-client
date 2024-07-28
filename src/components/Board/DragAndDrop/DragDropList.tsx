@@ -4,6 +4,7 @@ import List from '../List';
 import { ListData } from '@/context/ListContext';
 
 const reorder = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
+  console.log(startIndex, endIndex)
   // Create copy of the state list.
   const reorderedList = [...list];
   // Get source index.
@@ -33,11 +34,15 @@ export default function DragDroptList({ listArr }: DragDropProps) {
       return;
     }
 
-    if(source.droppableId === destination.droppableId && source.index === destination.index) {
+    // if(source.droppableId === destination.droppableId && source.index === destination.index) {
+    //   return;
+    // }
+    if (destination.index === source.index) {
       return;
     }
 
     if(type === 'group') {
+      console.log('testing')
       const reorderList = reorder(list, source.index, destination.index);
       setList(reorderList);
     }
@@ -45,14 +50,14 @@ export default function DragDroptList({ listArr }: DragDropProps) {
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <Droppable droppableId="droppable" type='group'>
+      <Droppable droppableId="droppable" type='group' direction='horizontal'>
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div className='flex flex-row' {...provided.droppableProps} ref={provided.innerRef}>
             {
               list.map((item, index) => (
                 <Draggable draggableId={item.listId.toString()} index={index} key={item.listId}>
                   {(provided) => (
-                    <div className=' bg-white' 
+                    <div
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                       ref={provided.innerRef}>
