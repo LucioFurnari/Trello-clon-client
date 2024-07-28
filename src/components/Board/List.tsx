@@ -1,11 +1,12 @@
 import Card from "./Card"
 import AddCardButton from "./Buttons/AddCardButton"
 import DeleteListButton from "./Buttons/DeleteListButton"
+import { CardData } from "@/context/ListContext"
 
 interface ListProps {
   name: string,
   id: string,
-  cards: []
+  cards: CardData[]
 }
 
 export default function List({ name, cards, id }: ListProps) {
