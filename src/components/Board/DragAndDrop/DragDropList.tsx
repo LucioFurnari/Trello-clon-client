@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import List from '../List';
 import { ListData } from '@/context/ListContext';
+import { useListContext } from '@/context/ListContext';
 
 const reorder = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
   console.log(startIndex, endIndex)
@@ -20,12 +20,8 @@ const reorder = (list: ListData[], startIndex: number, endIndex: number): ListDa
   return reorderedList;
 };
 
-interface DragDropProps {
-  listArr: ListData[]
-}
-
-export default function DragDroptList({ listArr }: DragDropProps) {
-  const [list, setList] = useState(listArr)
+export default function DragDroptList() {
+  const {list, setList} = useListContext();
 
   function handleDragDrop(result: DropResult) {
     const { source, destination, type} = result;
