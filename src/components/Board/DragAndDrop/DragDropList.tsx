@@ -4,7 +4,7 @@ import { ListData } from '@/context/ListContext';
 import { useListContext } from '@/context/ListContext';
 import { updatePosition } from '@/lib/list';
 
-const reorder = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
+const reorderList = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
   console.log(startIndex, endIndex)
   // Create copy of the state list.
   const reorderedList = [...list];
@@ -23,8 +23,8 @@ const reorder = (list: ListData[], startIndex: number, endIndex: number): ListDa
 
 function moveCard(
   sourceList: ListData[],
-  source: { index: number,droppableId: string},
-  destination: { index: number, droppableId: string}
+  source: {index: number, droppableId: string},
+  destination: {index: number, droppableId: string}
 ) {
   const sourceListIndex = sourceList.findIndex(list => list.listId === parseInt(source.droppableId))
   const destListIndex = sourceList.findIndex(list => list.listId === parseInt(destination.droppableId))
@@ -32,11 +32,18 @@ function moveCard(
   const sourceCards = [...sourceList[sourceListIndex].cards];
   const destCards = [...sourceList[destListIndex].cards];
 
-  const [movedCard] = sourceCards.splice(source.index, 1)
-  destCards.splice(destination.index, 0, movedCard);
+  if (sourceListIndex !== destListIndex) {
+    const [movedCard] = sourceCards.splice(source.index, 1);
+    destCards.splice(destination.index, 0, movedCard);
 
-  sourceList[sourceListIndex].cards = sourceCards;
-  sourceList[destListIndex].cards = destCards;
+    sourceList[sourceListIndex].cards = sourceCards;
+    sourceList[destListIndex].cards = destCards;
+  } else {
+    const [movedCard] = sourceCards.splice(source.index, 1);
+    sourceCards.splice(destination.index, 0, movedCard);
+
+    sourceList[sourceListIndex].cards = sourceCards;
+  }
 
   return [...sourceList]
 }
@@ -56,10 +63,9 @@ export default function DragDroptList() {
     }
 
     if(type === 'group') {
-      // const reorderList = reorder(list, source.index, destination.index);
-      const reorderList = reorder(list, source.index, destination.index);
-      setList(reorderList);
-      await updatePosition(reorderList);
+      const newList = reorderList(list, source.index, destination.index);
+      setList(newList);
+      await updatePosition(newList);
     } else if (type === 'card') {
       const updatedList = moveCard(list, source, destination);
       setList(updatedList);
