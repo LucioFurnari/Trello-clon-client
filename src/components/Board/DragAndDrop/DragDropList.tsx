@@ -21,6 +21,26 @@ const reorder = (list: ListData[], startIndex: number, endIndex: number): ListDa
   return reorderedList;
 };
 
+function moveCard(
+  sourceList: ListData[],
+  source: { index: number,droppableId: string},
+  destination: { index: number, droppableId: string}
+) {
+  const sourceListIndex = sourceList.findIndex(list => list.listId === parseInt(source.droppableId))
+  const destListIndex = sourceList.findIndex(list => list.listId === parseInt(destination.droppableId))
+
+  const sourceCards = [...sourceList[sourceListIndex].cards];
+  const destCards = [...sourceList[destListIndex].cards];
+
+  const [movedCard] = sourceCards.splice(source.index, 1)
+  destCards.splice(destination.index, 0, movedCard);
+
+  sourceList[sourceListIndex].cards = sourceCards;
+  sourceList[destListIndex].cards = destCards;
+
+  return [...sourceList]
+}
+
 export default function DragDroptList() {
   const {list, setList} = useListContext();
 
@@ -31,7 +51,7 @@ export default function DragDroptList() {
       return;
     }
 
-    if (destination.index === source.index) {
+    if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }
 
@@ -39,19 +59,22 @@ export default function DragDroptList() {
       // const reorderList = reorder(list, source.index, destination.index);
       const reorderList = reorder(list, source.index, destination.index);
       setList(reorderList);
-      console.log(reorderList)
       await updatePosition(reorderList);
+    } else if (type === 'card') {
+      const updatedList = moveCard(list, source, destination);
+      setList(updatedList);
+      // await updatePosition(updatedList);
     }
   }
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
-      <Droppable droppableId="droppable" type='group' direction='horizontal'>
+      <Droppable droppableId="lists" type='group' direction='horizontal'>
         {(provided) => (
           <div className='flex flex-row' {...provided.droppableProps} ref={provided.innerRef}>
             {
               list.map((item, index) => (
-                <Draggable draggableId={item.listId.toString()} index={index} key={item.listId}>
+                <Draggable draggableId={`list-${item.listId}`} index={index} key={`list-${item.listId}`}>
                   {(provided) => (
                     <div
                       {...provided.dragHandleProps}
