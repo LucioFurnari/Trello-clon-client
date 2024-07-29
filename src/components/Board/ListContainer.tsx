@@ -27,10 +27,6 @@ export default function ListContainer({ lists }: ListContainerProps) {
         list.length > 0 &&
         <DragDropList />
       }
-      {/* {
-        list.length > 0 &&
-        list.map((item: any) => <List key={item.position} name={item.name} cards={item.cards} id={item.listId}/>)
-      } */}
       <AddListButton />
     </section>
   )
