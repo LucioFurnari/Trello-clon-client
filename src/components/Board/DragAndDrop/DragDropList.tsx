@@ -2,6 +2,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea
 import List from '../List';
 import { ListData } from '@/context/ListContext';
 import { useListContext } from '@/context/ListContext';
+import { updatePosition } from '@/lib/list';
 
 const reorder = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
   console.log(startIndex, endIndex)
@@ -23,24 +24,23 @@ const reorder = (list: ListData[], startIndex: number, endIndex: number): ListDa
 export default function DragDroptList() {
   const {list, setList} = useListContext();
 
-  function handleDragDrop(result: DropResult) {
+  async function handleDragDrop(result: DropResult) {
     const { source, destination, type} = result;
 
     if (!destination) {
       return;
     }
 
-    // if(source.droppableId === destination.droppableId && source.index === destination.index) {
-    //   return;
-    // }
     if (destination.index === source.index) {
       return;
     }
 
     if(type === 'group') {
-      console.log('testing')
+      // const reorderList = reorder(list, source.index, destination.index);
       const reorderList = reorder(list, source.index, destination.index);
       setList(reorderList);
+      console.log(reorderList)
+      await updatePosition(reorderList);
     }
   }
 
@@ -57,7 +57,7 @@ export default function DragDroptList() {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                       ref={provided.innerRef}>
-                        <List name={item.name} id={item.listId.toString()} cards={[]} />
+                        <List name={item.name} id={item.listId.toString()} cards={item.cards} />
                     </div>
                   )
                   }
