@@ -13,7 +13,12 @@ export default function ListContainer({ lists }: ListContainerProps) {
   const { setList, list } = useListContext();
 
   useEffect(() => {
-    setList(lists)
+    // Sort array, maybe move it for this file
+    const sortedArr = [...lists]
+    sortedArr.sort((a: any, b: any) => a.position - b.position)
+
+    setList(sortedArr)
+    
   }, [lists, setList]);
 
   return (
