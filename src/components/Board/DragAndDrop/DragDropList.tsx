@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import List from '../List';
-import { ListData } from '@/context/ListContext';
+import { CardData, ListData } from '@/context/ListContext';
 import { useListContext } from '@/context/ListContext';
 import { updatePosition } from '@/lib/list';
 
@@ -32,12 +32,19 @@ function moveCard(
   const sourceCards = [...sourceList[sourceListIndex].cards];
   const destCards = [...sourceList[destListIndex].cards];
 
+  let cardsArr: CardData[] = []
+
   if (sourceListIndex !== destListIndex) {
     const [movedCard] = sourceCards.splice(source.index, 1);
+
+    const sourceListId = sourceList[destListIndex].listId
+    movedCard.listId = sourceListId;
+
     destCards.splice(destination.index, 0, movedCard);
 
     sourceList[sourceListIndex].cards = sourceCards;
     sourceList[destListIndex].cards = destCards;
+    cardsArr = [...sourceCards, ...destCards]
   } else {
     const [movedCard] = sourceCards.splice(source.index, 1);
     sourceCards.splice(destination.index, 0, movedCard);
@@ -45,7 +52,10 @@ function moveCard(
     sourceList[sourceListIndex].cards = sourceCards;
   }
 
-  return [...sourceList]
+  return {
+    list: [...sourceList],
+    cards: cardsArr
+  }
 }
 
 export default function DragDroptList() {
@@ -65,11 +75,11 @@ export default function DragDroptList() {
     if(type === 'group') {
       const newList = reorderList(list, source.index, destination.index);
       setList(newList);
-      await updatePosition(newList);
+      await updatePosition(newList, []);
     } else if (type === 'card') {
       const updatedList = moveCard(list, source, destination);
-      setList(updatedList);
-      // await updatePosition(updatedList);
+      setList(updatedList.list);
+      await updatePosition(updatedList.list, updatedList.cards);
     }
   }
 
