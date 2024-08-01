@@ -1,4 +1,4 @@
-import Card from "./Card"
+import CardLink from "./CardLink"
 import AddCardButton from "./Buttons/AddCardButton"
 import DeleteListButton from "./Buttons/DeleteListButton"
 import { Droppable, Draggable } from "@hello-pangea/dnd"
@@ -11,8 +11,6 @@ interface ListProps {
 }
 
 export default function List({ name, cards, id }: ListProps) {
-  console.log(`Rendering List: ${name}`);
-  cards.forEach(card => console.log(`Card ID: ${card.cardId}, Title: ${card.title}`));
 
   return (
     <div className="mx-6 p-4 bg-slate-700 w-52 overflow-visible" draggable={true}>
@@ -20,7 +18,7 @@ export default function List({ name, cards, id }: ListProps) {
       <DeleteListButton listId={id} />
       <Droppable droppableId={id} type="card">
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} className=" p-4 bg-slate-200 max-h-80 overflow-hidden">
+          <div {...provided.droppableProps} ref={provided.innerRef} className="p-4 bg-slate-200 max-h-80 overflow-hidden">
             {
             cards && 
             cards.map((card, index) =>(
@@ -31,7 +29,7 @@ export default function List({ name, cards, id }: ListProps) {
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                   >
-                    <Card title={card.title} />
+                    <CardLink title={card.title} />
                   </div>
                 )}
               </Draggable>
@@ -41,9 +39,7 @@ export default function List({ name, cards, id }: ListProps) {
           </div>
         )}
       </Droppable>
-      <AddCardButton />
+      <AddCardButton listId={id} />
     </div>
   )
 }
-
-// overflow-y-auto
