@@ -1,8 +1,8 @@
 import Card from "@/components/Card/Card"
 
-export default function CardPage() {
+export default function CardPage({params}: {params: {card: string}}) {
 
   return (
-    <Card />
+    <Card cardId={params.card} />
   )
 }
