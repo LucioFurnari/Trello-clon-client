@@ -1,23 +1,8 @@
-"use client"
-
-import { CardData } from "@/types/types"
 import Modal from "../Modal/Modal"
-import { useEffect, useState } from "react"
 import { getCard } from "@/lib/card"
-import { useParams } from "next/navigation"
 
-export default function Card() {
-  const params = useParams<{ card: string; }>();
-  const [card, setCard] = useState({title: '', cardId: ''});
-
-  useEffect(() => {
-    async function handleGetCard() {
-      const data = await getCard(params.card);
-
-      setCard(data);
-    }
-    handleGetCard();
-  }, [params.card])
+export default async function Card({ cardId }: { cardId: string}) {
+  const card = await getCard(cardId);
 
   return (
     <Modal>
