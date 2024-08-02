@@ -29,7 +29,7 @@ export default function List({ name, cards, id }: ListProps) {
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                   >
-                    <CardLink title={card.title} />
+                    <CardLink title={card.title} cardId={card.cardId.toString()} />
                   </div>
                 )}
               </Draggable>
