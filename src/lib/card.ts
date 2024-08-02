@@ -26,7 +26,7 @@ export async function createCard(listId: string, card: any) {
 
 export async function getCard(cardId: string) {
   try {
-    const res = await fetch(`${process.env.API_HOST}/card/:cardId`, {
+    const res = await fetch(`${process.env.API_HOST}/card/${cardId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
