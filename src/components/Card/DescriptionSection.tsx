@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import TextEditor from "../Editor/TextEditor"
 
 export default function DescriptionSection({ description }: {description: string | null}) {
 
@@ -11,6 +12,7 @@ export default function DescriptionSection({ description }: {description: string
         description &&
         <p>{description}</p>
       }
+      <TextEditor />
     </div>
   )
 }
