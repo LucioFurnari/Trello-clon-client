@@ -21,7 +21,7 @@ const formats = [
 ];
 
 
-const MyEditor: React.FC = () => {
+export default function MyEditor() {
   const [content, setContent] = useState<string>('');
 
   return (
@@ -37,4 +37,3 @@ const MyEditor: React.FC = () => {
   );
 };
 
-export default MyEditor;
