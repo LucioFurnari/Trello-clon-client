@@ -1,4 +1,5 @@
 import Modal from "../Modal/Modal"
+import DescriptionSection from "./DescriptionSection";
 import { getCard } from "@/lib/card"
 
 export default async function Card({ cardId }: { cardId: string}) {
@@ -6,8 +7,11 @@ export default async function Card({ cardId }: { cardId: string}) {
 
   return (
     <Modal>
-      <h1>{card.title}</h1>
-      <p>Card id: {card.cardId}</p>
+      <article className="p-4">
+        <h1>{card.title}</h1>
+        <p>Card id: {card.cardId}</p>
+        <DescriptionSection description={card.description} />
+      </article>
     </Modal>
   )
 }
