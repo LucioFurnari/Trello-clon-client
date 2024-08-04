@@ -29,10 +29,10 @@ export default function AddCardButton({listId}: {listId: string}) {
         <div className="mt-2">
           <input className="w-full p-2" onChange={handleInput} type="text" placeholder="Enter the title of the card" />
           <AddCard card={card} listId={listId} />
-          <button className="hover:bg-slate-500 p-2 mt-2" onClick={handleCloseInput}>X</button>
+          <button className="hover:bg-slate-500 p-2 mt-2 ml-2 rounded" onClick={handleCloseInput}>X</button>
         </div>
         :
-        <button className="pl-2 hover:bg-slate-500 transition-colors rounded w-full text-left" onClick={handleShowInput}>
+        <button className="pl-2 text-slate-200 hover:bg-slate-500 transition-colors rounded w-full text-left" onClick={handleShowInput}>
           Add Card
         </button>
       }
