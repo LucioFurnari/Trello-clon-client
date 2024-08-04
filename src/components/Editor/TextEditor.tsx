@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -22,7 +22,15 @@ const formats = [
 
 
 export default function MyEditor() {
+  const quillRef = useRef<ReactQuill>(null);
   const [content, setContent] = useState<string>('');
+
+  function saveContent() {
+    if (quillRef.current) {
+      const quill = quillRef.current.getEditor();
+      const deltaContent = quill.getContents();
+    }
+  }
 
   return (
     <div>
