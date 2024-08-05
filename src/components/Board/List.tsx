@@ -18,7 +18,7 @@ export default function List({ name, cards, id }: ListProps) {
       <DeleteListButton listId={id} />
       <Droppable droppableId={id} type="card">
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef} className="p-4 bg-slate-200 max-h-80 overflow-hidden">
+          <div {...provided.droppableProps} ref={provided.innerRef} className={`bg-transparent ${cards.length > 0 ? "py-0" : "py-4 bg-gray-500 rounded"} max-h-80 overflow-hidden`}>
             {
             cards && 
             cards.map((card, index) =>(
