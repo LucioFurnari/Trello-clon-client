@@ -35,7 +35,7 @@ export default function AddListButton() {
           <AddList name={inputText} />
         </div>
       }
-      <button onClick={handleShowInput}>
+      <button className=" backdrop-blur bg-white/30 p-2 px-4 rounded-xl" onClick={handleShowInput}>
         Add another list
       </button>
     </div>
