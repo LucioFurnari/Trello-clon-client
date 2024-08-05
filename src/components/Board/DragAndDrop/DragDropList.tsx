@@ -92,7 +92,7 @@ export default function DragDroptList() {
               list.map((item, index) => (
                 <Draggable draggableId={`list-${item.listId}`} index={index} key={`list-${item.listId}`}>
                   {(provided) => (
-                    <div
+                    <div className=' h-fit'
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                       ref={provided.innerRef}>
