@@ -28,16 +28,17 @@ export default function AddListButton() {
   return (
     <div>
       {
-        showInput && 
-        <div>
-          <input onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
-          <button onClick={handleCloseInput}>X</button>
+        showInput ?
+        <div className="bg-slate-600 p-4 rounded-xl">
+          <input className="block rounded pl-1 py-1 mb-2 bg-slate-700" onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
           <AddList name={inputText} />
+          <button className="p-2 hover:bg-slate-400 text-gray-200 rounded ml-2" onClick={handleCloseInput}>X</button>
         </div>
+        :
+        <button className="backdrop-blur bg-white/30 p-2 px-4 rounded-xl" onClick={handleShowInput}>
+          Add another list
+        </button>
       }
-      <button className=" backdrop-blur bg-white/30 p-2 px-4 rounded-xl" onClick={handleShowInput}>
-        Add another list
-      </button>
     </div>
   )
 }
@@ -52,7 +53,7 @@ function AddList({ name }: AddListProps) {
   }
 
   return (
-    <button type="button" onClick={handleAddList}>
+    <button className="bg-sky-600 hover:bg-sky-500 rounded p-2 px-4" type="button" onClick={handleAddList}>
       Add list
     </button>
   )
