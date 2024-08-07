@@ -22,13 +22,19 @@ export async function getBoard(boardId: string) {
   }
 }
 
-export async function createBoard(workspaceId: string) {
+export async function createBoard(workspaceId: string, formData: FormData) {
   try {
+    const rawFormData = {
+      title: formData.get('title'),
+    }
+    console.log(rawFormData)
+    const newBoard = JSON.stringify(rawFormData);
     const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}/board`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: newBoard
     });
 
     if (res.status !== 201) {
