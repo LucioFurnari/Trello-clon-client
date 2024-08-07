@@ -2,8 +2,14 @@
 
 import { useState } from "react"
 import MessageModal from "@/components/Modal/MessageModal"
+import { createBoard } from "@/lib/board";
 
-export default function CreateBoardButton() {
+interface CreateBoardButtonProps {
+  workspaceId: string,
+}
+
+export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps) {
+  const createBoardWithId = createBoard.bind(null, workspaceId);
   const [openModal, setOpenModal] = useState(false);
 
   function handleOpenModal() {
@@ -22,8 +28,9 @@ export default function CreateBoardButton() {
       {
         openModal &&
         <MessageModal setAction={handleCloseModal}>
-          <form>
-            <input type="text" placeholder="Board title" />
+          <form action={createBoardWithId}>
+            <input type="text" placeholder="Board title" name="title" />
+            <button type="submit">Create</button>
           </form>
         </MessageModal>
       }
