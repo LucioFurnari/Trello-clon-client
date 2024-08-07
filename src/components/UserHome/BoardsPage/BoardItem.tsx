@@ -2,14 +2,15 @@ import Link from "next/link"
 
 interface BoardItemProp {
   title: string,
+  boardId: number
 }
 
-export default function BoardItem({ title }: BoardItemProp) {
+export default function BoardItem({ title, boardId }: BoardItemProp) {
   return (
     <li className="bg-pink-500 cursor-pointer">
       <Link 
-        href={""} 
-        className="inline-block pb-14 pt-2 pl-2">
+        href={`/board/${boardId}`} 
+        className="inline-block w-full pb-14 pt-2 pl-2">
         { title }
       </Link>
     </li>

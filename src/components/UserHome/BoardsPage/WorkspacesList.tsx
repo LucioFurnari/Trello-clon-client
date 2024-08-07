@@ -11,6 +11,7 @@ export default async function WorkspacesList({ workspaces }: { workspaces: any})
               name={item.workspace.name} 
               key={item.workspace.workspaceId} 
               boards={item.workspace.boards}
+              workspaceId={item.workspace.workspaceId}
             />
           )
         }

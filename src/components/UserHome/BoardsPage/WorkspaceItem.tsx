@@ -2,14 +2,15 @@ import BoardList from "./BoardList"
 
 interface WorkspaceItemProp {
   name: string,
-  boards?: []
+  boards?: [],
+  workspaceId: string
 }
 
-export function WorkspaceItem({ name, boards }: WorkspaceItemProp) {
+export function WorkspaceItem({ name, boards, workspaceId }: WorkspaceItemProp) {
   return (
     <div className="pb-4">
       <h3 className="pb-2 text-zinc-200">{name}</h3>
-      <BoardList boards={boards} />
+      <BoardList boards={boards} workspaceId={workspaceId} />
     </div>
   )
 }
