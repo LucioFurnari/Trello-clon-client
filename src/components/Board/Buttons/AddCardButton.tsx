@@ -3,15 +3,11 @@
 import { useState } from "react"
 import { createCard } from "@/lib/card";
 import { useListContext } from "@/context/ListContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function AddCardButton({listId}: {listId: string}) {
   const [showInput, setShowInput] = useState(false);
-  const [inputText, setInputText] = useState('');
-
-
-  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setInputText(event.currentTarget.value);
-  }
 
   function handleShowInput() {
     setShowInput(true)
@@ -21,14 +17,12 @@ export default function AddCardButton({listId}: {listId: string}) {
     setShowInput(false)
   }
 
-  const card = { title: inputText}
   return (
     <div className="mt-2">
       {
         showInput ?
         <div className="mt-2">
-          <input className="w-full p-2" onChange={handleInput} type="text" placeholder="Enter the title of the card" />
-          <AddCard card={card} listId={listId} />
+          <AddCardForm listId={listId} />
           <button className="hover:bg-slate-500 p-2 mt-2 ml-2 rounded" onClick={handleCloseInput}>X</button>
         </div>
         :
@@ -46,15 +40,22 @@ interface CardData {
   coverColor?: string,
   coverImage?: string,
   startDate?: string,
-  dueDate?: string
+  dueDate?: Date | null
 }
 
-function AddCard({card, listId}: { card: CardData, listId: string}) {
+function AddCardForm({listId}: { listId: string}) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+
   const {list, setList} = useListContext();
 
   const listIndex = list.findIndex((elem) => elem.listId.toString() === listId);
 
-  async function handleCreateCard() {
+  async function handleCreateCard(event: React.FormEvent) {
+    event.preventDefault();
+    const card = { title: title, description: description, dueDate: dueDate}
+
     const result = await createCard(listId, card)
 
     if (result) {
@@ -65,8 +66,28 @@ function AddCard({card, listId}: { card: CardData, listId: string}) {
   }
 
   return (
-    <button onClick={(handleCreateCard)} className="p-2 mt-2 text-left rounded bg-blue-500 hover:bg-blue-400 transition-colors">
-      Add a card
-    </button>
+    <form onSubmit={handleCreateCard}>
+      <input
+        type="text"
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+        required
+        className="border p-2 rounded w-full"
+      />
+      <textarea
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Description"
+        className="border p-2 rounded w-full mt-2"
+      />
+      <DatePicker
+        selected={dueDate}
+        onChange={(date: Date | null) => setDueDate(date)}
+        placeholderText="Set due date"
+        className="border p-2 rounded w-full mt-2"
+      />
+      <button type="submit" className="p-2 mt-2 text-left rounded bg-blue-500 hover:bg-blue-400 transition-colors">
+        Add a card
+      </button>
+    </form>
   )
 }
