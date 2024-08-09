@@ -45,3 +45,27 @@ export async function getCard(cardId: string) {
     return null;
   }
 }
+
+export async function updateCard(cardId: string, card: any)  {
+  try {
+    const newCard = JSON.stringify(card);
+    const res = await fetch(`${process.env.API_HOST}/card/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: newCard
+    });
+
+    if (!res.ok) {
+      console.error('Failed to create card', res.status, res.statusText)
+      return null;
+    }
+
+    const data = await res.json();
+    return data.card;
+  } catch (error) {
+    console.error('Error in the server, it was not possible to perform the fetch');
+    return null;
+  }
+}
