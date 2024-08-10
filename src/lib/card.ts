@@ -48,13 +48,13 @@ export async function getCard(cardId: string) {
 
 export async function updateCard(cardId: string, card: any)  {
   try {
-    const newCard = JSON.stringify(card);
     const res = await fetch(`${process.env.API_HOST}/card/${cardId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache', // Prevent caching
       },
-      body: newCard
+      body: JSON.stringify(card)
     });
 
     if (!res.ok) {
