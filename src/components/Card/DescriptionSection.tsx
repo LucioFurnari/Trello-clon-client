@@ -3,16 +3,19 @@
 import { useState } from "react"
 import TextEditor from "../Editor/TextEditor"
 
-export default function DescriptionSection({ description }: {description: string | null}) {
+export default function DescriptionSection({ card }: {card: any}) {
+  const [openEditor, setOpenEditor] = useState(false);
 
   return(
-    <div>
-      <h3>Description</h3>
+    <div className="mt-4">
+      <h3 className="mb-2 text-gray-500">Description:</h3>
       {
-        description &&
-        <p>{description}</p>
+        card.description &&
+        !openEditor ?
+        <p onClick={() => setOpenEditor(true)} className="ml-2">{card.description}</p>
+        :
+        <TextEditor setAction={setOpenEditor} card={card} />
       }
-      <TextEditor />
     </div>
   )
 }
