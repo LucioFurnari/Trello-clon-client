@@ -30,7 +30,8 @@ export async function getCard(cardId: string) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      cache: 'no-store'
     });
 
     if (!res.ok) {
