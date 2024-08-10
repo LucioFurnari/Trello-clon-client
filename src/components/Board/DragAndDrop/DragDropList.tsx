@@ -26,8 +26,8 @@ function moveCard(
   source: {index: number, droppableId: string},
   destination: {index: number, droppableId: string}
 ) {
-  const sourceListIndex = sourceList.findIndex(list => list.listId === parseInt(source.droppableId))
-  const destListIndex = sourceList.findIndex(list => list.listId === parseInt(destination.droppableId))
+  const sourceListIndex = sourceList.findIndex(list => list.listId === source.droppableId)
+  const destListIndex = sourceList.findIndex(list => list.listId === destination.droppableId)
 
   const sourceCards = [...sourceList[sourceListIndex].cards];
   const destCards = [...sourceList[destListIndex].cards];
