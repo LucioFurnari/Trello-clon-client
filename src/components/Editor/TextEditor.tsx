@@ -1,6 +1,9 @@
-import { useState, useRef } from 'react';
-import ReactQuill from 'react-quill';
+import { useState, useRef, Dispatch, SetStateAction, useEffect } from 'react';
+import { updateCard } from '@/lib/card';
+
+import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import { useParams } from 'next/navigation';
 
 const modules = {
   toolbar: [
@@ -20,20 +23,30 @@ const formats = [
   'link',
 ];
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
-export default function MyEditor() {
-  const quillRef = useRef<ReactQuill>(null);
-  const [content, setContent] = useState<string>('');
 
-  function saveContent() {
-    if (quillRef.current) {
-      const quill = quillRef.current.getEditor();
-      const deltaContent = quill.getContents();
+export default function MyEditor({ card, setAction }: { card: any, setAction: Dispatch<SetStateAction<boolean>> }) {
+  const [content, setContent] = useState(card.description || ''); // Initial value from card
+  const params = useParams<{ card: string }>();
+
+  async function handleSave() {
+    const updatedCard = {
+      ...card,
+      description: content, // Save the HTML content directly
+    };
+    
+    const updatedData = await updateCard(params.card, updatedCard);
+    console.log(updatedData)
+    // Ensure the content is updated with what was actually saved
+    if (updatedData && updatedData.description) {
+      setContent(updatedData.description);
     }
   }
 
   return (
-    <div>
+    <div className='mt-4'>
       <ReactQuill 
         value={content} 
         onChange={setContent} 
@@ -41,7 +54,9 @@ export default function MyEditor() {
         formats={formats}
       />
       <button onClick={() => console.log(content)}>Log Content</button>
+      <button onClick={() => handleSave()}>Save</button>
+      <button className='ml-2 mt-4 p-2 hover:bg-gray-600' onClick={() => setAction(false)}>Cancel</button>
     </div>
   );
-};
+}
 
