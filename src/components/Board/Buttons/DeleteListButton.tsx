@@ -19,7 +19,8 @@ export default function DeleteListButton({ listId }: DeleteListButtonProps) {
     const res = await deleteList(listId, params.board)
 
     if (res) {
-      setList(list.filter(item => item.listId !== parseInt(listId)))
+      setList(list.filter(item => item.listId !== listId))
+      setOpenModal(false);
     }
 
   }
