@@ -17,6 +17,8 @@ export async function addList(boardId: string, name: string) {
     }
 
     const data = await res.json();
+    // Add empty cards to lists, the api don´t return the cards when create list.
+    data.list.cards = []
     return data.list;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch');
@@ -46,9 +48,9 @@ export async function deleteList(listId: string, boardId: string) {
   }
 }
 
-export async function updatePosition(list: any) {
+export async function updatePosition(list: any, cards: any) {
   try {
-    const newList =  JSON.stringify({ newList: list} )
+    const newList =  JSON.stringify({ newList: list, newCards: cards })
     const res = await fetch(`${process.env.API_HOST}/list`, {
       method: 'PUT',
       headers: {
@@ -61,7 +63,6 @@ export async function updatePosition(list: any) {
       console.error('Failed to update list', res.status, res.statusText)
       return null;
     }
-    console.log('working')
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch');
     return null;
