@@ -8,11 +8,7 @@ import { CardData } from "@/types/types";
 
 export default function DescriptionSection({ card }: {card: CardData}) {
   const [openEditor, setOpenEditor] = useState(false);
-  const [content, setContent] = useState<Delta>()
-
-  useEffect(() => {
-    setContent(card.description)
-  }, [])
+  const [content, setContent] = useState<Delta | undefined>(card.description)
 
   return(
     <div className="mt-4">
@@ -22,6 +18,7 @@ export default function DescriptionSection({ card }: {card: CardData}) {
           setAction={setOpenEditor}
           card={card}
           setContent={setContent}
+          content={content}
         />
       ) : (
         <DescriptionText
