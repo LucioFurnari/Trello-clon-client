@@ -1,5 +1,5 @@
 import Quill, { Delta } from "quill/core"
-import { Dispatch, SetStateAction, useEffect, useRef, useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 export default function DescriptionText({delta, setAction}: {delta: Delta | undefined, setAction: Dispatch<SetStateAction<boolean>>}) {
   const quillRef = useRef<HTMLDivElement>(null);
@@ -16,13 +16,14 @@ export default function DescriptionText({delta, setAction}: {delta: Delta | unde
         },
       });
 
-      // Set the editor contents from the delta object
-      console.log(delta)
-      quill.setContents(delta);
+      if (delta) {
+        // Set the editor contents from the delta object
+        quill.setContents(delta);
+      }
       const htmlText = quill.getSemanticHTML();
-      console.log(htmlText)
       setHtml(htmlText)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
