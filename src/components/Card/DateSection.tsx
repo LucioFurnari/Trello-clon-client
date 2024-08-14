@@ -1,6 +1,5 @@
 
-
-export default function DateSection({ dueDate }: { dueDate: Date | null }) {
+export default function DateSection({ dueDate }: { dueDate: Date | undefined}) {
   const isOverdue = dueDate ? new Date(dueDate) < new Date() : false;
   
   const daysLeft = dueDate
