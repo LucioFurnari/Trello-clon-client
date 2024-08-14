@@ -1,28 +1,34 @@
 import Quill, { Delta } from "quill/core"
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useCallback, useState } from "react";
 
-export default function DescriptionText(delta: Delta) {
-  const editorRef = useRef<HTMLDivElement>(null);
-  const quillRef = useRef<Quill | null>(null);
+export default function DescriptionText({delta, setAction}: {delta: Delta | undefined, setAction: Dispatch<SetStateAction<boolean>>}) {
+  const quillRef = useRef<HTMLDivElement>(null);
+  const [html, setHtml] = useState('')
 
   useEffect(() => {
-    if (editorRef.current && !quillRef.current) {
-      // Create a new Quill instance in a hidden div
-      quillRef.current = new Quill(editorRef.current);
-    }
+    if (quillRef.current) {
+      // Initialize Quill editor
+      const quill = new Quill(quillRef.current, {
+        theme: 'snow',
+        readOnly: true, // Set to true to make the editor read-only
+        modules: {
+          toolbar: false, // Disable the toolbar
+        },
+      });
 
-    if (quillRef.current && delta) {
-      // Set the contents of the editor
-      quillRef.current.setContents(delta);
+      // Set the editor contents from the delta object
+      console.log(delta)
+      quill.setContents(delta);
+      const htmlText = quill.getSemanticHTML();
+      console.log(htmlText)
+      setHtml(htmlText)
     }
-  }, [delta]);
+  }, []);
 
   return (
-    <div>
-      {/* This div will hold the Quill editor's root node */}
-      <div ref={editorRef} style={{ display: 'none' }}></div>
-      {/* This div will display the converted HTML */}
-      <div dangerouslySetInnerHTML={{ __html: editorRef.current?.innerHTML || '' }}></div>
-    </div>
-  );
+  <div onClick={() => setAction(true)}>
+    <div ref={quillRef} className="hidden"></div>
+    <div dangerouslySetInnerHTML={{__html: html}}></div>
+  </div>
+  )
 }
