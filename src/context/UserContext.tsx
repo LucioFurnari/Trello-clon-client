@@ -31,10 +31,11 @@ export default function UserContextProvider({ children }: UserContextProviderPro
     const getUserData = async () => {
       const userData = await verifyToken()
 
-      // Remove this
-      console.log(`User data: ${userData}`)
-      console.log(`Is logged in: ${isLogged}`)
-      if (userData) setUser({ username: userData.username, email: userData.email, id: userData.id })
+      if (userData) { 
+        setUser({ username: userData.username, email: userData.email, id: userData.id })
+      } else {
+        setIsLogged(false)
+      }
     }
     getUserData();
   }, [isLogged])
