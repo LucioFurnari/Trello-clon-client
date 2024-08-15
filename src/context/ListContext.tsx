@@ -2,23 +2,23 @@
 
 import { createContext, useContext, useState } from "react";
 
-interface ListData {
-  listId: number,
+export interface ListData {
+  listId: string,
   name: string,
   position: number,
-  boardId: number,
+  boardId: string,
   cards: CardData[]
 }
 
-interface CardData {
-  cardId: number,
+export interface CardData {
+  cardId: string,
   title: string,
   description: string,
   coverColor: string | null,
   coverImage: string | null,
   startDate: string | null,
   dueDate: string | null,
-  listId: number
+  listId: string
 }
 
 type ListContextType = {
@@ -32,14 +32,26 @@ type ListContextProviderProps = {
 
 // default value for the context
 const defaultValue: ListContextType = {
-  list: [],
+  list: [{
+    cards: [],
+    listId: "",
+    name: "",
+    position: 0,
+    boardId: ""
+  }],
   setList: () => []
 };
 
 const ListContext = createContext<ListContextType>(defaultValue)
 
 export default function ListContextProvider({ children }: ListContextProviderProps) {
-  const [list, setList] = useState<ListData[]>([]);
+  const [list, setList] = useState<ListData[]>([{
+    cards: [],
+    listId: "",
+    name: "",
+    position: 0,
+    boardId: ""
+  }]);
 
   return (
     <ListContext.Provider
