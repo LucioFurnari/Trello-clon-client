@@ -5,7 +5,6 @@ import NavLinkContainer from "./NavBarLinkContainer/NavLinkContainer"
 import HomeLink from "./HomeLink"
 import UserMenuContainer from "./UserMenu/LoginMenuContainer"
 import { useUserContext } from "@/context/UserContext"
-import { useEffect, useState } from "react"
 
 export default function Navbar() {
   const { isLogged } = useUserContext();
