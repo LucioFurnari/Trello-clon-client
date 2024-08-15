@@ -9,21 +9,12 @@ import { useEffect, useState } from "react"
 
 export default function Navbar() {
   const { isLogged } = useUserContext();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (isLogged) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false)
-    }
-  }, [isLogged])
 
   return (
-    <nav className="flex items-center justify-between bg-slate-700 p-2">
+    <nav className="flex items-center justify-between bg-zinc-800 p-2">
       <HomeLink />
       {
-        isLoggedIn ?
+        isLogged ?
         <>
           <SubMenuContainer title="Your Workspaces" name={'Workspace'} />
           <UserMenuContainer />
