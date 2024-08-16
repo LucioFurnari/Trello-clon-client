@@ -1,11 +1,17 @@
+import { getAllWorkspacesOfUser } from "@/lib/workspace";
+import { FetchDataError } from "@/types/exceptions";
 import { WorkspaceItem } from "./WorkspaceItem"
 
-export default async function WorkspacesList({ workspaces }: { workspaces: any}) {
+export default async function WorkspacesList() {
+  const data = await getAllWorkspacesOfUser();
+
+  if (!data) throw new FetchDataError();
+
   return (
     <div>
       {
-        workspaces &&
-        workspaces.map((item: any) => {
+        data.length > 0 &&
+        data.map((item: any) => {
           return (
             <WorkspaceItem 
               name={item.workspace.name} 
