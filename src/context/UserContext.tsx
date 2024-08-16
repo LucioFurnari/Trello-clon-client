@@ -2,6 +2,7 @@
 
 import { createContext, useState, useContext, useEffect } from "react";
 import { verifyToken } from "@/lib/auth";
+import { usePathname } from "next/navigation";
 
 interface UserData {
   username: string,
@@ -24,6 +25,7 @@ type UserContextProviderProps = {
 const UserContext = createContext<UserContextType | null>(null);
 
 export default function UserContextProvider({ children }: UserContextProviderProps) {
+  const pathname = usePathname();
   const [user, setUser] = useState<UserData>({ username: '', email: '', id: 0 });
   const [isLogged, setIsLogged] = useState(false);
 
@@ -33,12 +35,13 @@ export default function UserContextProvider({ children }: UserContextProviderPro
 
       if (userData) { 
         setUser({ username: userData.username, email: userData.email, id: userData.id })
+        setIsLogged(true);
       } else {
         setIsLogged(false)
       }
     }
     getUserData();
-  }, [isLogged])
+  }, [isLogged, pathname])
 
   return (
     <UserContext.Provider
