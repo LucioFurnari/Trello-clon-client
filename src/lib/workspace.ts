@@ -1,9 +1,8 @@
-import { getCookie } from "./cookies"
+import { getCookie } from "./cookies";
 
 export async function getWorkspace(workspaceId: string) {
+  const token = getCookie();
   try {
-    const token = await getCookie();
-
     const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}`,{
       method: 'GET',
       headers: {
@@ -26,9 +25,8 @@ export async function getWorkspace(workspaceId: string) {
 }
 
 export async function getAllWorkspacesOfUser() {
+  const token = getCookie();
   try {
-    const token = await getCookie();
-
     if (!token) {
       console.error('No token found');
       return null;
