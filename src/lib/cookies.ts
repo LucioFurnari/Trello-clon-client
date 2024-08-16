@@ -1,11 +1,8 @@
-'use server'
-
 import { cookies } from "next/headers";
 
-export async function getCookie() {
-  const token = cookies().get('access_token')
-
-  if (token) return token.value;
+export function getCookie() {
+  const token = cookies().get('access_token')?.value
+  return token;
 }
 
 export async function setCookie(token: string) {
