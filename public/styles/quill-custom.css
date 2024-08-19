@@ -1,0 +1,9 @@
+.ql-editor ol,
+.ql-editor ul,
+.ql-editor li {
+    list-style-type: disc; /* For ul */
+    list-style-type: decimal; /* For ol */
+    margin-left: 1.5em; /* Optional: Indent the list */
+    padding-left: 1em; /* Optional: Padding for the list */
+    padding: 0;
+}
