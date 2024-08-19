@@ -1,8 +1,8 @@
 import WorkspacePage from "@/components/Workspace/WorkspacePage"
 
-export default function Workspace({ params }: { params: { workspace: string }}) {
+export default async function Workspace({ params }: { params: { workspace: string }}) {
 
   return (
-    <WorkspacePage />
+    <WorkspacePage workspaceId={params.workspace} />
   )
 }
