@@ -95,7 +95,7 @@ export async function verifyToken() {
     if (!res.ok) return null
 
     const data = await res.json();
-    
+
     return data.user; 
   } catch (error) {
     console.error('Error in the server');

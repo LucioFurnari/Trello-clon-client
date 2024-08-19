@@ -55,7 +55,7 @@ export async function updateCard(cardId: string, card: any)  {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache', // Prevent caching
       },
-      body: JSON.stringify(card)
+      body: card
     });
 
     if (!res.ok) {

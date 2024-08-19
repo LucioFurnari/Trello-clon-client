@@ -10,7 +10,7 @@ export async function getBoard(boardId: string) {
     });
 
     if (res.status !== 302) {
-      console.error('Failed to fetch workspaces', res.status, res.statusText)
+      console.error('Failed to fetch board', res.status, res.statusText)
       return null;
     }
 
