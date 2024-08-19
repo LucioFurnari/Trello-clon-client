@@ -7,7 +7,7 @@ export default function UserLayout({
   boards: React.ReactNode
 }) {
   return (
-    <main className="flex">
+    <main className="flex min-h-[calc(100vh-56px)] bg-slate-600">
       {children}
       {boards}
     </main>
