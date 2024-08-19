@@ -28,9 +28,9 @@ export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps)
       {
         openModal &&
         <MessageModal setAction={handleCloseModal}>
-          <form action={createBoardWithId}>
-            <input type="text" placeholder="Board title" name="title" />
-            <button type="submit">Create</button>
+          <form className="flex flex-col p-2" action={createBoardWithId}>
+            <input className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Board title" name="title" />
+            <button className="bg-blue-600 hover:bg-blue-500 py-2 text-xl" type="submit">Create</button>
           </form>
         </MessageModal>
       }

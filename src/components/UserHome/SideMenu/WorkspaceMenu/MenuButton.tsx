@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export default function MenuButton({ name, action }: ButtonProps) {
   return (
-    <button onClick={action}>
+    <button className="p-2 text-zinc-300 hover:bg-zinc-600 transition-colors rounded" onClick={action}>
       {name}
     </button>
   )
