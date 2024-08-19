@@ -29,7 +29,7 @@ export default function DescriptionText({delta, setAction}: {delta: Delta | unde
   return (
   <div onClick={() => setAction(true)}>
     <div ref={quillRef} className="hidden"></div>
-    <div dangerouslySetInnerHTML={{__html: html}}></div>
+    <div className="ql-editor" dangerouslySetInnerHTML={{__html: html}}></div>
   </div>
   )
 }
