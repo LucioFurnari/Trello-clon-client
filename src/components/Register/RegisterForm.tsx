@@ -16,13 +16,17 @@ export default function RegisterForm() {
 
 
   return (
-    <form className="flex flex-col mt-8 p-4" action={formAction}>
+    <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
       <Fieldset type={"text"} name={"username"} errors={state?.errors} />
       <Fieldset type={"email"} name={"email"} errors={state?.errors} />
       <Fieldset type={"text"} name={"password"} errors={state?.errors} />
       <SubmitButton />
       {
         state?.success &&
+        <p>{state.message}</p>
+      }
+      {
+        !state?.success &&
         <p>{state.message}</p>
       }
     </form>
