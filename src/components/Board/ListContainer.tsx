@@ -16,15 +16,13 @@ export default function ListContainer({ lists }: ListContainerProps) {
     // Sort array, maybe move it for this file
     const sortedArr = [...lists]
     sortedArr.sort((a: any, b: any) => a.position - b.position)
-
-    setList(sortedArr)
-    
+    setList(sortedArr) 
   }, [lists, setList]);
 
   return (
     <section className="flex flex-row">
       {
-        list.length > 0 &&
+        lists.length > 0 &&
         <DragDropList />
       }
       <AddListButton />
