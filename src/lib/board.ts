@@ -50,3 +50,21 @@ export async function createBoard(workspaceId: string, formData: FormData) {
     return null;
   }
 }
+
+export async function deleteBoard(boardId: string) {
+  try {
+    const res = await fetch(`${process.env.API_HOST}/board/${boardId}`, {
+      method: 'DELETE',
+    })
+
+    if (!res.ok) {
+      console.error('Error deleting the board');
+      return null;
+    }
+    
+    return res;
+  } catch (error) {
+    console.error('Error in the server, it was not possible to perform the fetch');
+    return null;
+  }
+}
