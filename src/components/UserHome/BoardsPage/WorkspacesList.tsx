@@ -5,7 +5,7 @@ import { WorkspaceItem } from "./WorkspaceItem"
 export default async function WorkspacesList() {
   const data = await getAllWorkspacesOfUser();
 
-  if (!data) throw new FetchDataError();
+  if (data.error) throw new FetchDataError();
 
   return (
     <div>
