@@ -29,7 +29,7 @@ export async function getAllWorkspacesOfUser() {
   try {
     if (!token) {
       console.error('No token found');
-      return null;
+      return { error: true, message: 'Token not found' };
     }
 
     const res = await fetch(`${process.env.API_HOST}/workspace`, {
@@ -42,7 +42,7 @@ export async function getAllWorkspacesOfUser() {
 
     if (!res.ok) {
       console.error('Failed to fetch workspaces', res.status, res.statusText)
-      return null;
+      return { error: true, message: res.statusText};
     }
 
     const data = await res.json();
