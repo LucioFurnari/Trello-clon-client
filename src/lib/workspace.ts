@@ -1,3 +1,4 @@
+'use server'
 import { getCookie } from "./cookies";
 
 const API_HOST = process.env.API_HOST;
@@ -57,7 +58,12 @@ export async function getAllWorkspacesOfUser() {
 
 export async function createWorkspace(formData: FormData) {
   const token = getCookie();
-  const rawData = JSON.stringify(formData)
+  const rawData = JSON.stringify(
+    {
+      name: formData.get('name'),
+      description: formData.get('description')
+    }
+  );
   try {
     if (!token) {
       console.error('No token found');
