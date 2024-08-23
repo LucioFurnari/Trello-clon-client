@@ -27,7 +27,7 @@ export async function createBoard(workspaceId: string, formData: FormData) {
     const rawFormData = {
       title: formData.get('title'),
     }
-    console.log(rawFormData)
+
     const newBoard = JSON.stringify(rawFormData);
     const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}/board`, {
       method: 'POST',
@@ -55,6 +55,9 @@ export async function deleteBoard(boardId: string) {
   try {
     const res = await fetch(`${process.env.API_HOST}/board/${boardId}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
 
     if (!res.ok) {
