@@ -1,25 +1,21 @@
 'use client'
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
+import { WorkspaceData, BoardData } from "@/types/types"
 
 type WorkspaceContextType = {
-  workspace: string
-  setWorkspace: React.Dispatch<React.SetStateAction<string>>
+  workspace: WorkspaceData[] | undefined,
+  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceData[] | undefined>>
 }
 
 type WorkspaceContextProviderType = {
   children: React.ReactNode,
 }
 
-const defaultValue: WorkspaceContextType = {
-  workspace: 'hi',
-  setWorkspace: (string) => string 
-}
-
-const WorkspaceContext = createContext<WorkspaceContextType>(defaultValue);
+const WorkspaceContext = createContext<WorkspaceContextType | null>(null);
 
 export default function WorkspaceContextProvider({ children }: WorkspaceContextProviderType) {
-  const [workspace, setWorkspace] = useState('');
+  const [workspace, setWorkspace] = useState<WorkspaceData[] | undefined>();
 
   return (
     <WorkspaceContext.Provider
@@ -31,4 +27,14 @@ export default function WorkspaceContextProvider({ children }: WorkspaceContextP
       {children}
     </WorkspaceContext.Provider>
   )
+}
+
+export function useWorkspaceContext() {
+  const context = useContext(WorkspaceContext);
+  if (context === undefined) {
+    throw new Error(
+      "useUserContext must be used within a UserContextProvider"
+    );
+  }
+  return context;
 }
