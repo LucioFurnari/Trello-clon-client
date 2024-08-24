@@ -1,12 +1,12 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect } from "react"
-import { WorkspaceData, BoardData } from "@/types/types"
+import { WorkspaceData, BoardData, WorkspaceListData } from "@/types/types"
 import { getAllWorkspacesOfUser } from "@/lib/workspace"
 
 type WorkspaceContextType = {
-  workspace: WorkspaceData[] | null,
-  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceData[] | null>>
+  workspace: WorkspaceListData[] | null,
+  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceListData[] | null>>
 }
 
 type WorkspaceContextProviderType = {
@@ -16,14 +16,15 @@ type WorkspaceContextProviderType = {
 const WorkspaceContext = createContext<WorkspaceContextType | null>(null);
 
 export default function WorkspaceContextProvider({ children }: WorkspaceContextProviderType) {
-  const [workspace, setWorkspace] = useState<WorkspaceData[] | null>([]);
+  const [workspace, setWorkspace] = useState<WorkspaceListData[] | null>([]);
 
   useEffect(() => {
     const getData = async () => {
       const data = await getAllWorkspacesOfUser();
-      console.log('Workspaces: ', data);
+      
+      if (data.error) return
 
-      if (data) setWorkspace(data)
+      setWorkspace(data)
     }
     getData();
   }, [])
