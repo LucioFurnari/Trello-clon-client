@@ -56,12 +56,12 @@ export async function getAllWorkspacesOfUser() {
   }
 }
 
-export async function createWorkspace(formData: FormData) {
+export async function createWorkspace(workspaceData: { name: string, description: string }) {
   const token = getCookie();
   const rawData = JSON.stringify(
     {
-      name: formData.get('name'),
-      description: formData.get('description')
+      name: workspaceData.name,
+      description: workspaceData.description
     }
   );
   try {
