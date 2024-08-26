@@ -25,7 +25,11 @@ export interface WorkspaceData {
 }
 
 export interface WorkspaceListData {
-  workspace: WorkspaceData
+  workspace: {
+    workspaceId: string,
+    name: string,
+    boards: BoardData[] | []
+  }
 }
 
 export interface BoardData {
