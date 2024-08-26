@@ -11,7 +11,8 @@ export default function WorkspaceMenu() {
     <div>
       <h3 className="text-zinc-400 text-xl border-b-[1px] border-gray-500/50 py-2 ml-2 mr-2">Workspaces</h3>
       {
-        context?.workspace && 
+        context?.workspace &&
+        context.workspace.length > 0 &&
         <div>
           {
             context.workspace.map((item) => {
