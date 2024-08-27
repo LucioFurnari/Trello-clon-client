@@ -1,13 +1,21 @@
-'use client'
-
 import { useState } from "react";
 import { createWorkspace } from "@/lib/workspace"
-import { useWorkspaceContext } from "@/context/WorkspaceContext"
 
-export default function CreateWorkspaceForm() {
+type formReturnType = {
+  workspace: {
+    workspaceId: string,
+    name: string,
+    boards: []
+  }
+}
+
+interface CreateWorkspaceProps {
+  setAction: (elem: formReturnType) => void
+}
+
+export default function CreateWorkspaceForm({ setAction }: CreateWorkspaceProps) {
   const [workspaceName, setWorkspaceName] = useState('');
   const [workspaceDescription, setWorkspaceDescription] = useState('');
-  const context = useWorkspaceContext();
 
   async function handleCreateWorkspace(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -22,14 +30,14 @@ export default function CreateWorkspaceForm() {
       return
     };
     
-    const workspaceData = {
+    const workspaceData: formReturnType = {
       workspace: {
         workspaceId: data.workspaceId,
         name: data.name,
         boards: []
       }
     }
-    context?.setWorkspace([...context.workspace, workspaceData]);
+    setAction(workspaceData)
   }
 
   return (
