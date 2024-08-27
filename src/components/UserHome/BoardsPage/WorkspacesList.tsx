@@ -7,21 +7,26 @@ export default function WorkspacesList() {
   const context = useWorkspaceContext();
 
   return (
-    <div>
+    <section>
       {
         context?.workspace &&
-        context.workspace.map((item: any) => {
+        context.workspace.length > 0 &&
+        <div>
+          {
+        context.workspace.map((item) => {
+          const {workspace} = item;
           return (
             <WorkspaceItem 
-              name={item.workspace.name} 
-              key={item.workspace.workspaceId} 
-              boards={item.workspace.boards}
-              workspaceId={item.workspace.workspaceId}
+              name={workspace.name} 
+              key={workspace.workspaceId} 
+              boards={workspace.boards}
+              workspaceId={workspace.workspaceId}
             />
+            )}
           )
         }
-        )
+        </div>
       }
-    </div>
+    </section>
   )
 }
