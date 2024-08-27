@@ -1,8 +1,9 @@
 import BoardList from "./BoardList"
+import { BoardData } from "@/types/types"
 
 interface WorkspaceItemProp {
   name: string,
-  boards?: [],
+  boards?: BoardData[] | [],
   workspaceId: string
 }
 
