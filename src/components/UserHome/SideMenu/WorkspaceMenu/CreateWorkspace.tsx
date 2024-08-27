@@ -2,10 +2,16 @@
 
 import MessageModal from "@/components/Modal/MessageModal";
 import CreateWorkspaceForm from "@/components/CreateWorkspace/CreateWorkspaceForm";
+import { useWorkspaceContext } from "@/context/WorkspaceContext";
 import { useState } from "react";
 
 export default function CreateWorkspace() {
   const [openModal, setOpenModal] = useState(false);
+  const context = useWorkspaceContext();
+
+  function handleChangeState(newWorkspace: any) {
+    context?.setWorkspace([...context.workspace, newWorkspace])
+  }
 
   return (
     <>
@@ -15,7 +21,7 @@ export default function CreateWorkspace() {
     {
       openModal &&
       <MessageModal setAction={() => setOpenModal(false)}>
-        <CreateWorkspaceForm />
+        <CreateWorkspaceForm  setAction={handleChangeState}/>
       </MessageModal>
     }
     </>
