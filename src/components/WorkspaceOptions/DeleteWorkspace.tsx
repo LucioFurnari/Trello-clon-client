@@ -1,8 +1,18 @@
 import MessageModal from "../Modal/MessageModal"
+import { deleteWorkspace } from "@/lib/workspace";
 import { useState } from "react"
 
-export default function DeleteWorkspace() {
+interface DeleteWorkspaceProps {
+  id: string
+}
+
+export default function DeleteWorkspace({ id }: DeleteWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
+
+  async function handleDeleteWorkspace() {
+    const res = await deleteWorkspace(id);
+    console.log(res);
+  }
 
   return (
     <>
@@ -10,9 +20,10 @@ export default function DeleteWorkspace() {
       {
         openModal &&
         <MessageModal setAction={() => setOpenModal(false)}>
-        <div>
-          <h2>You wanna delete this workspace ?</h2>
-          <p>All boards will be deleted</p>
+        <div className="flex flex-col">
+          <h2 className="text-center">You wanna delete this workspace ?</h2>
+          <p className="text-center">All boards will be deleted</p>
+          <button onClick={handleDeleteWorkspace} className="mx-auto mt-4 px-8 py-2 rounded bg-red-600 text-white">Delete</button>
         </div>
       </MessageModal>
       }
