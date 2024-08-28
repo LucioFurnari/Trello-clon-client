@@ -1,7 +1,12 @@
+import DeleteWorkspace from "./DeleteWorkspace";
 import { useState } from "react"
 import { SVGProps } from "react"
 
-export default function WorkspaceOptions() {
+interface WorkspaceOptionsProps {
+  workspaceId: string
+}
+
+export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -11,8 +16,8 @@ export default function WorkspaceOptions() {
       </button>
       {
         openMenu &&
-        <div className="z-[1] p-4 top-0 left-10 absolute bg-violet-500">
-        Menu
+        <div className="z-[1] px-4 top-0 left-10 absolute bg-violet-500">
+          <DeleteWorkspace id={workspaceId} />
         </div>
       }
     </div>
