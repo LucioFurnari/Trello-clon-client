@@ -1,6 +1,7 @@
 import DeleteWorkspace from "./DeleteWorkspace";
 import { useState } from "react"
 import { SVGProps } from "react"
+import { useWorkspaceContext } from "@/context/WorkspaceContext";
 
 interface WorkspaceOptionsProps {
   workspaceId: string
@@ -8,6 +9,13 @@ interface WorkspaceOptionsProps {
 
 export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps) {
   const [openMenu, setOpenMenu] = useState(false);
+  const context = useWorkspaceContext();
+
+  function handleDeleteWorkspace(elem: any) {
+    context?.setWorkspace(
+      context.workspace.filter(workspace => workspace.workspace.workspaceId !== elem.workspaceId)
+    )
+  }
 
   return (
     <div className="relative inline-block">
@@ -17,7 +25,7 @@ export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps)
       {
         openMenu &&
         <div className="z-[1] px-4 top-0 left-10 absolute bg-violet-500">
-          <DeleteWorkspace id={workspaceId} />
+          <DeleteWorkspace id={workspaceId} setAction={handleDeleteWorkspace}/>
         </div>
       }
     </div>
