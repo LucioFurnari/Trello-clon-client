@@ -3,15 +3,16 @@ import { deleteWorkspace } from "@/lib/workspace";
 import { useState } from "react"
 
 interface DeleteWorkspaceProps {
-  id: string
+  id: string,
+  setAction: (elem: any) => void
 }
 
-export default function DeleteWorkspace({ id }: DeleteWorkspaceProps) {
+export default function DeleteWorkspace({ id, setAction }: DeleteWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
 
   async function handleDeleteWorkspace() {
     const res = await deleteWorkspace(id);
-    console.log(res);
+    setAction(res.deleteWorkSpace)
   }
 
   return (
