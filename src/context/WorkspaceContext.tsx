@@ -5,8 +5,8 @@ import { WorkspaceData, BoardData, WorkspaceListData } from "@/types/types"
 import { getAllWorkspacesOfUser } from "@/lib/workspace"
 
 type WorkspaceContextType = {
-  workspace: WorkspaceListData[] | null,
-  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceListData[] | null>>
+  workspace: WorkspaceListData[] | [],
+  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceListData[] | []>>
 }
 
 type WorkspaceContextProviderType = {
@@ -16,7 +16,7 @@ type WorkspaceContextProviderType = {
 const WorkspaceContext = createContext<WorkspaceContextType | null>(null);
 
 export default function WorkspaceContextProvider({ children }: WorkspaceContextProviderType) {
-  const [workspace, setWorkspace] = useState<WorkspaceListData[] | null>([]);
+  const [workspace, setWorkspace] = useState<WorkspaceListData[] | []>([]);
 
   useEffect(() => {
     const getData = async () => {
