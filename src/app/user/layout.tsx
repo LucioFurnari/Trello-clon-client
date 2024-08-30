@@ -1,3 +1,4 @@
+import WorkspaceContextProvider from "@/context/WorkspaceContext"
 
 export default function UserLayout({
   children,
@@ -8,8 +9,10 @@ export default function UserLayout({
 }) {
   return (
     <main className="flex min-h-[calc(100vh-56px)] bg-slate-600">
+      <WorkspaceContextProvider>
       {children}
       {boards}
+      </WorkspaceContextProvider>
     </main>
   )
 }
