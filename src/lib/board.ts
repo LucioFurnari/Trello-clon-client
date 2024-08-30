@@ -22,13 +22,9 @@ export async function getBoard(boardId: string) {
   }
 }
 
-export async function createBoard(workspaceId: string, formData: FormData) {
+export async function createBoard(workspaceId: string, formData: { title: string}) {
   try {
-    const rawFormData = {
-      title: formData.get('title'),
-    }
-
-    const newBoard = JSON.stringify(rawFormData);
+    const newBoard = JSON.stringify(formData);
     const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}/board`, {
       method: 'POST',
       headers: {
