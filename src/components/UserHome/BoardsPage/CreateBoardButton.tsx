@@ -10,15 +10,26 @@ interface CreateBoardButtonProps {
 }
 
 export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps) {
-  const createBoardWithId = createBoard.bind(null, workspaceId);
+  // const createBoardWithId = createBoard.bind(null, workspaceId);
   const [openModal, setOpenModal] = useState(false);
   const [title, setTile] = useState('');
   const context = useWorkspaceContext();
 
-  function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
+  async function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const newBoard = { title: title };
+    const board = await createBoard(workspaceId, newBoard);
 
+    if (board) {
+      context?.setWorkspace(context.workspace.map((item) => {
+        if (item.workspace.workspaceId === workspaceId) {
+          return {...item, workspace: {...item.workspace, boards: [...item.workspace.boards, board]}}
+        } else {
+          return item;
+        }
+      }))
+    }
   }
 
   return (
