@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import MenuButton from "./MenuButton"
-import OptionMenu from "./OptionsMenu"
+import BoardLink from "./BoardLink"
 import { BoardData } from "@/types/types"
 
 interface ListContainerProps {
@@ -24,7 +24,7 @@ export default function ListContainer({ name, boards }: ListContainerProps) {
         openMenu &&
         boards.map((board, index) => {
           return (
-            <OptionMenu key={index} boardId={board.boardId} name={board.title}/> 
+            <BoardLink key={index} boardId={board.boardId} name={board.title}/> 
           )
         })
 
