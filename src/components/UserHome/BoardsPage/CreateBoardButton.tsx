@@ -22,11 +22,11 @@ export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps)
     const board = await createBoard(workspaceId, newBoard);
 
     if (board) {
-      context?.setWorkspace(context.workspace.map((item) => {
-        if (item.workspace.workspaceId === workspaceId) {
-          return {...item, workspace: {...item.workspace, boards: [...item.workspace.boards, board]}}
+      context?.setWorkspace(context.workspace.map((workspace) => {
+        if (workspace.workspaceId === workspaceId) {
+          return {...workspace, workspace: {...workspace, boards: [...workspace.boards, board]}}
         } else {
-          return item;
+          return workspace;
         }
       }))
     }

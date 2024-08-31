@@ -13,8 +13,7 @@ export default function WorkspacesList() {
         context.workspace.length > 0 &&
         <div>
           {
-        context.workspace.map((item) => {
-          const {workspace} = item;
+        context.workspace.map((workspace) => {
           return (
             <WorkspaceItem 
               name={workspace.name} 
