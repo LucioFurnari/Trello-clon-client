@@ -15,8 +15,7 @@ export default function WorkspaceMenu() {
         context.workspace.length > 0 &&
         <div>
           {
-            context.workspace.map((item) => {
-              const { workspace } = item;
+            context.workspace.map((workspace) => {
               return(
                 <ListContainer key={workspace.workspaceId} name={workspace.name}/>
               )
