@@ -13,7 +13,7 @@ export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps)
 
   function handleDeleteWorkspace(elem: any) {
     context?.setWorkspace(
-      context.workspace.filter(workspace => workspace.workspace.workspaceId !== elem.workspaceId)
+      context.workspace.filter(workspace => workspace.workspaceId !== elem.workspaceId)
     )
   }
 
