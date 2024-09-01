@@ -1,5 +1,6 @@
 'use server'
 
+import { redirect } from "next/navigation";
 import { getCookie, setCookie, deleteCookie } from "./cookies";
 
 export async function loginUser(prevState: any, formData: FormData) {
@@ -106,4 +107,5 @@ export async function verifyToken() {
 export async function logout() {
   "use server"
   deleteCookie()
+  redirect('/');
 }
