@@ -1,4 +1,5 @@
 import DeleteWorkspace from "./DeleteWorkspace";
+import EditWorkspace from "./EditWorkspace";
 import { useState } from "react"
 import { SVGProps } from "react"
 import { useWorkspaceContext } from "@/context/WorkspaceContext";
@@ -26,6 +27,7 @@ export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps)
         openMenu &&
         <div className="z-[1] px-4 top-0 left-10 absolute bg-violet-500">
           <DeleteWorkspace id={workspaceId} setAction={handleDeleteWorkspace}/>
+          <EditWorkspace id={workspaceId} />
         </div>
       }
     </div>
