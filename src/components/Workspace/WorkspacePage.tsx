@@ -9,7 +9,7 @@ export default async function WorkspacePage({ workspaceId }: WorkspacePageProp) 
   const workspace = await getWorkspace(workspaceId);
   
   return (
-    <main>
+    <main className=" bg-slate-800 min-h-[calc(100vh-52px)]">
       <WorkspaceHeader title={workspace.name} description={workspace.description} visibilityPrivate={workspace.visibilityPrivate} visibilityPublic={workspace.visibilityPublic} />
     </main>
   )
