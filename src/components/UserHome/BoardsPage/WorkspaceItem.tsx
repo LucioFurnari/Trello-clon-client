@@ -1,4 +1,4 @@
-import BoardList from "./BoardList"
+import BoardList from "../../BoardList/BoardList"
 import WorkspaceOptions from "@/components/WorkspaceOptions/WorkspaceOptions"
 import WorkspaceLink from "@/components/Workspace/WorkspaceLink"
 import { BoardData } from "@/types/types"
