@@ -1,24 +1,21 @@
 "use client"
 
-import { deleteBoard } from "@/lib/board"
 import Link from "next/link"
 import MessageModal from "@/components/Modal/MessageModal"
+import DeleteBoardButton from "./DeleteBoardButton"
 import { useState } from "react"
 
 interface BoardItemProp {
   title: string,
-  boardId: string
+  boardId: string,
+  workspaceId: string,
+  setAction: (value: any) => void
 }
 
-export default function BoardItem({ title, boardId }: BoardItemProp) {
+export default function BoardItem({ title, boardId, workspaceId, setAction }: BoardItemProp) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleCloseModal = () => setOpenModal(false);
-
-  async function handleDeleteBoard() {
-    const res = await deleteBoard(boardId);
-  }
-
   return (
     <li className="bg-pink-500 cursor-pointer relative">
       <Link 
@@ -32,7 +29,7 @@ export default function BoardItem({ title, boardId }: BoardItemProp) {
         <>
           <h2 className="text-center">Are you sure you want to delete your board?</h2>
           <span className="text-center">all the cards in it will be deleted</span>
-          <button onClick={handleDeleteBoard} className="bg-red-600 hover:bg-red-500 rounded p-2 px-8 text-lg mx-auto mt-4">Delete Board</button>
+          <DeleteBoardButton id={boardId}  setAction={setAction}/>
         </>
       </MessageModal>
       }
