@@ -3,17 +3,15 @@
 import { useState } from "react"
 import MessageModal from "@/components/Modal/MessageModal"
 import { createBoard } from "@/lib/board";
-import { useWorkspaceContext } from "@/context/WorkspaceContext";
 
 interface CreateBoardButtonProps {
   workspaceId: string,
+  setAction: (value?: any) => void
 }
 
-export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps) {
-  // const createBoardWithId = createBoard.bind(null, workspaceId);
+export default function CreateBoardButton({workspaceId, setAction}: CreateBoardButtonProps) {
   const [openModal, setOpenModal] = useState(false);
   const [title, setTile] = useState('');
-  const context = useWorkspaceContext();
 
   async function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -22,13 +20,7 @@ export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps)
     const board = await createBoard(workspaceId, newBoard);
 
     if (board) {
-      context?.setWorkspace(context.workspace.map((workspace) => {
-        if (workspace.workspaceId === workspaceId) {
-          return {...workspace, workspace: {...workspace, boards: [...workspace.boards, board]}}
-        } else {
-          return workspace;
-        }
-      }))
+      setAction(board);
     }
   }
 
