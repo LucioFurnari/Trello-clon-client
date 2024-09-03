@@ -2,12 +2,14 @@
 import { deleteBoard } from "@/lib/board"
 
 interface DeleteBoardButtonProps {
-  id: string
+  id: string,
+  setAction: (value?: any) => void
 }
 
-export default function DeleteBoardButton({id}: DeleteBoardButtonProps) {
+export default function DeleteBoardButton({id, setAction}: DeleteBoardButtonProps) {
 
   async function handleDeleteBoard() {
+    setAction(id);
     const res = await deleteBoard(id);
   }
 
