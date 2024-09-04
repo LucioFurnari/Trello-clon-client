@@ -15,16 +15,19 @@ export default function WorkspaceMain({ id }: WorkspaceMainProps) {
   useEffect(() => {
     async function handleGetWorkspace() {
       const data = await getWorkspace(id);
-      console.log(data)
       setWorkspace(data);
     }
     handleGetWorkspace()
   }, [id])
+  console.log(workspace)
 
+  function handleCreateBoard(board: any) {
+    setWorkspace({...workspace, boards: [...workspace.boards, board]})
+  }
 
   return (
     <section>
-      <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={() => {}} deleteHandle={() => {}}/>
+      <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={() => {}}/>
     </section>
   )
 }
