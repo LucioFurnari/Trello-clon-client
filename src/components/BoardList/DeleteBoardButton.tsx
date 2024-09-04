@@ -9,8 +9,12 @@ interface DeleteBoardButtonProps {
 export default function DeleteBoardButton({id, setAction}: DeleteBoardButtonProps) {
 
   async function handleDeleteBoard() {
-    setAction(id);
     const res = await deleteBoard(id);
+
+    if (!res) {
+      return
+    }
+    setAction(id);
   }
 
   return (
