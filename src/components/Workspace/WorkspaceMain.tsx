@@ -19,15 +19,19 @@ export default function WorkspaceMain({ id }: WorkspaceMainProps) {
     }
     handleGetWorkspace()
   }, [id])
-  console.log(workspace)
 
   function handleCreateBoard(board: any) {
     setWorkspace({...workspace, boards: [...workspace.boards, board]})
   }
 
+  function handleDeleteBoard(id: string) {
+    console.log({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
+    setWorkspace({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
+  }
+
   return (
     <section>
-      <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={() => {}}/>
+      <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
     </section>
   )
 }
