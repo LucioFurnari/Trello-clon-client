@@ -61,7 +61,7 @@ export async function deleteBoard(boardId: string) {
       return null;
     }
     
-    return res;
+    return await res.json();
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch');
     return null;
