@@ -26,7 +26,6 @@ export function WorkspaceItem({ name, boards, workspaceId }: WorkspaceItemProp) 
   const handleDeleteBoard = (boardId: string) => {
     context?.setWorkspace(context.workspace.map((workspace) => {
       if (workspace.workspaceId === workspaceId) {
-        console.log({...workspace, workspace: {...workspace, boards: workspace.boards.map(board => board.boardId !== boardId)}})
         return {...workspace, boards: workspace.boards.filter(board => board.boardId !== boardId)}
       } else {
         return workspace;
