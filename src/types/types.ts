@@ -20,14 +20,8 @@ export interface WorkspaceData {
   visibilityPublic: boolean,
   canEditAdmin: boolean,
   canEditUser: boolean,
-  boards: BoardData[]
-
-}
-
-export interface WorkspaceListData {
-  workspaceId: string,
-  name: string,
   boards: BoardData[] | []
+
 }
 
 export interface BoardData {
