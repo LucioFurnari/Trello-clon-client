@@ -10,7 +10,7 @@ interface WorkspaceMainProps {
 }
 
 export default function WorkspaceMain({ id }: WorkspaceMainProps) {
-  const [workspace, setWorkspace] = useState<WorkspaceData>();
+  const [workspace, setWorkspace] = useState<WorkspaceData | undefined>();
 
   useEffect(() => {
     async function handleGetWorkspace() {
@@ -21,16 +21,15 @@ export default function WorkspaceMain({ id }: WorkspaceMainProps) {
   }, [id])
 
   function handleCreateBoard(board: any) {
-    setWorkspace({...workspace, boards: [...workspace.boards, board]})
+    if (workspace) setWorkspace({...workspace, boards: [...workspace.boards, board]})
   }
 
   function handleDeleteBoard(id: string) {
-    console.log({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
-    setWorkspace({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
+    if (workspace) setWorkspace({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
   }
 
   return (
-    <section>
+    <section className="mx-20">
       <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
     </section>
   )
