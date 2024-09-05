@@ -16,7 +16,8 @@ export default function WorkspacesList() {
         context.workspace.map((workspace) => {
           return (
             <WorkspaceItem 
-              name={workspace.name} 
+              name={workspace.name}
+              description={workspace.description}
               key={workspace.workspaceId} 
               boards={workspace.boards}
               workspaceId={workspace.workspaceId}
