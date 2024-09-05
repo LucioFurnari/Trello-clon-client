@@ -1,6 +1,5 @@
 'use client'
 
-import SubMenuContainer from "./SubMenuContainer"
 import NavLinkContainer from "./NavBarLinkContainer/NavLinkContainer"
 import HomeLink from "./HomeLink"
 import UserMenuContainer from "./UserMenu/LoginMenuContainer"
@@ -15,7 +14,6 @@ export default function Navbar() {
       {
         isLogged ?
         <>
-          <SubMenuContainer title="Your Workspaces" name={'Workspace'} />
           <UserMenuContainer />
         </>
         :
