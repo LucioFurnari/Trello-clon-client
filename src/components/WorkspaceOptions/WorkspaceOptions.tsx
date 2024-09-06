@@ -9,7 +9,7 @@ interface WorkspaceOptionsProps {
   name: string,
   description?: string,
   handleDelete: (elem?: any) => void,
-  handleEdit: (elem?: any) => void
+  handleEdit: (id: string, elem?: any) => void
 }
 
 export default function WorkspaceOptions({ workspaceId, name, description, handleDelete, handleEdit }: WorkspaceOptionsProps) {
