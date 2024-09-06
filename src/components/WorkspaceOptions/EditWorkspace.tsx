@@ -2,11 +2,24 @@ import MessageModal from "../Modal/MessageModal"
 import { useState } from "react"
 
 interface UpdateWorkspaceProps {
+  workspaceName: string,
+  workspaceDesc?: string
   id: string
 }
 
-export default function EditWorkspace({ id }: UpdateWorkspaceProps) {
+export default function EditWorkspace({ id, workspaceName, workspaceDesc }: UpdateWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
+  const [name, setName] = useState(workspaceName);
+  const [description, setDescription] = useState(workspaceDesc);
+
+  async function handleUpdateWorkspace(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const editedData = {
+      name,
+      description
+    }
+    console.log(editedData);
+  }
 
   return (
     <>
@@ -15,8 +28,10 @@ export default function EditWorkspace({ id }: UpdateWorkspaceProps) {
         openModal &&
         <MessageModal setAction={() => setOpenModal(false)}>
           <div>
-            <form>
-              <input type="text" name="name" placeholder="Board name"/>
+            <form className="flex flex-col" onSubmit={handleUpdateWorkspace}>
+              <input onChange={(event: React.FormEvent<HTMLInputElement>) => setName(event.currentTarget.value)} className="border-b-2 mb-4 p-2" type="text" name="name" placeholder="Workspace name" value={name}/>
+              <input onChange={(event: React.FormEvent<HTMLInputElement>) => setDescription(event.currentTarget.value)} className="border-b-2 mb-4 p-2" type="text" name="description" placeholder="Workspace description" value={description}/>
+              <button className="bg-blue-600 text-gray-200 py-2 px-8 ml-auto" type="submit">Edit</button>
             </form>
           </div>
         </MessageModal>
