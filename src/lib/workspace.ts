@@ -131,7 +131,7 @@ export async function updateWorkspace(workspaceId: string, editData: { name: str
     }
 
     const data = await res.json();
-    return data.updateWorkspace;
+    return data.updatedWorkspace;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
     return null;
