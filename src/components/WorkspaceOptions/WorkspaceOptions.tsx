@@ -5,18 +5,15 @@ import { SVGProps } from "react"
 import { useWorkspaceContext } from "@/context/WorkspaceContext";
 
 interface WorkspaceOptionsProps {
-  workspaceId: string
+  workspaceId: string,
+  name: string,
+  description?: string,
+  handleDelete: (elem?: any) => void,
+  handleEdit: (elem?: any) => void
 }
 
-export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps) {
+export default function WorkspaceOptions({ workspaceId, name, description, handleDelete, handleEdit }: WorkspaceOptionsProps) {
   const [openMenu, setOpenMenu] = useState(false);
-  const context = useWorkspaceContext();
-
-  function handleDeleteWorkspace(elem: any) {
-    context?.setWorkspace(
-      context.workspace.filter(workspace => workspace.workspaceId !== elem.workspaceId)
-    )
-  }
 
   return (
     <div className="relative inline-block">
@@ -26,8 +23,8 @@ export default function WorkspaceOptions({ workspaceId }: WorkspaceOptionsProps)
       {
         openMenu &&
         <div className="z-[1] px-4 top-0 left-10 absolute bg-violet-500">
-          <DeleteWorkspace id={workspaceId} setAction={handleDeleteWorkspace}/>
-          <EditWorkspace id={workspaceId} />
+          <DeleteWorkspace id={workspaceId} setAction={handleDelete}/>
+          <EditWorkspace id={workspaceId} workspaceName={name} workspaceDesc={description} editAction={handleEdit}/>
         </div>
       }
     </div>
