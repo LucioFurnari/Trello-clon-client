@@ -114,11 +114,8 @@ export async function deleteWorkspace(workspaceId: string) {
   }
 }
 
-export async function updateWorkspace(workspaceId: string, editData: { name: string, description: string}) {
-  const updatedContent = JSON.stringify({
-    name: editData.name,
-    description: editData.description
-  })
+export async function updateWorkspace(workspaceId: string, editData: { name: string, description?: string}) {
+  const updatedContent = JSON.stringify(editData)
   try {
     const res = await fetch(`${API_HOST}/workspace/${workspaceId}`, {
       method: 'PUT',
@@ -134,7 +131,7 @@ export async function updateWorkspace(workspaceId: string, editData: { name: str
     }
 
     const data = await res.json();
-    return data;
+    return data.updateWorkspace;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
     return null;
