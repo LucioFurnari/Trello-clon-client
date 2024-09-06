@@ -1,13 +1,15 @@
 import MessageModal from "../Modal/MessageModal"
+import { updateWorkspace } from "@/lib/workspace"
 import { useState } from "react"
 
 interface UpdateWorkspaceProps {
   workspaceName: string,
   workspaceDesc?: string
-  id: string
+  id: string,
+  editAction: (elem?: any) => void
 }
 
-export default function EditWorkspace({ id, workspaceName, workspaceDesc }: UpdateWorkspaceProps) {
+export default function EditWorkspace({ id, workspaceName, workspaceDesc, editAction }: UpdateWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
   const [name, setName] = useState(workspaceName);
   const [description, setDescription] = useState(workspaceDesc);
@@ -18,7 +20,8 @@ export default function EditWorkspace({ id, workspaceName, workspaceDesc }: Upda
       name,
       description
     }
-    console.log(editedData);
+    const res = await updateWorkspace(id, editedData);
+    editAction(res)
   }
 
   return (
