@@ -12,7 +12,10 @@ export default function DeleteWorkspace({ id, setAction }: DeleteWorkspaceProps)
 
   async function handleDeleteWorkspace() {
     const res = await deleteWorkspace(id);
-    setAction(res.deleteWorkSpace)
+
+    if (!res.error) {
+      setAction(id)
+    }
   }
 
   return (
