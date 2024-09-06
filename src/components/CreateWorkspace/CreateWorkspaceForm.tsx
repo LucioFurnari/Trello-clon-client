@@ -1,16 +1,8 @@
 import { useState } from "react";
 import { createWorkspace } from "@/lib/workspace"
 
-type formReturnType = {
-  workspace: {
-    workspaceId: string,
-    name: string,
-    boards: []
-  }
-}
-
 interface CreateWorkspaceProps {
-  setAction: (elem: formReturnType) => void
+  setAction: (elem: any) => void
 }
 
 export default function CreateWorkspaceForm({ setAction }: CreateWorkspaceProps) {
@@ -29,15 +21,8 @@ export default function CreateWorkspaceForm({ setAction }: CreateWorkspaceProps)
       console.log(data)
       return
     };
-    
-    const workspaceData: formReturnType = {
-      workspace: {
-        workspaceId: data.workspaceId,
-        name: data.name,
-        boards: []
-      }
-    }
-    setAction(workspaceData)
+
+    setAction(data)
   }
 
   return (
