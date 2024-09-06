@@ -6,7 +6,7 @@ interface UpdateWorkspaceProps {
   workspaceName: string,
   workspaceDesc?: string
   id: string,
-  editAction: (elem?: any) => void
+  editAction: (id: string, elem?: any) => void
 }
 
 export default function EditWorkspace({ id, workspaceName, workspaceDesc, editAction }: UpdateWorkspaceProps) {
@@ -21,7 +21,10 @@ export default function EditWorkspace({ id, workspaceName, workspaceDesc, editAc
       description
     }
     const res = await updateWorkspace(id, editedData);
-    editAction(res)
+
+    if (!res.error) {
+      editAction(id, res)
+    }
   }
 
   return (
