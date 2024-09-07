@@ -2,7 +2,6 @@ import DeleteWorkspace from "./DeleteWorkspace";
 import EditWorkspace from "./EditWorkspace";
 import { useState } from "react"
 import { SVGProps } from "react"
-import { useWorkspaceContext } from "@/context/WorkspaceContext";
 
 interface WorkspaceOptionsProps {
   workspaceId: string,
