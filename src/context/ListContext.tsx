@@ -23,7 +23,7 @@ export interface CardData {
 
 type ListContextType = {
   list: ListData[],
-  setList: React.Dispatch<React.SetStateAction<ListData[] | []>>
+  setList: React.Dispatch<React.SetStateAction<ListData[]>>
 }
 
 type ListContextProviderProps = {
@@ -32,45 +32,27 @@ type ListContextProviderProps = {
 
 // default value for the context
 const defaultValue: ListContextType = {
-  list: [{
-    cards: [],
-    listId: "",
-    name: "",
-    position: 0,
-    boardId: ""
-  }],
+  list: [],
   setList: () => []
 };
 
-const ListContext = createContext<ListContextType>(defaultValue)
+const ListContext = createContext<ListContextType>(defaultValue);
 
 export default function ListContextProvider({ children }: ListContextProviderProps) {
-  const [list, setList] = useState<ListData[]>([{
-    cards: [],
-    listId: "",
-    name: "",
-    position: 0,
-    boardId: ""
-  }]);
+  const [list, setList] = useState<ListData[]>([]);
 
   return (
-    <ListContext.Provider
-      value={{
-        list,
-        setList
-      }}
-    >
+    <ListContext.Provider value={{ list, setList }}>
       {children}
     </ListContext.Provider>
   )
 }
 
-
 export function useListContext() {
   const context = useContext(ListContext);
   if (context === undefined) {
     throw new Error(
-      "useUserContext must be used within a UserContextProvider"
+      "useListContext must be used within a ListContextProvider"
     );
   }
   return context;
