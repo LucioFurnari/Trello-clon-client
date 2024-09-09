@@ -45,11 +45,13 @@ export default function AddListButton() {
 
 function AddList({ name }: AddListProps) {
   const params = useParams<{ board: string}>()
-  const {setList, list} = useListContext();
+  const { setList } = useListContext();
 
   async function handleAddList() {
     const result = await addList(params.board, name);
-    setList([...list, result])
+    if (result) {
+      setList((prevList) => [...prevList, result]);
+    }
   }
 
   return (
