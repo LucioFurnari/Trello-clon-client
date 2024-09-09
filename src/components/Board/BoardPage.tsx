@@ -12,7 +12,7 @@ export default async function BoardPage({ params }: { params: { board: string }}
     notFound();
   }
   return (
-    <main className="bg-purple-500 min-h-[calc(100vh-56px)] overflow-auto">
+    <main className="bg-purple-500 min-h-[calc(100vh-52px)] overflow-auto">
       <BoardHeader title={data.title} />
       <ListContextProvider>
         <ListContainer lists={data.lists} />
