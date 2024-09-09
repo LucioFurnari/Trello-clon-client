@@ -5,7 +5,6 @@ import { useListContext } from '@/context/ListContext';
 import { updatePosition } from '@/lib/list';
 
 const reorderList = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
-  console.log(startIndex, endIndex)
   // Create copy of the state list.
   const reorderedList = [...list];
   // Get source index.
