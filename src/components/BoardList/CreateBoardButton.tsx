@@ -21,6 +21,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
 
     if (board) {
       setAction(board);
+      setOpenModal(false);
     }
   }
 

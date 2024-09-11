@@ -11,6 +11,7 @@ export default function CreateWorkspace() {
 
   function handleChangeState(newWorkspace: any) {
     context?.setWorkspace([...context.workspace, newWorkspace])
+    setOpenModal(false)
   }
 
   return (
