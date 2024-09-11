@@ -3,8 +3,8 @@
 import { redirect } from "next/navigation";
 import { getCookie, setCookie, deleteCookie } from "./cookies";
 
+// Login user function
 export async function loginUser(prevState: any, formData: FormData) {
-  'use server'
 
   try {
     const email = formData.get('email') as string | null;
@@ -45,8 +45,8 @@ export async function loginUser(prevState: any, formData: FormData) {
   }
 }
 
+// Register user function
 export async function registerUser(prevState: any, formData: FormData) {
-  'use server'
 
   try {
     const rawFormData = {
@@ -75,7 +75,7 @@ export async function registerUser(prevState: any, formData: FormData) {
   
     return {
       success: true,
-      message: 'User created'
+      message: 'User created successfully'
     }
   } catch (error) {
     console.error('Error during register');
@@ -83,6 +83,7 @@ export async function registerUser(prevState: any, formData: FormData) {
   }
 }
 
+// Verify token function
 export async function verifyToken() {
   try {
     const token = await getCookie();
@@ -104,6 +105,7 @@ export async function verifyToken() {
   }
 }
 
+// Logout user function
 export async function logout() {
   "use server"
   deleteCookie()
