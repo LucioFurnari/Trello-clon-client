@@ -12,6 +12,7 @@ export interface CardData {
   listId: string   
 }
 
+// Change this or the name
 export interface WorkspaceData {
   workspaceId: string,
   name: string,
@@ -21,6 +22,17 @@ export interface WorkspaceData {
   canEditAdmin: boolean,
   canEditUser: boolean,
   boards: BoardData[] | []
+}
+
+// Change this or the name
+export interface WorkspaceType {
+  workspaceId: string,
+  name: string,
+  description?: string
+  visibilityPrivate: boolean,
+  visibilityPublic: boolean,
+  canEditAdmin: boolean,
+  canEditUser: boolean,
 }
 
 export interface BoardData {
