@@ -21,7 +21,6 @@ export interface WorkspaceData {
   canEditAdmin: boolean,
   canEditUser: boolean,
   boards: BoardData[] | []
-
 }
 
 export interface BoardData {
