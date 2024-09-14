@@ -15,8 +15,10 @@ export async function getWorkspace(workspaceId: string) {
     });
 
     if (!res.ok) {
+      // Json response and return message
+      const data = await res.json();
       console.error('Failed to fetch workspaces', res.status, res.statusText)
-      return null;
+      return { error: true, message: data.message, statusCode: res.status};
     }
 
     const data = await res.json();
