@@ -9,16 +9,15 @@ interface WorkspacePageProp {
 
 export default async function WorkspacePage({ workspaceId }: WorkspacePageProp) {
   const workspace = await getWorkspace(workspaceId);
-  
-  console.log(workspace)
+
   return (
     <main className=" bg-slate-800 h-[calc(100vh-52px)] min-h-[calc(100vh-52px)]">
       {
-        workspace.statusCode === 403 ?
+        workspace.statusCode === 403 || workspace.statusCode === 401 ?
           <AccessDenied />
         : 
           <>
-          <WorkspaceHeader title={workspace.name} description={workspace.description} visibilityPrivate={workspace.visibilityPrivate} visibilityPublic={workspace.visibilityPublic} />
+          <WorkspaceHeader workspace={workspace} />
           <WorkspaceMain id={workspaceId} />
           </>
       }
