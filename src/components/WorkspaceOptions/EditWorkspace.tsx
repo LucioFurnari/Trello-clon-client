@@ -1,25 +1,25 @@
 import MessageModal from "../Modal/MessageModal"
+import { WorkspaceType } from "@/types/types"
 import { updateWorkspace } from "@/lib/workspace"
 import { useState } from "react"
 
 interface UpdateWorkspaceProps {
-  workspaceName: string,
-  workspaceDesc?: string
-  id: string,
+  workspace: WorkspaceType,
   editAction: (id: string, elem?: any) => void
 }
 
-export default function EditWorkspace({ id, workspaceName, workspaceDesc, editAction }: UpdateWorkspaceProps) {
+export default function EditWorkspace({ workspace, editAction }: UpdateWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
   const [editData, setEditData] = useState({
-    name: workspaceName,
-    description: workspaceDesc,
-    visibilityPrivate: true,
-    visibilityPublic: false
+    name: workspace.name,
+    description: workspace.description,
+    visibilityPrivate: workspace.visibilityPrivate,
+    visibilityPublic: workspace.visibilityPublic
   });
 
   function handleEditData(event: React.FormEvent<HTMLInputElement>) {
     const {name, value} = event.currentTarget;
+    console.log(name)
     setEditData({
       ...editData,
       [name]: value 
@@ -29,10 +29,10 @@ export default function EditWorkspace({ id, workspaceName, workspaceDesc, editAc
   async function handleUpdateWorkspace(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const res = await updateWorkspace(id, editData);
+    const res = await updateWorkspace(workspace.workspaceId, editData);
 
     if (!res.error) {
-      editAction(id, res)
+      editAction(workspace.workspaceId, res)
     }
   }
 
