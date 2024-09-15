@@ -3,15 +3,15 @@ import WorkspaceOptions from "@/components/WorkspaceOptions/WorkspaceOptions"
 import WorkspaceLink from "@/components/Workspace/WorkspaceLink"
 import { BoardData } from "@/types/types"
 import { useWorkspaceContext } from "@/context/WorkspaceContext"
+import { WorkspaceType } from "@/types/types"
 
 interface WorkspaceItemProp {
-  name: string,
-  description?: string,
+  workspace: WorkspaceType,
   boards?: BoardData[] | [],
   workspaceId: string
 }
 
-export function WorkspaceItem({ name, boards, workspaceId, description }: WorkspaceItemProp) {
+export function WorkspaceItem({ boards, workspaceId, workspace }: WorkspaceItemProp) {
   const context = useWorkspaceContext();
 
   function handleCreateBoard(board: any) {
@@ -53,8 +53,8 @@ export function WorkspaceItem({ name, boards, workspaceId, description }: Worksp
 
   return (
     <div className="pb-4">
-      <WorkspaceLink name={name} id={workspaceId} />
-      <WorkspaceOptions workspaceId={workspaceId} name={name} description={description} handleDelete={handleDeleteWorkspace} handleEdit={handleEditWorkspace}/>
+      <WorkspaceLink name={workspace.name} id={workspaceId} />
+      <WorkspaceOptions workspaceId={workspaceId} workspace={workspace} handleDelete={handleDeleteWorkspace} handleEdit={handleEditWorkspace}/>
       <BoardList boards={boards} workspaceId={workspaceId} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
     </div>
   )
