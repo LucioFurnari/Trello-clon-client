@@ -2,16 +2,16 @@ import DeleteWorkspace from "./DeleteWorkspace";
 import EditWorkspace from "./EditWorkspace";
 import { useState } from "react"
 import { SVGProps } from "react"
+import { WorkspaceType } from "@/types/types";
 
 interface WorkspaceOptionsProps {
   workspaceId: string,
-  name: string,
-  description?: string,
+  workspace: WorkspaceType,
   handleDelete: (elem?: any) => void,
   handleEdit: (id: string, elem?: any) => void
 }
 
-export default function WorkspaceOptions({ workspaceId, name, description, handleDelete, handleEdit }: WorkspaceOptionsProps) {
+export default function WorkspaceOptions({ workspaceId, workspace, handleDelete, handleEdit }: WorkspaceOptionsProps) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ export default function WorkspaceOptions({ workspaceId, name, description, handl
         openMenu &&
         <div className="z-[1] px-4 top-0 left-10 absolute bg-violet-500">
           <DeleteWorkspace id={workspaceId} setAction={handleDelete}/>
-          <EditWorkspace id={workspaceId} workspaceName={name} workspaceDesc={description} editAction={handleEdit}/>
+          <EditWorkspace  editAction={handleEdit} workspace={workspace}/>
         </div>
       }
     </div>
