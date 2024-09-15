@@ -5,7 +5,7 @@ import { useState } from "react"
 
 interface UpdateWorkspaceProps {
   workspace: WorkspaceType,
-  editAction: (id: string, elem?: any) => void
+  editAction: (id?: string, elem?: any) => void
 }
 
 export default function EditWorkspace({ workspace, editAction }: UpdateWorkspaceProps) {
@@ -19,7 +19,7 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
 
   function handleEditData(event: React.FormEvent<HTMLInputElement>) {
     const {name, value} = event.currentTarget;
-    console.log(name)
+
     setEditData({
       ...editData,
       [name]: value 
