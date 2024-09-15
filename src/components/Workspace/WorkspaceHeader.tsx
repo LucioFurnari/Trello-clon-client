@@ -1,33 +1,26 @@
 'use client'
 
-import WorkspaceOptions from "../WorkspaceOptions/WorkspaceOptions"
+import WorkspaceOptions from "../WorkspaceOptions/WorkspaceOptions";
+import { WorkspaceType } from "@/types/types";
 
 interface WorkspaceHeaderProps {
-  id: string,
-  title: string,
-  description: string,
-  visibilityPrivate: boolean,
-  visibilityPublic: boolean
-}
+  workspace: WorkspaceType,
+};
 
-export default function WorkspaceHeader({ id, title, description, visibilityPrivate, visibilityPublic }: WorkspaceHeaderProps) {
+export default function WorkspaceHeader({ workspace }: WorkspaceHeaderProps) {
   return (
     <header className="w-fit ml-20 py-8">
-      <h1 className="text-4xl text-left text-gray-200">{title}</h1>
-      <WorkspaceOptions workspaceId={id} name={title} handleDelete={function (elem?: any): void {
-        throw new Error("Function not implemented.")
-      } } handleEdit={function (id: string, elem?: any): void {
-        throw new Error("Function not implemented.")
-      } } />
+      <h1 className="text-4xl text-left text-gray-200">{workspace.name}</h1>
+      <WorkspaceOptions workspaceId={workspace.workspaceId} workspace={workspace} handleDelete={() => { } } handleEdit={function (id: string, elem?: any): void {}}  />
       <span className="text-sm text-gray-200">
         {
-          visibilityPrivate && 'Private'
+          workspace.visibilityPrivate && 'Private'
         }
         {
-          visibilityPublic && 'Public'
+          workspace.visibilityPublic && 'Public'
         }
       </span>
-      <p className="mt-4 text-gray-200">{description}</p>
+      <p className="mt-4 text-gray-200">{workspace.description}</p>
     </header>
   )
 }
