@@ -7,30 +7,23 @@ import { useEffect, useState } from "react"
 
 interface WorkspaceMainProps {
   id: string,
+  workspace: WorkspaceData
 }
 
-export default function WorkspaceMain({ id }: WorkspaceMainProps) {
-  const [workspace, setWorkspace] = useState<WorkspaceData | undefined>();
-
-  useEffect(() => {
-    async function handleGetWorkspace() {
-      const data = await getWorkspace(id);
-      setWorkspace(data);
-    }
-    handleGetWorkspace()
-  }, [id])
+export default function WorkspaceMain({ id, workspace }: WorkspaceMainProps) {
+  const [workspaceData, setWorkspace] = useState(workspace);
 
   function handleCreateBoard(board: any) {
-    if (workspace) setWorkspace({...workspace, boards: [...workspace.boards, board]})
+    if (workspaceData) setWorkspace((prevState: WorkspaceData) => ({...prevState, boards: [...prevState.boards, board]}));
   }
 
   function handleDeleteBoard(id: string) {
-    if (workspace) setWorkspace({...workspace,  boards: workspace.boards.filter(board => board.boardId !== id)})
+    if (workspaceData) setWorkspace((prevState: WorkspaceData) => ({...prevState,  boards: prevState.boards.filter(board => board.boardId !== id)}));
   }
 
   return (
     <section className="mx-20">
-      <BoardList boards={workspace?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
+      <BoardList boards={workspaceData?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
     </section>
   )
 }
