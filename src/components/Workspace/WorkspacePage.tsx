@@ -18,7 +18,7 @@ export default async function WorkspacePage({ workspaceId }: WorkspacePageProp) 
         : 
           <>
           <WorkspaceHeader workspace={workspace} />
-          <WorkspaceMain id={workspaceId} />
+          <WorkspaceMain id={workspaceId} workspace={workspace} />
           </>
       }
     </main>
