@@ -20,10 +20,24 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
   function handleEditData(event: React.FormEvent<HTMLInputElement>) {
     const {name, value} = event.currentTarget;
 
-    setEditData({
-      ...editData,
-      [name]: value 
-    })
+    if (name === 'visibilityPrivate') {
+      setEditData({
+        ...editData,
+        visibilityPrivate: true,
+        visibilityPublic: false
+      });
+    } else if (name === 'visibilityPublic') {
+      setEditData({
+        ...editData,
+        visibilityPrivate: false,
+        visibilityPublic: true
+      });
+    } else {
+      setEditData({
+        ...editData,
+        [name]: value 
+      });
+    }
   }
 
   async function handleUpdateWorkspace(event: React.FormEvent<HTMLFormElement>) {
@@ -47,11 +61,11 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
               <input onChange={handleEditData} className="border-b-2 mb-4 p-2" type="text" name="name" placeholder="Workspace name" value={editData.name}/>
               <input onChange={handleEditData} className="border-b-2 mb-4 p-2" type="text" name="description" placeholder="Workspace description" value={editData.description}/>
               <fieldset>
-                <input  type="checkbox" id="private" name="visibilityPrivate" checked={editData.visibilityPrivate}/>
+                <input onChange={handleEditData} type="checkbox" id="private" name="visibilityPrivate" checked={editData.visibilityPrivate} value="private"/>
                 <label htmlFor="private">Private</label>
               </fieldset>
               <fieldset>
-                <input className="inline" type="checkbox" id="public" name="visibilityPublic" checked={editData.visibilityPublic}/>
+                <input onChange={handleEditData} className="inline" type="checkbox" id="public" name="visibilityPublic" checked={editData.visibilityPublic} value="public"/>
                 <label htmlFor="public">Public</label>
               </fieldset>
               <button className="bg-blue-600 text-gray-200 py-2 px-8 ml-auto" type="submit">Edit</button>
