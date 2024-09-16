@@ -38,7 +38,7 @@ export function WorkspaceItem({ boards, workspaceId, workspace }: WorkspaceItemP
     context?.setWorkspace(context.workspace.filter((item) => item.workspaceId !== id));
   }
 
-  function handleEditWorkspace(id: string, newData: any) {
+  function handleEditWorkspace(newData: any, id: string) {
     context?.setWorkspace(context.workspace.map((item) => {
       if (item.workspaceId === id) {
         return {
