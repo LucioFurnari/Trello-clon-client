@@ -5,7 +5,7 @@ import { useState } from "react"
 
 interface UpdateWorkspaceProps {
   workspace: WorkspaceType,
-  editAction: (id?: string, elem?: any) => void
+  editAction: (elem?: any, id?: string) => void
 }
 
 export default function EditWorkspace({ workspace, editAction }: UpdateWorkspaceProps) {
@@ -32,7 +32,7 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
     const res = await updateWorkspace(workspace.workspaceId, editData);
 
     if (!res.error) {
-      editAction(workspace.workspaceId, res)
+      editAction(res, workspace.workspaceId)
     }
   }
 
