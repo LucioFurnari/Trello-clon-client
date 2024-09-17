@@ -27,7 +27,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="bg-zinc-700 text-zinc-300 text-sm hover:bg-zinc-600 p-10">
+      <button onClick={() => setOpenModal(true)} className="bg-zinc-700 text-zinc-300 text-sm hover:bg-zinc-600 p-10 rounded">
         Create new board
       </button>
       {
