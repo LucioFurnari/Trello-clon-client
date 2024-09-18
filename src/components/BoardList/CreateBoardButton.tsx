@@ -11,13 +11,26 @@ interface CreateBoardButtonProps {
 
 export default function CreateBoardButton({workspaceId, setAction}: CreateBoardButtonProps) {
   const [openModal, setOpenModal] = useState(false);
-  const [title, setTile] = useState('');
+  const [boardData, setBoardData] = useState({
+    title: '',
+    description: '',
+    coverColor: '',
+    coverImage: '',
+  });
+
+  function handleInput(event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>) {
+    const { name, value } = event.currentTarget;
+
+    setBoardData({
+      ...boardData,
+      [name]: value
+    })
+  }
 
   async function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const newBoard = { title: title };
-    const board = await createBoard(workspaceId, newBoard);
+    const board = await createBoard(workspaceId, boardData);
 
     if (board) {
       setAction(board);
@@ -34,8 +47,9 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
         openModal &&
         <MessageModal setAction={() => setOpenModal(false)}>
           <form onSubmit={handleCreateBoard} className="flex flex-col p-2">
-            <input onChange={(event: React.FormEvent<HTMLInputElement>) => setTile(event.currentTarget.value)} className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Board title" name="title" />
-            <button className="bg-blue-600 hover:bg-blue-500 py-2 text-xl" type="submit">Create</button>
+            <input onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Title" name="title" />
+            <textarea onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" name="description" placeholder="Description..."/>
+            <button className="bg-blue-600 hover:bg-blue-500 text-gray-200 py-2 text-xl" type="submit">Create</button>
           </form>
         </MessageModal>
       }
