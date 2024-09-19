@@ -3,6 +3,7 @@
 import { useState } from "react"
 import MessageModal from "@/components/Modal/MessageModal"
 import { createBoard } from "@/lib/board";
+import { ColorPicker, useColor, Saturation, Hue } from "react-color-palette";
 
 interface CreateBoardButtonProps {
   workspaceId: string,
@@ -14,23 +15,26 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
   const [boardData, setBoardData] = useState({
     title: '',
     description: '',
-    coverColor: '',
-    coverImage: '',
   });
+  const [color, setColor] = useColor('#561ecb');
 
   function handleInput(event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>) {
     const { name, value } = event.currentTarget;
 
     setBoardData({
       ...boardData,
-      [name]: value
+      [name]: value,
     })
   }
 
   async function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const board = await createBoard(workspaceId, boardData);
+    const newBoard = {
+      ...boardData,
+      coverColor: color.hex,
+    }
+    const board = await createBoard(workspaceId, newBoard);
 
     if (board) {
       setAction(board);
@@ -49,6 +53,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
           <form onSubmit={handleCreateBoard} className="flex flex-col p-2">
             <input onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Title" name="title" />
             <textarea onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" name="description" placeholder="Description..."/>
+            <ColorPicker hideInput={['rgb', 'hsv']} color={color} onChange={setColor}/>
             <button className="bg-blue-600 hover:bg-blue-500 text-gray-200 py-2 text-xl" type="submit">Create</button>
           </form>
         </MessageModal>
