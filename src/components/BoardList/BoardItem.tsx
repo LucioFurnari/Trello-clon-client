@@ -4,20 +4,20 @@ import Link from "next/link"
 import MessageModal from "@/components/Modal/MessageModal"
 import DeleteBoardButton from "./DeleteBoardButton"
 import { SVGProps, useState } from "react"
+import { BoardData } from "@/types/types"
 
 interface BoardItemProp {
-  title: string,
-  boardId: string,
-  workspaceId: string,
+  board: BoardData,
   setAction: (value: any) => void
 }
 
-export default function BoardItem({ title, boardId, workspaceId, setAction }: BoardItemProp) {
+export default function BoardItem({ board, setAction }: BoardItemProp) {
+  const {boardId, title, description, coverColor} = board;
   const [openModal, setOpenModal] = useState(false);
 
   const handleCloseModal = () => setOpenModal(false);
   return (
-    <li className="bg-pink-500 cursor-pointer relative rounded">
+    <li style={coverColor ? {backgroundColor: coverColor} : {backgroundColor: 'rgb(59 130 246 / var(--tw-bg-opacity))'} } className={'cursor-pointer relative rounded'}>
       <Link 
         href={`/board/${boardId}`} 
         className="inline-block w-full pb-14 pt-2 pl-2">
