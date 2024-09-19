@@ -4,7 +4,6 @@ import { useState } from "react"
 import { createCard } from "@/lib/card";
 import { useListContext } from "@/context/ListContext";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function AddCardButton({listId}: {listId: string}) {
   const [showInput, setShowInput] = useState(false);
@@ -21,10 +20,9 @@ export default function AddCardButton({listId}: {listId: string}) {
     <div className="mt-2">
       {
         showInput ?
-        <div className="mt-2">
-          <AddCardForm listId={listId} />
-          <button className="hover:bg-slate-500 p-2 mt-2 ml-2 rounded" onClick={handleCloseInput}>X</button>
-        </div>
+        <>
+          <AddCardForm listId={listId} setAction={handleCloseInput}/>
+        </>
         :
         <button className="pl-2 text-slate-200 hover:bg-slate-500 transition-colors rounded w-full text-left" onClick={handleShowInput}>
           Add Card
@@ -34,16 +32,7 @@ export default function AddCardButton({listId}: {listId: string}) {
   )
 }
 
-interface CardData {
-  title: string,
-  description?: string,
-  coverColor?: string,
-  coverImage?: string,
-  startDate?: string,
-  dueDate?: Date | null
-}
-
-function AddCardForm({listId}: { listId: string}) {
+function AddCardForm({listId, setAction}: { listId: string, setAction: () => void}) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState<Date | null>(null);
@@ -85,9 +74,10 @@ function AddCardForm({listId}: { listId: string}) {
         placeholderText="Set due date"
         className="border p-2 rounded w-full mt-2"
       />
-      <button type="submit" className="p-2 mt-2 text-left rounded bg-blue-500 hover:bg-blue-400 transition-colors">
+      <button type="submit" className="inline p-2 mt-2 text-left rounded bg-blue-500 hover:bg-blue-400 transition-colors">
         Add a card
       </button>
+      <button className="hover:bg-slate-500 p-2 mt-2 ml-2 rounded" onClick={setAction}>X</button>
     </form>
   )
 }
