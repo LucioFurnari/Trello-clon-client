@@ -35,7 +35,7 @@ export default function AddListButton() {
           <button className="p-2 hover:bg-slate-400 text-gray-200 rounded ml-2" onClick={handleCloseInput}>X</button>
         </div>
         :
-        <button className="backdrop-blur bg-white/30 p-2 px-4 rounded-xl" onClick={handleShowInput}>
+        <button className="backdrop-blur bg-white/30 p-2 px-4 rounded-xl ml-4" onClick={handleShowInput}>
           Add another list
         </button>
       }
@@ -49,8 +49,11 @@ function AddList({ name }: AddListProps) {
 
   async function handleAddList() {
     const result = await addList(params.board, name);
+
     if (result) {
-      setList((prevList) => [...prevList, result]);
+      setList((prevList) => {
+        return [...prevList, result]
+      });
     }
   }
 
