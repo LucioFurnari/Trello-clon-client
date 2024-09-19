@@ -3,6 +3,8 @@
 @tailwind utilities;
 @import "quill/dist/quill.snow.css";
 @import "/public/styles/quill-custom.css";
+@import "react-color-palette/css";
+@import "react-datepicker/dist/react-datepicker.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;
