@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from "react";
+import { CardData } from "@/types/types";
 
 export interface ListData {
   listId: string,
@@ -8,17 +9,6 @@ export interface ListData {
   position: number,
   boardId: string,
   cards: CardData[]
-}
-
-export interface CardData {
-  cardId: string,
-  title: string,
-  description: string,
-  coverColor: string | null,
-  coverImage: string | null,
-  startDate: string | null,
-  dueDate: string | null,
-  listId: string
 }
 
 type ListContextType = {
