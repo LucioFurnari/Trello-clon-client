@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import List from '../List';
-import { CardData, ListData } from '@/context/ListContext';
+import { ListData } from '@/context/ListContext';
+import { CardData } from '@/types/types';
 import { useListContext } from '@/context/ListContext';
 import { updatePosition } from '@/lib/list';
 

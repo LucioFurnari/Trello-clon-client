@@ -2,7 +2,7 @@ import CardLink from "./CardLink"
 import AddCardButton from "./Buttons/AddCardButton"
 import DeleteListButton from "./Buttons/DeleteListButton"
 import { Droppable, Draggable } from "@hello-pangea/dnd"
-import { CardData } from "@/context/ListContext"
+import { CardData } from "@/types/types"
 
 interface ListProps {
   name: string,
