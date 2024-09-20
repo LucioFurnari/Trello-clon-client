@@ -95,7 +95,7 @@ export default function DragDroptList() {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                       ref={provided.innerRef}>
-                        <List name={item.name} id={item.listId.toString()} cards={item.cards} />
+                        <List name={item.name} id={item.listId} cards={item.cards} />
                     </div>
                   )
                   }
