@@ -6,23 +6,24 @@ import { useListContext } from "@/context/ListContext"
 import DragDropList from "./DragAndDrop/DragDropList"
 
 interface ListContainerProps {
-  lists: [],
+  lists: any,
 }
 
 export default function ListContainer({ lists }: ListContainerProps) {
-  const { setList, list } = useListContext();
+  const { setList } = useListContext();
 
   useEffect(() => {
     // Sort array, maybe move it for this file
-    const sortedArr = [...lists]
-    sortedArr.sort((a: any, b: any) => a.position - b.position)
-    setList(sortedArr) 
-  }, [lists, setList]);
+    if (lists.length > 0) {
+      const sortedArr = lists
+      sortedArr.sort((a: any, b: any) => a.position - b.position)
+      setList(sortedArr); 
+    }
+  }, []);
 
   return (
     <section className="flex flex-row">
       {
-        lists.length > 0 &&
         <DragDropList />
       }
       <AddListButton />
