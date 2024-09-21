@@ -6,7 +6,8 @@ export async function getBoard(boardId: string) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      cache: 'no-store'
     });
 
     if (res.status !== 302) {
