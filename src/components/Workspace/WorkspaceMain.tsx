@@ -1,9 +1,8 @@
 'use client'
 
 import BoardList from "../BoardList/BoardList"
-import { WorkspaceData, BoardData } from "@/types/types"
-import { getWorkspace } from "@/lib/workspace"
-import { useEffect, useState } from "react"
+import { WorkspaceData } from "@/types/types"
+import { useState } from "react"
 
 interface WorkspaceMainProps {
   id: string,
