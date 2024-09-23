@@ -19,6 +19,7 @@ export default function ListContainer({ lists }: ListContainerProps) {
       sortedArr.sort((a: any, b: any) => a.position - b.position)
       setList(sortedArr); 
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
