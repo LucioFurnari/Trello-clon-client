@@ -17,10 +17,10 @@ export default function BoardItem({ board, setAction }: BoardItemProp) {
 
   const handleCloseModal = () => setOpenModal(false);
   return (
-    <li style={coverColor ? {backgroundColor: coverColor} : {backgroundColor: 'rgb(59 130 246 / var(--tw-bg-opacity))'} } className={'cursor-pointer relative rounded'}>
+    <li style={coverColor ? {backgroundColor: coverColor} : {backgroundColor: 'rgb(59 130 246 / var(--tw-bg-opacity))'} } className={'cursor-pointer relative rounded '}>
       <Link 
         href={`/board/${boardId}`} 
-        className="inline-block w-full pb-14 pt-2 pl-2">
+        className="inline-block w-full h-full pt-2 pl-2 hover:bg-white/20">
         { title }
       </Link>
       <button onClick={() => setOpenModal(true)} className=" hover:bg-red-500 p-1 rounded absolute right-4 top-1">
