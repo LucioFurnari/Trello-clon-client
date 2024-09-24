@@ -27,9 +27,14 @@ export default function DescriptionText({delta, setAction}: {delta: Delta | unde
   }, []);
 
   return (
-  <div onClick={() => setAction(true)}>
+  <div className="p-2 hover:bg-slate-400 cursor-pointer" onClick={() => setAction(true)}>
     <div ref={quillRef} className="hidden"></div>
-    <div className="ql-editor" dangerouslySetInnerHTML={{__html: html}}></div>
+    {
+      html === '<p></p>' ?
+      'Add a description'
+      :
+      <div className="ql-editor" dangerouslySetInnerHTML={{__html: html}}></div>
+    }
   </div>
   )
 }
