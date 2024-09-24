@@ -34,7 +34,6 @@ export default function AddCardButton({listId}: {listId: string}) {
 
 function AddCardForm({listId, setAction}: { listId: string, setAction: () => void}) {
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState<Date | null>(null);
 
   const {list, setList} = useListContext();
@@ -43,7 +42,7 @@ function AddCardForm({listId, setAction}: { listId: string, setAction: () => voi
 
   async function handleCreateCard(event: React.FormEvent) {
     event.preventDefault();
-    const card = { title: title, description: description, dueDate: dueDate}
+    const card = { title: title, dueDate: dueDate}
 
     const result = await createCard(listId, card)
 
@@ -51,6 +50,7 @@ function AddCardForm({listId, setAction}: { listId: string, setAction: () => voi
       const listCopy = [...list];
       listCopy[listIndex].cards.push(result)
       setList(listCopy);
+      setAction();
     }
   }
 
@@ -62,11 +62,6 @@ function AddCardForm({listId, setAction}: { listId: string, setAction: () => voi
         placeholder="Title"
         required
         className="border p-2 rounded w-full"
-      />
-      <textarea
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        className="border p-2 rounded w-full mt-2"
       />
       <DatePicker
         selected={dueDate}
