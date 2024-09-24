@@ -57,10 +57,8 @@ export default function MyEditor({ card, content, setContent ,setAction }: { car
     <div>
     {/* <div ref={quillRef}/> */}
     <div id='editor-container' ref={wrappedRef} />
-    <div>
-      <button onClick={() => handleSaveContent()}>Save</button>
-      <button className='ml-2 mt-4 p-2 hover:bg-gray-600' onClick={() => setAction(false)}>Cancel</button>
-    </div>
+      <button className='bg-blue-600 hover:bg-blue-500 rounded p-2 px-4 text-white' onClick={() => handleSaveContent()}>Save</button>
+      <button className='ml-2 mt-4 p-2 rounded hover:bg-slate-300 ' onClick={() => setAction(false)}>Cancel</button>
     </div>
   );
 }
