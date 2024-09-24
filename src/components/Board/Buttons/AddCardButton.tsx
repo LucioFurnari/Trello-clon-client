@@ -17,18 +17,18 @@ export default function AddCardButton({listId}: {listId: string}) {
   }
 
   return (
-    <div className="mt-2">
+    <>
       {
         showInput ?
         <>
           <AddCardForm listId={listId} setAction={handleCloseInput}/>
         </>
         :
-        <button className="pl-2 text-slate-200 hover:bg-slate-500 transition-colors rounded w-full text-left" onClick={handleShowInput}>
+        <button className="pl-2 py-2 mt-2 text-slate-200 bg-blue-600 hover:bg-blue-500 transition-colors rounded w-full text-left" onClick={handleShowInput}>
           Add Card
         </button>
       }
-    </div>
+    </>
   )
 }
 
@@ -74,10 +74,10 @@ function AddCardForm({listId, setAction}: { listId: string, setAction: () => voi
         placeholderText="Set due date"
         className="border p-2 rounded w-full mt-2"
       />
-      <button type="submit" className="inline p-2 mt-2 text-left rounded bg-blue-500 hover:bg-blue-400 transition-colors">
+      <button type="submit" className="inline px-4 p-2 mt-2 text-left rounded text-slate-200 bg-blue-600 hover:bg-blue-500 transition-colors">
         Add a card
       </button>
-      <button className="hover:bg-slate-500 p-2 mt-2 ml-2 rounded" onClick={setAction}>X</button>
+      <button className="hover:bg-slate-500 text-white p-2 mt-2 ml-2 rounded" onClick={setAction}>X</button>
     </form>
   )
 }
