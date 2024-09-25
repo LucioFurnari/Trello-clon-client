@@ -1,5 +1,9 @@
+import { useState } from "react";
+import DatePicker from "react-datepicker";
 
-export default function DateSection({ dueDate }: { dueDate: Date | undefined}) {
+export default function DateSection({ dueDate }: { dueDate: Date | null}) {
+  const [date, setDueDate] = useState<Date | null>(dueDate);
+
   const isOverdue = dueDate ? new Date(dueDate) < new Date() : false;
   
   const daysLeft = dueDate
@@ -9,7 +13,13 @@ export default function DateSection({ dueDate }: { dueDate: Date | undefined}) {
   const isDueSoon = daysLeft !== null && daysLeft < 2 && daysLeft >= 0;
 
   return (
-    <div>
+    <div className="relative ">
+      <DatePicker
+        selected={date}
+        onChange={(date: Date | null) => setDueDate(date)}
+        placeholderText="Set due date"
+        popperPlacement="bottom-start"
+      />
       {dueDate && (
         <p
           className={`mt-2 ${
