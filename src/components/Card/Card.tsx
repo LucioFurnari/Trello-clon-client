@@ -28,10 +28,10 @@ export default function Card({ cardId }: { cardId: string}) {
       {
         card &&
         <div className="card p-4 rounded-lg shadow-md bg-white">
-        <h3 className="text-xl font-bold">{card.title}</h3>
-        <DateSection dueDate={card.dueDate} />
-        <DescriptionSection card={card} />
-      </div>
+          <h3 className="text-xl font-bold">{card.title}</h3>
+          <DateSection dueDate={card.dueDate || null} />
+          <DescriptionSection card={card} />
+        </div>
       }
     </Modal>
   )
