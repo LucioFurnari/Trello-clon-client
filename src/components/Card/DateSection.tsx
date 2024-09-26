@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { updateCard } from "@/lib/card";
+import { CardData } from "@/types/types";
 import DatePicker from "react-datepicker";
 
-export default function DateSection({ dueDate }: { dueDate: Date | null}) {
+export default function DateSection({ dueDate, card }: { dueDate: Date | null, card: CardData}) {
   const [date, setDueDate] = useState<Date | null>(dueDate);
 
   const isOverdue = dueDate ? new Date(dueDate) < new Date() : false;
@@ -12,11 +14,20 @@ export default function DateSection({ dueDate }: { dueDate: Date | null}) {
   
   const isDueSoon = daysLeft !== null && daysLeft < 2 && daysLeft >= 0;
 
+  async function handleDateChange(date: Date | null) {
+    setDueDate(date);
+    const newCard = {
+      ...card,
+      dueDate: date
+    }
+    await updateCard(card.cardId, newCard);
+  }
+
   return (
     <div className="relative ">
       <DatePicker
         selected={date}
-        onChange={(date: Date | null) => setDueDate(date)}
+        onChange={handleDateChange}
         placeholderText="Set due date"
         popperPlacement="bottom-start"
       />
