@@ -8,7 +8,7 @@ export interface CardData {
   coverColor?: string,
   coverImage?: string,
   startDate?: string,
-  dueDate?: Date, 
+  dueDate?: Date | null, 
   listId: string   
 }
 
