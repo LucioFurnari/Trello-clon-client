@@ -1,5 +1,7 @@
 "use server"
 
+import { CardData } from "@/types/types";
+
 export async function createCard(listId: string, card: any) {
   try {
     const newCard = JSON.stringify(card);
@@ -47,7 +49,7 @@ export async function getCard(cardId: string) {
   }
 }
 
-export async function updateCard(cardId: string, card: any)  {
+export async function updateCard(cardId: string, card: CardData)  {
   try {
     const res = await fetch(`${process.env.API_HOST}/card/${cardId}`, {
       method: 'PUT',
@@ -55,7 +57,7 @@ export async function updateCard(cardId: string, card: any)  {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache', // Prevent caching
       },
-      body: card
+      body: JSON.stringify(card)
     });
 
     if (!res.ok) {
