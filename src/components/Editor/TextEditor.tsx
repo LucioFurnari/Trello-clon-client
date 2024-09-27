@@ -45,7 +45,7 @@ export default function MyEditor({ card, content, setContent ,setAction }: { car
   }, [quill])
 
   async function handleSaveContent() {
-    const updatedCard = JSON.stringify({...card, description: descriptionContent});
+    const updatedCard = JSON.parse(JSON.stringify({ ...card ,description: descriptionContent }));
     setContent(descriptionContent)
     const data = await updateCard(params.card, updatedCard);
     if (!data) return
