@@ -1,8 +1,7 @@
-"use server"
 
 export async function getBoard(boardId: string) {
   try {
-    const res = await fetch(`${process.env.API_HOST}/board/${boardId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/board/${boardId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +25,7 @@ export async function getBoard(boardId: string) {
 export async function createBoard(workspaceId: string, formData: { title: string}) {
   try {
     const newBoard = JSON.stringify(formData);
-    const res = await fetch(`${process.env.API_HOST}/workspace/${workspaceId}/board`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/workspace/${workspaceId}/board`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -50,7 +49,7 @@ export async function createBoard(workspaceId: string, formData: { title: string
 
 export async function deleteBoard(boardId: string) {
   try {
-    const res = await fetch(`${process.env.API_HOST}/board/${boardId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/board/${boardId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
