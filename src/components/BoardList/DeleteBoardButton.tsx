@@ -1,5 +1,5 @@
 
-import { deleteBoard } from "@/lib/board"
+import { deleteBoard } from "../../lib/board"
 
 interface DeleteBoardButtonProps {
   id: string,

@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import MessageModal from "@/components/Modal/MessageModal"
-import { createBoard } from "@/lib/board";
-import { ColorPicker, useColor, Saturation, Hue } from "react-color-palette";
+import { createBoard } from "../../lib/board";
+import { ColorPicker, useColor } from "react-color-palette";
 
 interface CreateBoardButtonProps {
   workspaceId: string,
