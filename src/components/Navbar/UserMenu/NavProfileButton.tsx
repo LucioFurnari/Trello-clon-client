@@ -8,7 +8,7 @@ export default function NavProfileButton({ action }: NavProfileButtonProp) {
   const context = useUserContext();
 
   return (
-    <button onClick={action}>
+    <button className="text-gray-200 text-xl mr-1" onClick={action}>
       { context.user.username}
     </button>
   )

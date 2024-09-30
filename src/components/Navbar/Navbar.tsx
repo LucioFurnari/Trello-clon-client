@@ -9,7 +9,7 @@ export default function Navbar() {
   const { isLogged } = useUserContext();
 
   return (
-    <nav className="flex items-center justify-between bg-zinc-800 p-2">
+    <nav className="flex items-center justify-between bg-zinc-800 p-2 px-10">
       <HomeLink />
       {
         isLogged ?
