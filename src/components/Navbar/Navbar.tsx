@@ -2,7 +2,7 @@
 
 import NavLinkContainer from "./NavBarLinkContainer/NavLinkContainer"
 import HomeLink from "./HomeLink"
-import UserMenuContainer from "./UserMenu/LoginMenuContainer"
+import UserMenu from "./UserMenu/UserMenu"
 import { useUserContext } from "@/context/UserContext"
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
       {
         isLogged ?
         <>
-          <UserMenuContainer />
+          <UserMenu/>
         </>
         :
           <NavLinkContainer />

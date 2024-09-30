@@ -5,7 +5,7 @@ import LoginMenu from "./LoginMenu"
 import LogoutButton from "./LogoutButton"
 import { useState } from "react"
 
-export default function UserMenuContainer() {
+export default function UserMenu() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function handleOpenMenu() {
