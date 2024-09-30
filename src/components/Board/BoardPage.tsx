@@ -1,6 +1,6 @@
 import { getBoard } from "@/lib/board"
 import { notFound } from "next/navigation";
-import ListContainer from "./ListContainer";
+import ListContainer from "../List/ListContainer";
 import ListContextProvider from "@/context/ListContext";
 import BoardHeader from "./BoarHeader";
 
