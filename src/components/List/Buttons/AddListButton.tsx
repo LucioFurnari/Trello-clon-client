@@ -46,13 +46,14 @@ function AddList({ setAction }: {setAction: () => void}) {
       setList((prevList) => {
         return [...prevList, result]
       });
+      setAction();
     }
   }
 
   return (
     <div className="bg-slate-600 p-4 rounded-xl ml-4">
-      <input className="block rounded pl-1 py-1 mb-2 bg-slate-700" onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
-      <button className="bg-sky-600 hover:bg-sky-500 rounded p-2 px-4" type="button" onClick={handleAddList}>
+      <input className="block rounded pl-1 py-1 mb-4 bg-slate-700 text-gray-200 " onChange={handleInput} autoFocus={true} type="text" placeholder="Enter list title..." />
+      <button className="bg-blue-600 hover:bg-blue-500 text-gray-200 rounded p-2 px-4" type="button" onClick={handleAddList}>
         Add list
       </button>
       <button className="p-2 hover:bg-slate-400 text-gray-200 rounded ml-2" onClick={setAction}>X</button>
