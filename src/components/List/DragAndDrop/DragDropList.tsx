@@ -44,12 +44,15 @@ function moveCard(
 
     sourceList[sourceListIndex].cards = sourceCards;
     sourceList[destListIndex].cards = destCards;
-    cardsArr = [...sourceCards, ...destCards]
+    // return destination cards list changed
+    cardsArr = [...destCards]
   } else {
     const [movedCard] = sourceCards.splice(source.index, 1);
     sourceCards.splice(destination.index, 0, movedCard);
 
     sourceList[sourceListIndex].cards = sourceCards;
+    // return source cards list changed
+    cardsArr = [...sourceCards];
   }
 
   return {
