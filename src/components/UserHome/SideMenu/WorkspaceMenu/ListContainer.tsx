@@ -19,7 +19,7 @@ export default function ListContainer({ name, boards }: ListContainerProps) {
 
   return (
     <div>
-      <MenuButton name={name} action={handleMenu} />
+      <MenuButton name={name} action={handleMenu} setValue={openMenu}/>
       {
         openMenu &&
         boards &&
