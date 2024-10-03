@@ -1,11 +1,7 @@
-import Modal from "@/components/Modal/Modal"
+import Card from "@/components/Card/Card"
 
-export default function CardPage() {
+export default function CardPage({params}: {params: {card: string}}) {
   return (
-    <section>
-      <Modal>
-        <h1>This is the card page !</h1>
-      </Modal>
-    </section>
+    <Card cardId={params.card} />
   )
 }
