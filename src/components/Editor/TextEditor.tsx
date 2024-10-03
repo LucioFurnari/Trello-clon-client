@@ -10,7 +10,7 @@ export default function MyEditor({ card, content, setContent ,setAction }: { car
   const params = useParams<{card: string}>()
   const [quill, setQuill] = useState<Quill>();
   // Save input of the editor in delta
-  const [descriptionContent, setDescriptionContent] = useState<Delta>();
+  const [descriptionContent, setDescriptionContent] = useState<Delta | undefined>(content);
   // const { quill, quillRef } = useQuill();
 
   // Callback to create quill editor.
