@@ -1,9 +1,8 @@
 import BoardList from "../../BoardList/BoardList"
-import WorkspaceOptions from "@/components/WorkspaceOptions/WorkspaceOptions"
-import WorkspaceLink from "@/components/Workspace/WorkspaceLink"
 import { BoardData } from "@/types/types"
 import { useWorkspaceContext } from "@/context/WorkspaceContext"
 import { WorkspaceType } from "@/types/types"
+import WorkItemHeader from "@/components/Workspace/WorkItemHeader"
 
 interface WorkspaceItemProp {
   workspace: WorkspaceType,
@@ -53,8 +52,7 @@ export function WorkspaceItem({ boards, workspaceId, workspace }: WorkspaceItemP
 
   return (
     <div className="pb-4">
-      <WorkspaceLink name={workspace.name} id={workspaceId} />
-      <WorkspaceOptions workspaceId={workspaceId} workspace={workspace} handleDelete={handleDeleteWorkspace} handleEdit={handleEditWorkspace}/>
+      <WorkItemHeader workspaceId={workspaceId} workspace={workspace} handleDelete={handleDeleteWorkspace} handleEdit={handleEditWorkspace} />
       <BoardList boards={boards} workspaceId={workspaceId} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
     </div>
   )
