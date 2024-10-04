@@ -15,10 +15,10 @@ export default function UserMenu() {
   return (
     <div className="relative">
       <NavProfileButton action={handleOpenMenu}/>
-      {
+      {/* {
         menuOpen &&
         <LoginMenu />
-      }
+      } */}
       <LogoutButton />
     </div>
   )
