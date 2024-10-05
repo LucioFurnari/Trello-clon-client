@@ -52,7 +52,7 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="p-2">Edit</button>
+      <button className="p-2 hover:bg-gray-600 text-gray-200 w-full" onClick={() => setOpenModal(true)}>Edit</button>
       {
         openModal &&
         <MessageModal setAction={() => setOpenModal(false)}>

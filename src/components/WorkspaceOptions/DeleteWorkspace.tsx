@@ -20,7 +20,7 @@ export default function DeleteWorkspace({ id, setAction }: DeleteWorkspaceProps)
 
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="p-2">Delete</button>
+      <button className="p-2 hover:bg-gray-600 text-gray-200 w-full" onClick={() => setOpenModal(true)}>Delete</button>
       {
         openModal &&
         <MessageModal setAction={() => setOpenModal(false)}>
