@@ -11,7 +11,7 @@ interface WorkspaceHeaderProps {
 
 export default function WorkItemHeader ({ workspaceId, workspace, handleDelete, handleEdit }: WorkspaceHeaderProps) {
   return (
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center mb-2">
       <WorkspaceLink name={workspace.name} id={workspaceId} />
       <WorkspaceOptions workspaceId={workspaceId} workspace={workspace} handleDelete={handleDelete} handleEdit={handleEdit} />
     </div>
