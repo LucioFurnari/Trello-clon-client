@@ -19,11 +19,11 @@ export default function BoardColorPicker({ color, setColor }: ColorPickerProps) 
 
   return (
     <div>
-      <button className="p-2 bg-slate-400/50 hover:bg-slate-300/50 rounded" onClick={openColorPicker}>Background color</button>
+      <button type="button" className="p-2 bg-slate-400/50 hover:bg-slate-300/50 rounded" onClick={openColorPicker}>Background color</button>
       {
         open && 
         <>
-        <button className="ml-6 p-2 hover:bg-slate-300/50 rounded" onClick={closeColorPicker}>Cancel</button>
+        <button type="button" className="ml-6 p-2 hover:bg-slate-300/50 rounded" onClick={closeColorPicker}>Cancel</button>
         <div className="mt-4">
           <ColorPicker color={color} onChange={setColor} />
           <div style={{ backgroundColor: color.hex} } className="my-4 rounded w-full h-20"></div>
