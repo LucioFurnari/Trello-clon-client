@@ -17,7 +17,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
     title: '',
     description: '',
   });
-  const [color, setColor] = useColor('#561ecb');
+  const [color, setColor] = useColor('#53a6e2');
 
   function handleInput(event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>) {
     const { name, value } = event.currentTarget;
