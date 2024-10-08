@@ -44,3 +44,16 @@ export interface BoardData {
   workspaceId: string,
   
 }
+
+export interface ImageData {
+  id: string,
+  urls: {
+    raw: string,
+    full: string,
+    regular: string,
+    small: string,
+    thumb: string,
+    small_s3: string,
+  },
+  alt_description: string
+}
