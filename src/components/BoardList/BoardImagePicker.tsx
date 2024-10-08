@@ -1,14 +1,18 @@
 import { getRandomImages } from "@/lib/unsplash"
 import { useEffect, useState } from "react"
 import { ImageData } from "@/types/types"
-import Image from "next/image"
 
 export default function BoardImagePicker() {
   const [images, setImages] = useState<ImageData[] | null>(null)
   const [selectedImage, setSelected] = useState('');
 
   useEffect(() => {
-    getRandomImages().then(data => setImages(data))
+    getRandomImages().then(data => {
+      if (data) {
+        setImages(data)
+        setSelected(data[0].urls.small)
+      }
+    }).catch((error) => console.log(error))
   }, [])
 
   function handleSelectImage(event: any) {
@@ -16,7 +20,7 @@ export default function BoardImagePicker() {
   }
 
   return (
-    <div className="mt-4">
+    <div className="my-4">
       {
         !images ?
         <span>Loading</span>
@@ -31,7 +35,7 @@ export default function BoardImagePicker() {
         })
         }
         </ul>
-        <div style={{backgroundImage: `url(${selectedImage})`}} className="w-full h-40 bg-cover bg-no-repeat bg-center"></div>
+        <div style={{backgroundImage: `url(${selectedImage})`}} className="w-full h-40 bg-cover bg-no-repeat bg-center rounded mt-4"></div>
         </>
       }
     </div>

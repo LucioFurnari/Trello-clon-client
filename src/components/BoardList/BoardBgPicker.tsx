@@ -32,7 +32,7 @@ export default function BoardBgPicker({ color, setColor }: BoardBgProps) {
   }
 
   return (
-    <div >
+    <div>
       <button type="button" className="p-2 bg-slate-400/50 hover:bg-slate-300/50 rounded" onClick={openColorPicker}>Background color</button>
       <button type="button" className="p-2 ml-6 bg-slate-400/50 hover:bg-slate-300/50 rounded" onClick={openImagePicker}>Image background</button>
       {
