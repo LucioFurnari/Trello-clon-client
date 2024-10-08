@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import MessageModal from "@/components/Modal/MessageModal"
-import BoardColorPicker from "./BoardColorPicker";
+import BoardBgPicker from "./BoardBgPicker";
 import { createBoard } from "../../lib/board";
 import { useColor } from "react-color-palette";
 
@@ -54,7 +54,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
           <form onSubmit={handleCreateBoard} className="flex flex-col p-2">
             <input onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Title" name="title" />
             <textarea onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" name="description" placeholder="Description..."/>
-            <BoardColorPicker color={color} setColor={setColor} />
+            <BoardBgPicker color={color} setColor={setColor}/>
             <button className="bg-blue-600 hover:bg-blue-500 text-gray-200 py-2 mt-4 text-xl" type="submit">Create</button>
           </form>
         </MessageModal>
