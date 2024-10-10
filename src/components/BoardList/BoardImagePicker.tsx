@@ -2,7 +2,7 @@ import { getRandomImages } from "@/lib/unsplash"
 import { useEffect, useState } from "react"
 import { ImageData } from "@/types/types"
 
-export default function BoardImagePicker() {
+export default function BoardImagePicker({ setImage }: {setImage: (image: string) => void}) {
   const [images, setImages] = useState<ImageData[] | null>(null)
   const [selectedImage, setSelected] = useState('');
 
@@ -16,7 +16,10 @@ export default function BoardImagePicker() {
   }, [])
 
   function handleSelectImage(event: any) {
-    setSelected(event.currentTarget.id)
+    setSelected(event.currentTarget.id);
+    const imageUrl = event.target.getAttribute('data-image-url');
+    console.log(imageUrl)
+    setImage(imageUrl);
   }
 
   return (
@@ -30,7 +33,7 @@ export default function BoardImagePicker() {
         {
         images.map((image: ImageData) => {
           return (
-            <li onClick={handleSelectImage} id={image.urls.small} key={image.id} style={{backgroundImage: `url(${image.urls.thumb})`}} className=" min-h-20 bg-cover "></li>
+            <li onClick={handleSelectImage} data-image-url={image.urls.regular} id={image.urls.small} key={image.id} style={{backgroundImage: `url(${image.urls.thumb})`}} className=" min-h-20 bg-cover "></li>
           )
         })
         }

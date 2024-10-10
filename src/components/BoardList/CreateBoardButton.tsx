@@ -16,6 +16,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
   const [boardData, setBoardData] = useState({
     title: '',
     description: '',
+    coverImage: ''
   });
   const [color, setColor] = useColor('#53a6e2');
 
@@ -26,7 +27,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
       ...boardData,
       [name]: value,
     })
-  }
+  };
 
   async function handleCreateBoard(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,7 +42,14 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
       setAction(board);
       setOpenModal(false);
     }
-  }
+  };
+
+  function handleSelectImage(image: string) {
+    setBoardData((board) => ({
+      ...board,
+      coverImage: image
+    }))
+  };
 
   return (
     <>
@@ -54,7 +62,7 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
           <form onSubmit={handleCreateBoard} className="flex flex-col p-2">
             <input onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" type="text" placeholder="Title" name="title" />
             <textarea onChange={handleInput} className="p-2 mb-8 border-b-2 border-gray-700" name="description" placeholder="Description..."/>
-            <BoardBgPicker color={color} setColor={setColor}/>
+            <BoardBgPicker color={color} setColor={setColor} setImage={handleSelectImage}/>
             <button className="bg-blue-600 hover:bg-blue-500 text-gray-200 py-2 mt-4 text-xl" type="submit">Create</button>
           </form>
         </MessageModal>

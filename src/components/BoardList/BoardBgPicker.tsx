@@ -5,10 +5,11 @@ import { useState } from "react";
 
 interface BoardBgProps {
   color: IColor,
-  setColor: (color: IColor) => void
+  setColor: (color: IColor) => void,
+  setImage: (image: string) => void
 }
 
-export default function BoardBgPicker({ color, setColor }: BoardBgProps) {
+export default function BoardBgPicker({ color, setColor, setImage }: BoardBgProps) {
   const [open, setOpen] = useState({
     openColor: false,
     openBg: false
@@ -45,7 +46,7 @@ export default function BoardBgPicker({ color, setColor }: BoardBgProps) {
       {
         open.openBg && 
         <>
-          <BoardImagePicker />
+          <BoardImagePicker setImage={setImage}/>
           <button className="bg-slate-400 hover:bg-slate-400/50 p-2 px-6 rounded float-end" onClick={closeImagePicker}>Cancel</button>
         </>
       }
