@@ -8,8 +8,8 @@ interface ButtonProps {
 
 export default function MenuButton({ name, action, setValue }: ButtonProps) {
   return (
-    <button className="flex justify-between items-center p-2 text-zinc-300 hover:bg-zinc-600 w-full text-left transition-colors rounded" onClick={action}>
-      <span>{name}</span>
+    <button className="flex justify-between items-center p-2 text-zinc-300 hover:bg-zinc-600 text-left transition-colors rounded w-full" onClick={action}>
+      <span className=" truncate">{name}</span>
       {
         !setValue ?
         <MaterialSymbolsLightKeyboardArrowDownRounded />
