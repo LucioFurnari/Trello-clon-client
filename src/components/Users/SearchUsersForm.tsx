@@ -1,17 +1,37 @@
 import { findUsers } from "@/lib/users";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
 
-export default function SearchUsersForm() {
+interface SearchFormProps {
+  setResults: (value: []) => void,
+  setLoading: (value: boolean) => void
+}
+
+export default function SearchUsersForm({setResults, setLoading}: SearchFormProps) {
   const [query, setQuery] = useState('');
-  const [result, setResults] = useState([]);
+
+
+  async function handleSearch(event: React.FormEvent) {
+    event.preventDefault();
+
+    if (!query.trim()) return;
+    setLoading(true);
+    const users = await findUsers(query);
+    setResults(users);
+    setLoading(false);
+  }
+
+  function handleInput(e: any) {
+    setQuery(e.target.value);
+  }
 
   return (
-    <Modal>
-      <form>
-        <input/>
-        <button type="submit">Search</button>
-      </form>
-    </Modal>
+    <form onSubmit={handleSearch}>
+      <input 
+        value={query}
+        onChange={handleInput}
+        placeholder="Search for users..."
+      />
+      <button type="submit">Search</button>
+    </form>
   )
 }
