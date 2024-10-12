@@ -4,6 +4,7 @@ import { useState } from "react"
 import MenuButton from "./MenuButton"
 import BoardLink from "./BoardLink"
 import { BoardData } from "@/types/types"
+import SearchUsersContainer from "@/components/Users/SearchUsersContainer"
 
 interface ListContainerProps {
   name: string,
@@ -23,12 +24,16 @@ export default function ListContainer({ name, boards }: ListContainerProps) {
       {
         openMenu &&
         boards &&
-        boards.map((board, index) => {
-          return (
-            <BoardLink key={index} boardId={board.boardId} name={board.title}/> 
-          )
-        })
-
+        <>
+        {
+          boards.map((board, index) => {
+            return (
+              <BoardLink key={index} boardId={board.boardId} name={board.title}/> 
+            )
+          })
+        }
+        <SearchUsersContainer />
+        </>
       }
     </div>
   )
