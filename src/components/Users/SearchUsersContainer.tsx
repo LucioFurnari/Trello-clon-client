@@ -7,7 +7,7 @@ export default function SearchUsersContainer() {
   const [open, setOpen] = useState(false);
   const [result, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   return (
     <div>
@@ -16,8 +16,9 @@ export default function SearchUsersContainer() {
         open &&
         <MessageModal setAction={() => setOpen(false)} >
           <>
-            <SearchUsersForm setLoading={setLoading} setResults={setResults} />
-            <UsersList />
+            <SearchUsersForm setLoading={setLoading} setResults={setResults} setSearched={setHasSearched}/>
+            { (hasSearched && !loading && result.length == 0) && <p>No results found</p>}
+            <UsersList users={result}/>
           </>
         </MessageModal>
       }
