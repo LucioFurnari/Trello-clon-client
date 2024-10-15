@@ -1,10 +1,15 @@
+'use server'
+import { getCookie } from "./cookies";
 
 export async function findUsers(query: string) {
   try {
+    const token = await getCookie();
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/users?query=${encodeURIComponent(query)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Cookie: `access_token=${token}`
       },
     });
 
