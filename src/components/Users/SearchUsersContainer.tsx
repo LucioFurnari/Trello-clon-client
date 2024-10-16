@@ -3,7 +3,11 @@ import MessageModal from "../Modal/MessageModal";
 import SearchUsersForm from "./SearchUsersForm"
 import UsersList from "./UsersList"
 
-export default function SearchUsersContainer() {
+interface SearchUsersContainerProps {
+  workspaceId: string
+}
+
+export default function SearchUsersContainer({ workspaceId }: SearchUsersContainerProps) {
   const [open, setOpen] = useState(false);
   const [result, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,7 +33,7 @@ export default function SearchUsersContainer() {
           <>
             <SearchUsersForm setLoading={setLoading} setResults={setResults} setSearched={setHasSearched}/>
             { (hasSearched && !loading && result.length == 0) && <p>No results found</p>}
-            <UsersList users={result}/>
+            <UsersList users={result} workspaceId={workspaceId}/>
           </>
         </MessageModal>
       }
