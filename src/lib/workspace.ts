@@ -3,6 +3,7 @@ import { getCookie } from "./cookies";
 
 const API_HOST = process.env.API_HOST;
 
+// Get workspace function.
 export async function getWorkspace(workspaceId: string) {
   const token = getCookie();
   try {
@@ -29,6 +30,7 @@ export async function getWorkspace(workspaceId: string) {
   }
 }
 
+// Get all workspaces of a user.
 export async function getAllWorkspacesOfUser() {
   const token = getCookie();
   try {
@@ -58,6 +60,7 @@ export async function getAllWorkspacesOfUser() {
   }
 }
 
+// Create workspace function.
 export async function createWorkspace(workspaceData: { name: string, description: string }) {
   const token = getCookie();
   const rawData = JSON.stringify(
@@ -94,6 +97,7 @@ export async function createWorkspace(workspaceData: { name: string, description
   }
 }
 
+// Delete workspace function.
 export async function deleteWorkspace(workspaceId: string) {
   try {
     const res = await fetch(`${API_HOST}/workspace/${workspaceId}`, {
@@ -116,6 +120,7 @@ export async function deleteWorkspace(workspaceId: string) {
   }
 }
 
+// Update workspace function.
 export async function updateWorkspace(workspaceId: string, editData: { name: string, description?: string}) {
   const updatedContent = JSON.stringify(editData)
   try {
@@ -134,6 +139,26 @@ export async function updateWorkspace(workspaceId: string, editData: { name: str
 
     const data = await res.json();
     return data.updatedWorkspace;
+  } catch (error) {
+    console.error('Error in the server, it was not possible to perform the fetch', error);
+    return null;
+  }
+}
+
+// Add member to workspace function.
+export async function addMemberToWorkspace(workspaceId: string, userId: string) {
+  const user = JSON.stringify({ userId: userId});
+  try {
+    const res = await fetch(`${API_HOST}/workspace/${workspaceId}/member`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: user
+    });
+
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
     return null;
