@@ -17,7 +17,7 @@ export default function WorkspaceMenu() {
           {
             context.workspace.map((workspace) => {
               return(
-                <ListContainer key={workspace.workspaceId} name={workspace.name} boards={workspace.boards}/>
+                <ListContainer key={workspace.workspaceId} name={workspace.name} boards={workspace.boards} id={workspace.workspaceId}/>
               )
           })
           }
