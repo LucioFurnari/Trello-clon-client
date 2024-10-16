@@ -8,10 +8,11 @@ import SearchUsersContainer from "@/components/Users/SearchUsersContainer"
 
 interface ListContainerProps {
   name: string,
-  boards: BoardData[]
+  boards: BoardData[],
+  id: string
 }
 
-export default function ListContainer({ name, boards }: ListContainerProps) {
+export default function ListContainer({ name, boards, id }: ListContainerProps) {
   const [openMenu, setOpenMenu] = useState(false); 
 
   function handleMenu() {
@@ -32,7 +33,7 @@ export default function ListContainer({ name, boards }: ListContainerProps) {
             )
           })
         }
-        <SearchUsersContainer />
+        <SearchUsersContainer  workspaceId={id}/>
         </>
       }
     </div>
