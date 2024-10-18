@@ -8,10 +8,11 @@ import { BoardData } from "@/types/types"
 
 interface BoardItemProp {
   board: BoardData,
-  setAction: (value: any) => void
+  setAction: (value: any) => void,
+  workspaceId: string
 }
 
-export default function BoardItem({ board, setAction }: BoardItemProp) {
+export default function BoardItem({ board, setAction, workspaceId }: BoardItemProp) {
   const {boardId, title, coverImage, coverColor} = board;
   const [openModal, setOpenModal] = useState(false);
 
@@ -30,7 +31,7 @@ export default function BoardItem({ board, setAction }: BoardItemProp) {
     }}
       className={'cursor-pointer relative rounded min-h-28 drop-shadow-xl'}>
       <Link 
-        href={`/board/${boardId}`} 
+        href={`/workspace/${workspaceId}/board/${boardId}`} 
         className="inline-block w-full h-full pt-2 pl-2 hover:bg-white/20 text-white font-semibold">
         { title }
       </Link>
