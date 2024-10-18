@@ -164,3 +164,21 @@ export async function addMemberToWorkspace(workspaceId: string, userId: string) 
     return null;
   }
 }
+
+// Get members of workspace.
+export async function getMembers(workspaceId: string) {
+  try {
+    const res = await fetch(`${API_HOST}/workspace/${workspaceId}/members`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error in the server, it was not possible to perform the fetch', error);
+    return null;
+  }
+}
