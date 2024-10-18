@@ -14,7 +14,7 @@ export default function BoardList({boards,workspaceId, createHandle, deleteHandl
     <ul className="grid grid-cols-4 gap-4">
       {
         boards &&
-        boards.map((board: BoardData) => <BoardItem key={board.boardId} board={board} setAction={deleteHandle}/>)
+        boards.map((board: BoardData) => <BoardItem key={board.boardId} board={board} workspaceId={workspaceId} setAction={deleteHandle}/>)
       }
       <CreateBoardButton workspaceId={workspaceId} setAction={createHandle} />
     </ul>
