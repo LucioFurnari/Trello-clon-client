@@ -4,7 +4,7 @@ import { deleteList } from "@/lib/list"
 import { useListContext } from "@/context/ListContext"
 import { useParams } from "next/navigation"
 import MessageModal from "@/components/Modal/MessageModal"
-import { useState } from "react"
+import { SVGProps, useState } from "react"
 
 interface DeleteListButtonProps {
   listId: string,
@@ -44,9 +44,15 @@ export default function DeleteListButton({ listId }: DeleteListButtonProps) {
           </button>
         </MessageModal>
       }
-      <button className="text-gray-200 hover:bg-slate-400 p-2 rounded" onClick={handleOpenModal}>
-        X
+      <button className="fill-white hover:fill-red-400 transition-colors p-2 rounded" onClick={handleOpenModal}>
+        <MdiTrashCanOutline />
       </button>
     </div>
+  )
+}
+
+function MdiTrashCanOutline(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg className="w-6 h-auto" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" {...props}><path d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zM7 6h10v13H7zm2 2v9h2V8zm4 0v9h2V8z"></path></svg>
   )
 }
