@@ -21,7 +21,7 @@ export default function CardLink({ card }: CardProps) {
       ? 'bg-red-600'
       : isDueSoon
       ? 'bg-yellow-500'
-      : 'bg-gray-500'} inline-block w-full bg-gray-500 text-slate-200 hover:bg-slate-400 p-2 rounded-md mb-4`}
+      : 'bg-gray-200'} inline-block w-full text-slate-800 hover:bg-gray-200 p-2 rounded-md mb-4`}
     href={`/card/${card.cardId}`}>
       {card.title}
     </Link>
