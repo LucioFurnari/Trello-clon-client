@@ -34,7 +34,7 @@ export default function DescriptionText({
 
   return (
     <div
-      className="p-2 hover:bg-slate-400 cursor-pointer"
+      className="p-2 hover:bg-gray-200/50 cursor-pointer"
       onClick={() => setAction(true)}
     >
       <div ref={quillRef} className="hidden"></div>
@@ -42,7 +42,7 @@ export default function DescriptionText({
         "Add a description"
       ) : (
         <div
-          className="ql-editor" // Make sure this class is applied for Quill's styling
+          className="ql-editor cursor-pointer" // Make sure this class is applied for Quill's styling
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
       )}
