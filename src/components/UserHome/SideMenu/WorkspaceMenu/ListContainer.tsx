@@ -29,7 +29,7 @@ export default function ListContainer({ name, boards, id }: ListContainerProps) 
         {
           boards.map((board, index) => {
             return (
-              <BoardLink key={index} boardId={board.boardId} name={board.title}/> 
+              <BoardLink key={index} boardId={board.boardId} name={board.title} workspaceId={id}/> 
             )
           })
         }
