@@ -2,17 +2,15 @@
 
 import { useState } from "react"
 import MenuButton from "./MenuButton"
-import BoardLink from "./BoardLink"
-import { BoardData } from "@/types/types"
 import SearchUsersContainer from "@/components/Users/SearchUsersContainer"
+import Link from "next/link"
 
 interface ListContainerProps {
   name: string,
-  boards: BoardData[],
   id: string
 }
 
-export default function ListContainer({ name, boards, id }: ListContainerProps) {
+export default function ListContainer({ name, id }: ListContainerProps) {
   const [openMenu, setOpenMenu] = useState(false); 
 
   function handleMenu() {
@@ -24,16 +22,9 @@ export default function ListContainer({ name, boards, id }: ListContainerProps) 
       <MenuButton name={name} action={handleMenu} setValue={openMenu} />
       {
         openMenu &&
-        boards &&
         <>
-        {
-          boards.map((board, index) => {
-            return (
-              <BoardLink key={index} boardId={board.boardId} name={board.title} workspaceId={id}/> 
-            )
-          })
-        }
         <SearchUsersContainer  workspaceId={id}/>
+        <Link className="text-gray-100 py-2 pl-4 w-full text-left text-sm hover:bg-slate-300/20 inline-block" href={`/user/workspace/${id}`}>Board</Link>
         </>
       }
     </div>
