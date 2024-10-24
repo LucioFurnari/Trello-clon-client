@@ -25,8 +25,8 @@ export default function SearchUsersContainer({ workspaceId }: SearchUsersContain
   };
 
   return (
-    <div>
-      <button onClick={handleOpenModal} className="text-gray-100 py-2 pl-2 w-full text-left text-sm hover:bg-slate-300/20">Add members</button>
+    <>
+      <button onClick={handleOpenModal} className="text-gray-100 py-2 pl-4 w-full text-left text-sm hover:bg-slate-300/20">Add members</button>
       {
         open &&
         <MessageModal setAction={handleCloseModal} >
@@ -37,6 +37,6 @@ export default function SearchUsersContainer({ workspaceId }: SearchUsersContain
           </>
         </MessageModal>
       }
-    </div>
+    </>
   )
 }
