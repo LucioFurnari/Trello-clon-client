@@ -58,10 +58,6 @@ export async function registerUser(prevState: any, formData: FormData) {
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
 
-    if (confirmPassword !== password) {
-      return { errors: [{ path: 'confirmPassword', msg: 'The password is not the same'}], success: false}
-    }
-
     const res = await fetch(`${process.env.API_HOST}/user`, {
       method: 'POST',
       headers: {
@@ -74,7 +70,11 @@ export async function registerUser(prevState: any, formData: FormData) {
   
     if(!res.ok) {
       if (data.errorList) {
-        return { errors: data.errorList, success: false }
+        if (confirmPassword !== password) {
+          return { errors: [...data.errorList, { path: 'confirmPassword', msg: 'The password is not the same'}], success: false}
+        } else {
+          return { errors: data.errorList, success: false }
+        }
       } else {
         return { errors: [], message: data.message, success: false }
       }
