@@ -18,9 +18,10 @@ export default function RegisterForm() {
 
   return (
     <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
-      <Fieldset type={"text"} name={"username"} errors={state?.errors} />
-      <Fieldset type={"email"} name={"email"} errors={state?.errors} />
-      <Fieldset type={"text"} name={"password"} errors={state?.errors} />
+      <Fieldset type={"text"} name={"username"} placeholder="Username" errors={state?.errors} />
+      <Fieldset type={"email"} name={"email"} placeholder="Email" errors={state?.errors} />
+      <Fieldset type={"text"} name={"password"} placeholder="Password" errors={state?.errors} />
+      <Fieldset type={"text"} name={"confirmPassword"} placeholder="Confirm password" errors={state?.errors}/>
       <SubmitButton />
       {
         state?.success &&
