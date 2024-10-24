@@ -28,8 +28,8 @@ export default function LoginForm() {
 
   return (
     <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
-      <Fieldset type={"text"} name={"email"} errors={state?.errors} />
-      <Fieldset type={"password"} name={"password"} errors={state?.errors} />
+      <Fieldset type={"text"} name={"email"} placeholder="Email" errors={state?.errors} />
+      <Fieldset type={"password"} name={"password"} placeholder="Password" errors={state?.errors} />
       <SubmitButton />
       <p className="mx-auto mt-4">{state?.message}</p>
       {
