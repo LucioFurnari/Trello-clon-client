@@ -67,7 +67,7 @@ export async function registerUser(prevState: any, formData: FormData) {
   
     if(!res.ok) {
       if (data.errorList) {
-        return { errors: data.errorList, succes: false }
+        return { errors: data.errorList, success: false }
       } else {
         return { errors: [], message: data.message, success: false }
       }
