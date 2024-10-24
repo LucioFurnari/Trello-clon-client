@@ -54,7 +54,14 @@ export async function registerUser(prevState: any, formData: FormData) {
       email: formData.get('email'),
       password: formData.get('password')
     }
-  
+
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+
+    if (confirmPassword !== password) {
+      return { errors: [{ path: 'confirmPassword', msg: 'The password is not the same'}], success: false}
+    }
+
     const res = await fetch(`${process.env.API_HOST}/user`, {
       method: 'POST',
       headers: {
