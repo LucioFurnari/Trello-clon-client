@@ -11,7 +11,7 @@ interface BoardListProps {
 
 export default function BoardList({boards,workspaceId, createHandle, deleteHandle}: BoardListProps) {
   return (
-    <ul className="grid grid-cols-4 gap-4">
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {
         boards &&
         boards.map((board: BoardData) => <BoardItem key={board.boardId} board={board} workspaceId={workspaceId} setAction={deleteHandle}/>)
