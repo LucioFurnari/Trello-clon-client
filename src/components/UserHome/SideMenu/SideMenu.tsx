@@ -8,7 +8,7 @@ export default function SideMenu() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className={`flex flex-col bg-slate-800 max-w-52 absolute top-13 z-50 md:static md:min-h-screen transition-all h-full ${open ? 'left-0': '-left-52'}`}>
+    <nav className={`flex flex-col bg-slate-800 max-w-52 absolute top-13 z-10 md:static md:min-h-screen transition-all h-full ${open ? 'left-0': '-left-52'}`}>
       <LinkBoard />
       <WorkspaceMenu />
       <button onClick={() => setOpen((value:boolean) => !value)} className="absolute top-1 left-52 p-4 bg-slate-700 rounded-r-xl md:hidden">
