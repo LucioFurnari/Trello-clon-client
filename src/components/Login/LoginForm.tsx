@@ -21,7 +21,8 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (state.success) {
-      router.replace('/user', { scroll: false })
+      // Change this for the route your want after the login
+      router.replace('/user/boards', { scroll: false })
       setIsLogged(true);
     }
   }, [state.success, router, setIsLogged]);
