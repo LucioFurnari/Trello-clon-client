@@ -1,6 +1,11 @@
 # Trello Clone - Client Side
 
-This is the client-side application of a **Trello Clone**, built using **Next.js**, **TypeScript**, and **Tailwind CSS**. The project replicates the core functionalities of Trello, allowing users to manage projects with workspaces, boards, lists, and cards. 
+This is the client-side application of a **Trello Clone**, built using **Next.js**, **TypeScript**, and **Tailwind CSS**. The project replicates the core functionalities of Trello, allowing users to manage projects with workspaces, boards, lists, and cards.
+
+If you want to test the application, use this email and password to enter the page:
+
+    Email: test@gmail.com
+    Pass: 123
 
 ## Table of Contents
 
