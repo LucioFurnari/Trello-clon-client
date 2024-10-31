@@ -8,7 +8,8 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (user && !pathname.startsWith('/user')) {
-    return NextResponse.redirect(new URL('/user', request.url));
+    // Change this for the route you want to see first in the dashboard
+    return NextResponse.redirect(new URL('/user/boards', request.url));
   }
 
   if (!user && pathname.startsWith('/user')) {
