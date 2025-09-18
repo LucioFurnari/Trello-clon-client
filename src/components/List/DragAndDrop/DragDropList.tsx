@@ -4,6 +4,8 @@ import { ListData } from '@/context/ListContext';
 import { CardData } from '@/types/types';
 import { useListContext } from '@/context/ListContext';
 import { updatePosition } from '@/lib/list';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 const reorderList = (list: ListData[], startIndex: number, endIndex: number): ListData[] => {
   // Create copy of the state list.
@@ -63,28 +65,27 @@ function moveCard(
 
 export default function DragDroptList() {
   const {list, setList} = useListContext();
+  const router = useRouter();
 
-  async function handleDragDrop(result: DropResult) {
-    const { source, destination, type} = result;
+  const handleDragDrop = useCallback(
+    async (result: DropResult) => {
+      const { source, destination, type } = result;
+      if (!destination) return;
 
-    if (!destination) {
-      return;
-    }
-
-    if (source.droppableId === destination.droppableId && source.index === destination.index) {
-      return;
-    }
-
-    if(type === 'group') {
-      const newList = reorderList(list, source.index, destination.index);
-      setList(newList);
-      await updatePosition(newList, []);
-    } else if (type === 'card') {
-      const updatedList = moveCard(list, source, destination);
-      setList(updatedList.list);
-      await updatePosition(updatedList.list, updatedList.cards);
-    }
-  }
+      if (type === 'group') {
+        const newList = reorderList(list, source.index, destination.index);
+        setList(newList);
+        await updatePosition(newList, []);
+        router.refresh();
+      } else if (type === 'card') {
+        const updatedList = moveCard(list, source, destination);
+        setList(updatedList.list);
+        await updatePosition(updatedList.list, updatedList.cards);
+        router.refresh();
+      }
+    },
+    [list, setList, router]
+  );
 
   return (
     <DragDropContext onDragEnd={handleDragDrop}>
