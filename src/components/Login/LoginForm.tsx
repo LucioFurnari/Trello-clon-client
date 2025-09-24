@@ -25,14 +25,19 @@ export default function LoginForm() {
       setIsLoading(false);
       router.replace('/user/boards', { scroll: false });
       setIsLogged(true);
-    } else if (state.message && !state.success) {
+    } else if (state.message) {
       setIsLoading(false);
     }
   }, [state.success, state.message, router, setIsLogged]);
 
   const handleSubmit = async (formData: FormData) => {
     setIsLoading(true);
-    await formAction(formData);
+    try {
+      await formAction(formData);
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
