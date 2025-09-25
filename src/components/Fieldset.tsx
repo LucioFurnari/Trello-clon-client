@@ -4,13 +4,12 @@ interface FieldsetProp {
   name: string,
   placeholder: string,
   errors: [],
-  disabled: boolean
 }
 
-export default function Fieldset({ type, name, errors, placeholder, disabled }: FieldsetProp) {
+export default function Fieldset({ type, name, errors, placeholder }: FieldsetProp) {
   return (
     <fieldset>
-      <input className="p-2 mt-3 border-b-2 w-full" disabled={disabled} type={type} placeholder={placeholder} name={name} id={name} />
+      <input className="p-2 mt-3 border-b-2 w-full" type={type} placeholder={placeholder} name={name} id={name} />
       { 
         errors &&
         <ul className="mt-2">

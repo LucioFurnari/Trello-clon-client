@@ -5,7 +5,7 @@ import { useFormState } from "react-dom"
 import Fieldset from "../Fieldset"
 import { SubmitButton } from "../SubmitButton"
 import { useRouter } from "next/navigation"
-import { SVGProps, useEffect, useState } from "react"
+import { SVGProps, useEffect } from "react"
 import { useUserContext } from "@/context/UserContext"
 
 const initialState = {
@@ -18,54 +18,33 @@ export default function LoginForm() {
   const [state, formAction] = useFormState(loginUser, initialState);
   const router = useRouter();
   const { setIsLogged } = useUserContext();
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (state.success) {
-      setIsLoading(false);
       router.replace('/user/boards', { scroll: false });
       setIsLogged(true);
-    } else if (state.message) {
-      setIsLoading(false);
     }
   }, [state.success, state.message, router, setIsLogged]);
 
-  const handleSubmit = async (formData: FormData) => {
-    setIsLoading(true);
-    try {
-      await formAction(formData);
-    } catch (error) {
-      setIsLoading(false);
-      console.error("Form submission error:", error);
-    }
-  };
-
   return (
-    <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={handleSubmit}>
+    <form className="flex flex-col mt-8 p-4 w-full md:max-w-2xl" action={formAction}>
       <Fieldset 
         type={"text"} 
         name={"email"} 
         placeholder="Email" 
         errors={state?.errors}
-        disabled={isLoading}
       />
       <Fieldset 
         type={"password"} 
         name={"password"} 
         placeholder="Password" 
         errors={state?.errors}
-        disabled={isLoading}
       />
-      <SubmitButton disabled={isLoading} />
-      {isLoading && (
-        <div className="flex justify-center mt-4">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-        </div>
-      )}
-      {!isLoading && state.message && (
+      <SubmitButton buttonText="Login"/>
+      {state.message && (
         <p className="mx-auto mt-4 text-center">{state.message}</p>
       )}
-      {!isLoading && state.success && (
+      {state.success && (
         <>
           <p className="text-center text-2xl mt-4">User logged successful</p>
           <p className="text-center">Redirecting to the dashboard</p>
