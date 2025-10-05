@@ -1,19 +1,18 @@
-'use client'
-
 import { WorkspaceItem } from "./WorkspaceItem";
-import { useWorkspaceContext } from "@/context/WorkspaceContext";
+import { getAllWorkspacesOfUser } from "@/lib/workspace";
+import { WorkspaceData } from "@/types/types"
 
-export default function WorkspacesList() {
-  const context = useWorkspaceContext();
+export default async function WorkspacesList() {
+  const workspaces = await getAllWorkspacesOfUser();
 
   return (
     <section>
       {
-        context?.workspace &&
-        context.workspace.length > 0 &&
+        workspaces &&
+        workspaces.length > 0 &&
         <div>
           {
-        context.workspace.map((workspace) => {
+        workspaces.map((workspace: WorkspaceData) => {
           return (
             <WorkspaceItem 
               workspace={workspace}
