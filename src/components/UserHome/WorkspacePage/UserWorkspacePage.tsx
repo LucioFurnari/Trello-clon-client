@@ -1,22 +1,19 @@
-'use client'
 
-import { useWorkspaceContext } from "@/context/WorkspaceContext"
 import { WorkspaceItem } from "../BoardsPage/WorkspaceItem"
+import { getWorkspace } from "@/lib/workspace"
 
 interface WorkspacePageProps {
   workspaceId: string,
 }
 
-export default function UserWorkspacePage({ workspaceId }: WorkspacePageProps) {
-  const context = useWorkspaceContext();
-  const workspace = context?.workspace.filter((item) => item.workspaceId === workspaceId);
+export default async function UserWorkspacePage({ workspaceId }: WorkspacePageProps) {
+  const workspace = await getWorkspace(workspaceId);
 
   return (
     <section className="p-4">
       {
         workspace &&
-        workspace.length > 0 &&
-        <WorkspaceItem workspace={workspace[0]} workspaceId={workspaceId} boards={workspace[0].boards} />
+        <WorkspaceItem workspace={workspace} workspaceId={workspaceId} boards={workspace.boards} />
       }
     </section>
   )
