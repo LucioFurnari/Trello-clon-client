@@ -3,14 +3,19 @@
 import LinkBoard from "./LinkBoard"
 import WorkspaceMenu from "./WorkspaceMenu/WorkspaceMenu"
 import { SVGProps, useState } from "react"
+import { WorkspaceData, WorkspaceType } from "@/types/types"
 
-export default function SideMenu() {
+type SideMenuProps = {
+  workspaces: WorkspaceData[],
+}
+
+export default function SideMenu({workspaces}: SideMenuProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <nav className={`flex flex-col bg-slate-800 max-w-52 absolute top-13 z-10 md:static md:min-h-screen transition-all h-full ${open ? 'left-0': '-left-52'}`}>
       <LinkBoard />
-      <WorkspaceMenu />
+      <WorkspaceMenu workspaces={workspaces} />
       <button onClick={() => setOpen((value:boolean) => !value)} className="absolute top-1 left-52 p-4 bg-slate-700 rounded-r-xl md:hidden">
         {
           open ?
