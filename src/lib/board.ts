@@ -1,3 +1,6 @@
+"use server"
+
+import { revalidatePath } from "next/cache";
 
 export async function getBoard(boardId: string) {
   try {
@@ -6,7 +9,7 @@ export async function getBoard(boardId: string) {
       headers: {
         'Content-Type': 'application/json'
       },
-      cache: 'no-store'
+      next: { revalidate: 60 }
     });
 
     if (res.status !== 302) {
@@ -40,6 +43,7 @@ export async function createBoard(workspaceId: string, formData: { title: string
 
     const data = await res.json();
     // Return board object created.
+    revalidatePath("/user/boards");
     return data.board;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch');
@@ -60,7 +64,7 @@ export async function deleteBoard(boardId: string) {
       console.error('Error deleting the board');
       return null;
     }
-    
+    revalidatePath("/user/boards");
     return await res.json();
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch');

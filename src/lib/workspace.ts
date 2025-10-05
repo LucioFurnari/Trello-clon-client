@@ -1,4 +1,5 @@
 'use server'
+import { revalidatePath } from "next/cache";
 import { getCookie } from "./cookies";
 
 const API_HOST = process.env.API_HOST;
@@ -90,6 +91,7 @@ export async function createWorkspace(workspaceData: { name: string, description
     }
 
     const data = await res.json();
+    revalidatePath("/user/boards");
     return data.workspace;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
@@ -113,6 +115,7 @@ export async function deleteWorkspace(workspaceId: string) {
     }
 
     const data = await res.json();
+    revalidatePath("/user/boards");
     return data;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
@@ -138,6 +141,7 @@ export async function updateWorkspace(workspaceId: string, editData: { name: str
     }
 
     const data = await res.json();
+    revalidatePath("/user/boards");
     return data.updatedWorkspace;
   } catch (error) {
     console.error('Error in the server, it was not possible to perform the fetch', error);
