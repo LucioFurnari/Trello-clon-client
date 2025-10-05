@@ -1,3 +1,5 @@
+"use client"
+
 import DeleteWorkspace from "./DeleteWorkspace";
 import EditWorkspace from "./EditWorkspace";
 import { useState } from "react"
@@ -7,11 +9,11 @@ import { WorkspaceType } from "@/types/types";
 interface WorkspaceOptionsProps {
   workspaceId: string,
   workspace: WorkspaceType,
-  handleDelete: (elem?: any) => void,
-  handleEdit: (id: string, elem?: any) => void
+  // handleDelete: (elem?: any) => void,
+  // handleEdit: (id: string, elem?: any) => void
 }
 
-export default function WorkspaceOptions({ workspaceId, workspace, handleDelete, handleEdit }: WorkspaceOptionsProps) {
+export default function WorkspaceOptions({ workspaceId, workspace }: WorkspaceOptionsProps) {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -22,8 +24,8 @@ export default function WorkspaceOptions({ workspaceId, workspace, handleDelete,
       {
         openMenu &&
         <div className="z-[1] w-32 top-0 left-6 absolute bg-gray-700">
-          <DeleteWorkspace id={workspaceId} setAction={handleDelete}/>
-          <EditWorkspace  editAction={handleEdit} workspace={workspace}/>
+          <DeleteWorkspace id={workspaceId} />
+          <EditWorkspace  workspace={workspace}/>
         </div>
       }
     </div>

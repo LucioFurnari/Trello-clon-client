@@ -5,10 +5,9 @@ import { useState } from "react"
 
 interface UpdateWorkspaceProps {
   workspace: WorkspaceType,
-  editAction: (elem?: any, id?: string) => void
 }
 
-export default function EditWorkspace({ workspace, editAction }: UpdateWorkspaceProps) {
+export default function EditWorkspace({ workspace }: UpdateWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
   const [editData, setEditData] = useState({
     name: workspace.name,
@@ -45,9 +44,9 @@ export default function EditWorkspace({ workspace, editAction }: UpdateWorkspace
 
     const res = await updateWorkspace(workspace.workspaceId, editData);
 
-    if (!res.error) {
-      editAction(res, workspace.workspaceId)
-    }
+    // if (!res.error) {
+    //   editAction(res, workspace.workspaceId)
+    // }
   }
 
   return (

@@ -4,19 +4,10 @@ import { useState } from "react"
 
 interface DeleteWorkspaceProps {
   id: string,
-  setAction: (elem: any) => void
 }
 
-export default function DeleteWorkspace({ id, setAction }: DeleteWorkspaceProps) {
+export default function DeleteWorkspace({ id }: DeleteWorkspaceProps) {
   const [openModal, setOpenModal] = useState(false);
-
-  async function handleDeleteWorkspace() {
-    const res = await deleteWorkspace(id);
-
-    if (!res.error) {
-      setAction(id)
-    }
-  }
 
   return (
     <>
@@ -27,7 +18,7 @@ export default function DeleteWorkspace({ id, setAction }: DeleteWorkspaceProps)
         <div className="flex flex-col">
           <h2 className="text-center">You wanna delete this workspace ?</h2>
           <p className="text-center">All boards will be deleted</p>
-          <button onClick={handleDeleteWorkspace} className="mx-auto mt-4 px-8 py-2 rounded bg-red-600 text-white">Delete</button>
+          <button onClick={() => deleteWorkspace(id)} className="mx-auto mt-4 px-8 py-2 rounded bg-red-600 text-white">Delete</button>
         </div>
       </MessageModal>
       }
