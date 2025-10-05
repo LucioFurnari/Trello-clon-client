@@ -8,11 +8,10 @@ import { BoardData } from "@/types/types"
 
 interface BoardItemProp {
   board: BoardData,
-  setAction: (value: any) => void,
   workspaceId: string
 }
 
-export default function BoardItem({ board, setAction, workspaceId }: BoardItemProp) {
+export default function BoardItem({ board, workspaceId }: BoardItemProp) {
   const {boardId, title, coverImage, coverColor} = board;
   const [openModal, setOpenModal] = useState(false);
 
@@ -43,7 +42,7 @@ export default function BoardItem({ board, setAction, workspaceId }: BoardItemPr
         <>
           <h2 className="text-center">Are you sure you want to delete your board?</h2>
           <span className="text-center">all the cards in it will be deleted</span>
-          <DeleteBoardButton id={boardId}  setAction={setAction}/>
+          <DeleteBoardButton id={boardId}/>
         </>
       </MessageModal>
       }
