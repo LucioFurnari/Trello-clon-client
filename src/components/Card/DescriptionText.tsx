@@ -1,4 +1,6 @@
-import Quill, { Delta } from "quill/core";
+import Quill from "quill";
+import { Delta } from "quill/core";
+import "quill/dist/quill.snow.css";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 export default function DescriptionText({
