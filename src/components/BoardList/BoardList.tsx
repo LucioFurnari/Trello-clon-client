@@ -5,18 +5,16 @@ import { BoardData } from "@/types/types"
 interface BoardListProps {
   boards?: BoardData[],
   workspaceId: string,
-  createHandle: (value?: any) => void,
-  deleteHandle: (value?: any) => void
 }
 
-export default function BoardList({boards,workspaceId, createHandle, deleteHandle}: BoardListProps) {
+export default function BoardList({boards,workspaceId}: BoardListProps) {
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {
         boards &&
-        boards.map((board: BoardData) => <BoardItem key={board.boardId} board={board} workspaceId={workspaceId} setAction={deleteHandle}/>)
+        boards.map((board: BoardData) => <BoardItem key={board.boardId} board={board} workspaceId={workspaceId} />)
       }
-      <CreateBoardButton workspaceId={workspaceId} setAction={createHandle} />
+      <CreateBoardButton workspaceId={workspaceId} />
     </ul>
   )
 }
