@@ -1,10 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import TextEditor from "../Editor/TextEditor"
 import { Delta } from "quill/core";
 import DescriptionText from "./DescriptionText";
 import { CardData } from "@/types/types";
+import dynamic from "next/dynamic";
+
+const TextEditor = dynamic(() => import("../Editor/TextEditor"));
 
 export default function DescriptionSection({ card }: {card: CardData}) {
   const [openEditor, setOpenEditor] = useState(false);
