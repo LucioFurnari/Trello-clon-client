@@ -8,10 +8,9 @@ import { useColor } from "react-color-palette";
 
 interface CreateBoardButtonProps {
   workspaceId: string,
-  setAction: (value?: any) => void
 }
 
-export default function CreateBoardButton({workspaceId, setAction}: CreateBoardButtonProps) {
+export default function CreateBoardButton({workspaceId}: CreateBoardButtonProps) {
   const [openModal, setOpenModal] = useState(false);
   const [boardData, setBoardData] = useState({
     title: '',
@@ -39,7 +38,6 @@ export default function CreateBoardButton({workspaceId, setAction}: CreateBoardB
     const board = await createBoard(workspaceId, newBoard);
 
     if (board) {
-      setAction(board);
       setOpenModal(false);
     }
   };
