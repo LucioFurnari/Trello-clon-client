@@ -1,9 +1,12 @@
 import SideMenu from "./SideMenu/SideMenu"
+import { getAllWorkspacesOfUser } from "@/lib/workspace"
 
-export default function UserHomePage() {
+export default async function UserHomePage() {
+  const workspace_list = await getAllWorkspacesOfUser();
+
   return (
     <>
-      <SideMenu />
+      <SideMenu workspaces={workspace_list} />
     </>
   )
 }
