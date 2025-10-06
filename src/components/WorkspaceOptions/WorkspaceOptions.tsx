@@ -9,8 +9,6 @@ import { WorkspaceType } from "@/types/types";
 interface WorkspaceOptionsProps {
   workspaceId: string,
   workspace: WorkspaceType,
-  // handleDelete: (elem?: any) => void,
-  // handleEdit: (id: string, elem?: any) => void
 }
 
 export default function WorkspaceOptions({ workspaceId, workspace }: WorkspaceOptionsProps) {
@@ -25,7 +23,7 @@ export default function WorkspaceOptions({ workspaceId, workspace }: WorkspaceOp
         openMenu &&
         <div className="z-[1] w-32 top-0 left-6 absolute bg-gray-700">
           <DeleteWorkspace id={workspaceId} />
-          <EditWorkspace  workspace={workspace}/>
+          <EditWorkspace workspace={workspace}/>
         </div>
       }
     </div>

@@ -22,7 +22,7 @@ export default function WorkspaceMain({ id, workspace }: WorkspaceMainProps) {
 
   return (
     <section className="mx-20">
-      <BoardList boards={workspaceData?.boards}  workspaceId={id} createHandle={handleCreateBoard} deleteHandle={handleDeleteBoard}/>
+      <BoardList boards={workspaceData?.boards}  workspaceId={id}/>
     </section>
   )
 }
